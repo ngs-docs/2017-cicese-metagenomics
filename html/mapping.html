@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Mapping &mdash; 2017-dibsi-metagenomics 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinxcontrib-images/LightBox2/lightbox2/css/lightbox.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/sphinxcontrib-images/LightBox2/lightbox2/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/sphinxcontrib-images/LightBox2/lightbox2/js/lightbox.min.js"></script>
+    <script type="text/javascript" src="_static/sphinxcontrib-images/LightBox2/lightbox2-customize/jquery-noconflict.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="2017-dibsi-metagenomics 1.0 documentation" href="toc.html" />
+    <link rel="next" title="Slicing and dicing with k-mers" href="slice.html" />
+    <link rel="prev" title="Gene Abundance Estimation with Salmon" href="salmon_tutorial.html" />
+
+
+<style type="text/css">
+<!-- github-based editing disabled; set github_base_account
+     and github_project -->
+#editor-trap.toggled {
+  display: none;
+}
+</style>
+
+
+
+  </head>
+  <body role="document">
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="toc.html">
+          2017-dibsi-metagenomics</a>
+        <span class="navbar-text navbar-version pull-left"><b>1.0</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="toc.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">2017 DIBSI Metagenomics Workshop at UC Davis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="welcome.html">Welcome!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jetstream/boot.html">Booting a Jetstream Computer Instance for your use!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command-line.html">Intro to Shell Lesson</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command-line.html#the-shell">The Shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command-line.html#for-future-reference">For Future Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command-line.html#finding-files">Finding files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running-command-line-blast.html">Running command-line BLAST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quality.html">Short read quality and trimming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="assemble.html">Run the MEGAHIT assembler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prokka_tutorial.html">Annotation with Prokka</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sourmash.html">A sourmash tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sourmash.html#k-mers-k-mer-specificity-and-comparing-samples-with-k-mer-jaccard-distance">K-mers, k-mer specificity, and comparing samples with k-mer Jaccard distance.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="binning.html">Binning a Metagenomic Assembly</a></li>
+<li class="toctree-l1"><a class="reference internal" href="salmon_tutorial.html">Gene Abundance Estimation with Salmon</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Mapping</a></li>
+<li class="toctree-l1"><a class="reference internal" href="slice.html">Slicing and dicing with k-mers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="anvio.html">Using Anvi&#8217;o to Knit Everything Together</a></li>
+<li class="toctree-l1"><a class="reference internal" href="circos_tutorial.html">Using and Installing Circos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="workflow.html">Workflow and repeatability discussion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DATA.html">Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="INSTALL.html">Building this site on your own</a></li>
+<li class="toctree-l1"><a class="reference internal" href="README.html">2017 / April / Metagenomics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="day2-install.html">Day 2 - installation instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="kmer_trimming.html">K-mer Spectral Error Trimming</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">Mapping</a><ul>
+<li><a class="reference internal" href="#downloading-data">Downloading data</a></li>
+<li><a class="reference internal" href="#mapping-the-reads">Mapping the reads</a></li>
+<li><a class="reference internal" href="#converting-to-bam-to-visualize">Converting to BAM to visualize</a></li>
+<li><a class="reference internal" href="#visualizing-the-read-mapping">Visualizing the read mapping</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="salmon_tutorial.html" title="Previous Chapter: Gene Abundance Estimation with Salmon"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Gene Abundanc...</span>
+    </a>
+  </li>
+  <li>
+    <a href="slice.html" title="Next Chapter: Slicing and dicing with k-mers"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Slicing and d... &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+              <li class="hidden-sm">
+<div id="sourcelink">
+  <a href="_sources/mapping.txt"
+     rel="nofollow">Source</a>
+</div></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+
+    <div class="col-md-12 content">
+      
+  
+  <div class="section" id="mapping">
+<h1>Mapping<a class="headerlink" href="#mapping" title="Permalink to this headline">¶</a></h1>
+<p>Download bwa:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>cd
+curl -L https://sourceforge.net/projects/bio-bwa/files/bwa-0.7.15.tar.bz2/download &gt; bwa-0.7.15.tar.bz2
+</pre></div>
+</div>
+<p>Unpack and build it:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>tar xjvf bwa-0.7.15.tar.bz2
+cd bwa-0.7.15
+make
+</pre></div>
+</div>
+<p>Install it:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>sudo cp bwa /usr/local/bin
+</pre></div>
+</div>
+<div class="section" id="downloading-data">
+<h2>Downloading data<a class="headerlink" href="#downloading-data" title="Permalink to this headline">¶</a></h2>
+<p>Now, go to a new directory and grab the data:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>mkdir ~/mapping
+cd ~/mapping
+
+curl -O https://s3-us-west-1.amazonaws.com/dib-training.ucdavis.edu/metagenomics-scripps-2016-10-12/SRR1976948.abundtrim.subset.pe.fq.gz
+curl -O https://s3-us-west-1.amazonaws.com/dib-training.ucdavis.edu/metagenomics-scripps-2016-10-12/SRR1977249.abundtrim.subset.pe.fq.gz
+</pre></div>
+</div>
+<p>And extract the files:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>for file in *fq.gz
+  do
+  gunzip $file
+done
+</pre></div>
+</div>
+<p>We will also need the assembly; rather than rebuilding it, you can download
+a copy that we saved for you:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>curl -O https://s3-us-west-1.amazonaws.com/dib-training.ucdavis.edu/metagenomics-scripps-2016-10-12/subset_assembly.fa.gz
+gunzip subset_assembly.fa
+</pre></div>
+</div>
+</div>
+<div class="section" id="mapping-the-reads">
+<h2>Mapping the reads<a class="headerlink" href="#mapping-the-reads" title="Permalink to this headline">¶</a></h2>
+<p>First, we will need to to index the megahit assembly:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>bwa index subset_assembly.fa
+</pre></div>
+</div>
+<p>to The reads are in paired-end/interleaved format, so you&#8217;ll need to add the -p flag to indicate to bwa that these are paired end data:</p>
+<p>Map the reads:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>for i in *fq
+  do
+  bwa mem -p subset_assembly.fa $i &gt; ${i}.aln.sam
+done
+</pre></div>
+</div>
+</div>
+<div class="section" id="converting-to-bam-to-visualize">
+<h2>Converting to BAM to visualize<a class="headerlink" href="#converting-to-bam-to-visualize" title="Permalink to this headline">¶</a></h2>
+<p>First, index the assembly for samtools:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>samtools faidx subset_assembly.fa
+</pre></div>
+</div>
+<p>Then, convert both SAM files to BAM files:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>for i in *.sam
+do
+   samtools import subset_assembly.fa $i $i.bam
+   samtools sort $i.bam $i.bam.sorted
+   samtools index $i.bam.sorted.bam
+done
+</pre></div>
+</div>
+</div>
+<div class="section" id="visualizing-the-read-mapping">
+<h2>Visualizing the read mapping<a class="headerlink" href="#visualizing-the-read-mapping" title="Permalink to this headline">¶</a></h2>
+<p>Find a contig name to visualize:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>grep -v ^@ SRR1976948.abundtrim.subset.pe.fq.aln.sam | \
+    cut -f 3 | sort | uniq -c | sort -n | tail
+</pre></div>
+</div>
+<p>Pick one e.g. k99_13588.</p>
+<p>Now execute:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>samtools tview SRR1976948.abundtrim.subset.pe.fq.aln.sam.bam.sorted.bam subset_assembly.fa -p k99_13588:400
+</pre></div>
+</div>
+<p>(use arrow keys to scroll, &#8216;q&#8217; to quit; a key for what you are looking at: <a href="#id1"><span class="problematic" id="id2">`pileup format&lt;https://en.wikipedia.org/wiki/Pileup_format&gt;`__</span></a>.)</p>
+<p>Look at it in both mappings:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>samtools tview SRR1977249.abundtrim.subset.pe.fq.aln.sam.bam.sorted.bam subset_assembly.fa -p k99_13588:400
+</pre></div>
+</div>
+<p>Why is the mapping so good??</p>
+<p>Note: no strain variation :).</p>
+<hr class="docutils" />
+<p>Grab some untrimmed data:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>curl -O https://s3-us-west-1.amazonaws.com/dib-training.ucdavis.edu/metagenomics-scripps-2016-10-12/SRR1976948_1.fastq.gz
+curl -O https://s3-us-west-1.amazonaws.com/dib-training.ucdavis.edu/metagenomics-scripps-2016-10-12/SRR1976948_2.fastq.gz
+</pre></div>
+</div>
+<p>Now align this untrimmed data:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>gunzip -c SRR1976948_1.fastq.gz | head -800000 &gt; SRR1976948.1
+gunzip -c SRR1976948_2.fastq.gz | head -800000 &gt; SRR1976948.2
+
+bwa aln subset_assembly.fa SRR1976948.1 &gt; SRR1976948_1.untrimmed.sai
+bwa aln subset_assembly.fa SRR1976948.2 &gt; SRR1976948_2.untrimmed.sai
+
+bwa sampe subset_assembly.fa SRR1976948_1.untrimmed.sai SRR1976948_2.untrimmed.sai SRR1976948.1 SRR1976948.2 &gt; SRR1976948.untrimmed.sam
+
+i=SRR1976948.untrimmed.sam
+samtools import subset_assembly.fa $i $i.bam
+samtools sort $i.bam $i.bam.sorted
+samtools index $i.bam.sorted.bam
+</pre></div>
+</div>
+<p>And now look:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>samtools tview SRR1976948.untrimmed.sam.bam.sorted.bam subset_assembly.fa -p k99_13588:500
+</pre></div>
+</div>
+<p>You can also use &#8216;Tablet&#8217; to view the downloaded BAM file - see <a class="reference external" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2815658/">the Tablet paper</a>.</p>
+</div>
+</div>
+
+
+
+<hr>
+
+<font size="-1"><b>LICENSE:</b>
+This documentation and all textual/graphic site content is released
+under <a href='http://creativecommons.org/publicdomain/zero/1.0/'>
+Creative Commons - 0
+(CC0)</a> -- <a href='https://github.com/ngs-docs/2017-ucsc-metagenomics'>fork @
+github</a>. </font>
+
+<hr>
+
+
+<!-- disqus commenting disabled; set disqus_shortname -->
+
+    </div>
+    
+
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2017, Lab for Data Intensive Biology.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.<br/>
+    </p>
+  </div>
+</footer>
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', '', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+  </body>
+</html>

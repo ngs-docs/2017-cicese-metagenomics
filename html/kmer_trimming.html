@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>K-mer Spectral Error Trimming &mdash; 2017-dibsi-metagenomics 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinxcontrib-images/LightBox2/lightbox2/css/lightbox.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/sphinxcontrib-images/LightBox2/lightbox2/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/sphinxcontrib-images/LightBox2/lightbox2/js/lightbox.min.js"></script>
+    <script type="text/javascript" src="_static/sphinxcontrib-images/LightBox2/lightbox2-customize/jquery-noconflict.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="2017-dibsi-metagenomics 1.0 documentation" href="toc.html" />
+    <link rel="prev" title="Day 2 - installation instructions" href="day2-install.html" />
+
+
+<style type="text/css">
+<!-- github-based editing disabled; set github_base_account
+     and github_project -->
+#editor-trap.toggled {
+  display: none;
+}
+</style>
+
+
+
+  </head>
+  <body role="document">
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="toc.html">
+          2017-dibsi-metagenomics</a>
+        <span class="navbar-text navbar-version pull-left"><b>1.0</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="toc.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">2017 Metagenomics workshop at UC Santa Cruz</a></li>
+<li class="toctree-l1"><a class="reference internal" href="welcome.html">Welcome!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jetstream/boot.html">Booting a Jetstream Computer Instance for your use!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quality.html">Short read quality and trimming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="assemble.html">Run the MEGAHIT assembler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prokka_tutorial.html">Annotation with Prokka</a></li>
+<li class="toctree-l1"><a class="reference internal" href="binning.html">Mapping and Binning a Metagenome Assembly</a></li>
+<li class="toctree-l1"><a class="reference internal" href="salmon_tutorial.html">Gene Abundance Estimation with Salmon</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mapping.html">Mapping</a></li>
+<li class="toctree-l1"><a class="reference internal" href="slice.html">Slicing and dicing with k-mers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="circos_tutorial.html">Using and Installing Circos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="workflow.html">Workflow and repeatability discussion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DATA.html">Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="INSTALL.html">Building this site on your own</a></li>
+<li class="toctree-l1"><a class="reference internal" href="README.html">2017 / April / Metagenomics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="day2-install.html">Day 2 - installation instructions</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">K-mer Spectral Error Trimming</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">K-mer Spectral Error Trimming</a><ul>
+<li><a class="reference internal" href="#why-or-why-not-do-k-mer-trimming">Why (or why not) do k-mer trimming?</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="day2-install.html" title="Previous Chapter: Day 2 - installation instructions"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Day 2 - insta...</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+              <li class="hidden-sm">
+<div id="sourcelink">
+  <a href="_sources/kmer_trimming.txt"
+     rel="nofollow">Source</a>
+</div></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+
+    <div class="col-md-12 content">
+      
+  
+  <div class="section" id="k-mer-spectral-error-trimming">
+<h1>K-mer Spectral Error Trimming<a class="headerlink" href="#k-mer-spectral-error-trimming" title="Permalink to this headline">¶</a></h1>
+<p>(Optional)</p>
+<p>khmer documentation: <a class="reference external" href="http://khmer.readthedocs.io/en/latest">http://khmer.readthedocs.io/en/latest</a></p>
+<p>If you plot a k-mer abundance histogram of the samples, you&#8217;ll
+notice something: there&#8217;s an awful lot of unique (abundance=1) k-mers.
+These are erroneous k-mers caused by sequencing errors.</p>
+<p>In a new Python3 Jupyter Notebook, run:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>cd ~/work
+</pre></div>
+</div>
+<p>and then</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>!abundance-dist-single.py -M 1e9 -k 21 SRR1976948_1.fastq.gz SRR1976948_1.fastq.gz.dist
+</pre></div>
+</div>
+<p>and in another cell:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>%matplotlib inline
+import numpy
+from pylab import *
+dist1 = numpy.loadtxt(&#39;SRR1976948_1.fastq.gz.dist&#39;, skiprows=1, delimiter=&#39;,&#39;)
+plot(dist1[:,0], dist1[:,1])
+axis(xmax=50)
+</pre></div>
+</div>
+<p>Many of these errors remain even after you do the Trimmomatic run; you can
+see this with:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>!abundance-dist-single.py -M 1e9 -k 21 SRR1976948_1.qc.fq.gz SRR1976948_1.qc.fq.gz.dist
+</pre></div>
+</div>
+<p>and then plot:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">dist2</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s1">&#39;SRR1976948_1.qc.fq.gz.dist&#39;</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">dist1</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">dist1</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;untrimmed&#39;</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">dist2</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">dist2</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;trimmed&#39;</span><span class="p">)</span>
+<span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">)</span>
+<span class="n">axis</span><span class="p">(</span><span class="n">xmax</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This is for
+two reasons:</p>
+<p>First, Trimmomatic trims based solely on the quality score, which is
+a statistical statement about the correctness of a base - a Q score
+of 30 means that, of 1000 bases with that Q score, 1 of those
+bases will be wrong.  So, a base can have a high Q score and still
+be wrong! (and <strong>many</strong> bases will have a low Q score and still be
+correct)</p>
+<p>Second, we trimmed <strong>very</strong> lightly - only bases that had a very low
+quality were removed.  This was intentional because with assembly,
+you want to retain as much coverage as possible, and the assembler
+will generally figure out what the &#8220;correct&#8221; base is from the coverage.</p>
+<p>An alternative to trimming based on the quality scores is to trim based on
+k-mer abundance - this is known as k-mer spectral error trimming.  K-mer
+spectral error trimming <em>always</em> beats quality score trimming in terms
+of eliminating errors; e.g. look at this table from <a class="reference external" href="http://journals.plos.org/plosone/article?id=10.1371%2Fjournal.pone.0101271">Zhang et al., 2014</a>:</p>
+<a class=""
+               data-lightbox="group-d66036ad-bf2c-4c4e-988d-f56d4cfd9962"
+               href="_images/2014-zhang.png"
+               title=""
+               data-title=""
+               ><img src="_images/2014-zhang.png"
+                     class=""
+                     width="40%"
+                     height="auto"
+                     alt=""/>
+                </a><p>The basic logic is this: if you see low abundance k-mers in a high
+coverage data set, those k-mers are almost certainly the result of
+errors.  (Caveat: strain variation could also create them.)</p>
+<p>In metagenomic data sets we do have the problem that we may have very
+low and very high coverage data.  So we don&#8217;t necessarily want to get
+rid of all low-abundance k-mers, because they may represent truly low
+abundance (but useful) data.</p>
+<p>As part of the khmer project in my lab, we have developed an approach
+that sorts reads into high abundance and low abundance reads, and only
+error trims the high abundance reads.</p>
+<a class=""
+               data-lightbox="group-3fa92c90-2bbe-469b-8b73-259bf7ecf62f"
+               href="_images/kmer-trimming.png"
+               title=""
+               data-title=""
+               ><img src="_images/kmer-trimming.png"
+                     class=""
+                     width="40%"
+                     height="auto"
+                     alt=""/>
+                </a><p>This does mean that many errors may get left in the data set, because we
+have no way of figuring out if they are errors or simply low coverage,
+but that&#8217;s OK (and you can always trim them off if you really care).</p>
+<p>To run such error trimming, use the command <code class="docutils literal"><span class="pre">trim-low-abund.py</span></code>
+(at the command line, or prefix with a &#8216;!&#8217; in the notebook):</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>interleave-reads.py SRR1976948_1.qc.fq.gz SRR1976948_2.qc.fq.gz |
+   trim-low-abund.py -V -M 8e9 -C 3 -Z 10 - -o SRR1976948.trim.fq
+</pre></div>
+</div>
+<div class="section" id="why-or-why-not-do-k-mer-trimming">
+<h2>Why (or why not) do k-mer trimming?<a class="headerlink" href="#why-or-why-not-do-k-mer-trimming" title="Permalink to this headline">¶</a></h2>
+<p>If you can assemble your data set without k-mer trimming, there&#8217;s no
+reason to do it.  The reason we&#8217;re error trimming here is to speed up
+the assembler (by removing data) and to decrease the memory requirements
+of the assembler (by removing a number of k-mers).</p>
+<p>To see how many k-mers we removed, you can examine the distribution as above,
+or use the <code class="docutils literal"><span class="pre">unique-kmers.py</span></code> script:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>unique-kmers.py SRR1976948_1.qc.fq.gz SRR1976948_2.qc.fq.gz
+unique-kmers.py SRR1976948.trim.fq
+</pre></div>
+</div>
+<hr class="docutils" />
+<p>Next: <a class="reference internal" href="assemble.html"><em>Run the MEGAHIT assembler</em></a></p>
+</div>
+</div>
+
+
+
+<hr>
+
+<font size="-1"><b>LICENSE:</b>
+This documentation and all textual/graphic site content is released
+under <a href='http://creativecommons.org/publicdomain/zero/1.0/'>
+Creative Commons - 0
+(CC0)</a> -- <a href='https://github.com/ngs-docs/2017-ucsc-metagenomics'>fork @
+github</a>. </font>
+
+<hr>
+
+
+<!-- disqus commenting disabled; set disqus_shortname -->
+
+    </div>
+    
+
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2017, Lab for Data Intensive Biology.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.<br/>
+    </p>
+  </div>
+</footer>
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', '', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+  </body>
+</html>

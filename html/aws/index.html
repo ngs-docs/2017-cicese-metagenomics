@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Starting up an Amazon Web Services machine &mdash; 2017-dibsi-metagenomics 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinxcontrib-images/LightBox2/lightbox2/css/lightbox.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/sphinxcontrib-images/LightBox2/lightbox2/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/sphinxcontrib-images/LightBox2/lightbox2/js/lightbox.min.js"></script>
+    <script type="text/javascript" src="../_static/sphinxcontrib-images/LightBox2/lightbox2-customize/jquery-noconflict.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="2017-dibsi-metagenomics 1.0 documentation" href="../toc.html" />
+
+
+<style type="text/css">
+<!-- github-based editing disabled; set github_base_account
+     and github_project -->
+#editor-trap.toggled {
+  display: none;
+}
+</style>
+
+
+
+  </head>
+  <body role="document">
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../toc.html">
+          2017-dibsi-metagenomics</a>
+        <span class="navbar-text navbar-version pull-left"><b>1.0</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../toc.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">2017 Metagenomics workshop at UC Santa Cruz</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../welcome.html">Welcome!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../jetstream/boot.html">Booting a Jetstream Computer Instance for your use!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quality.html">Short read quality and trimming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../assemble.html">Run the MEGAHIT assembler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../prokka_tutorial.html">Annotation with Prokka</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../binning.html">Mapping and Binning a Metagenome Assembly</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../salmon_tutorial.html">Gene Abundance Estimation with Salmon</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mapping.html">Mapping</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../slice.html">Slicing and dicing with k-mers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../circos_tutorial.html">Using and Installing Circos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow and repeatability discussion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DATA.html">Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../INSTALL.html">Building this site on your own</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../README.html">2017 / April / Metagenomics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../day2-install.html">Day 2 - installation instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../kmer_trimming.html">K-mer Spectral Error Trimming</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">Starting up an Amazon Web Services machine</a><ul>
+<li><a class="reference internal" href="#start-here-boot">Start here: <code class="docutils literal"><span class="pre">boot</span></code></a></li>
+<li><a class="reference internal" href="#full-table-of-contents">Full table of contents:</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+              
+            
+            
+            
+            
+              <li class="hidden-sm">
+<div id="sourcelink">
+  <a href="../_sources/aws/index.txt"
+     rel="nofollow">Source</a>
+</div></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+
+    <div class="col-md-12 content">
+      
+  
+  <div class="section" id="starting-up-an-amazon-web-services-machine">
+<h1>Starting up an Amazon Web Services machine<a class="headerlink" href="#starting-up-an-amazon-web-services-machine" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="start-here-boot">
+<h2>Start here: <a class="reference internal" href="boot.html"><em>Start an Amazon Web Services computer:</em></a><a class="headerlink" href="#start-here-boot" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="full-table-of-contents">
+<h2>Full table of contents:<a class="headerlink" href="#full-table-of-contents" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="boot.html">Start an Amazon Web Services computer:</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="boot.html#select-ec2-virtual-servers-in-the-cloud">0. Select &#8220;EC2 - virtual servers in the cloud&#8221;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="boot.html#switch-to-zone-us-west-n-california">1. Switch to zone US West (N California)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="boot.html#click-on-launch-instance">2. Click on &#8220;Launch instance.&#8221;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="boot.html#select-community-amis">3. Select &#8220;Community AMIs.&#8221;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="boot.html#search-for-ami-05384865-ubuntu-wily-15-10-amd64-server">4. Search for ami-05384865 (ubuntu-wily-15.10-amd64-server)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="boot.html#click-on-select">5. Click on &#8220;Select.&#8221;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="boot.html#choose-m4-xlarge">6. Choose m4.xlarge.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="boot.html#click-review-and-launch">7. Click &#8220;Review and Launch.&#8221;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="boot.html#click-launch">8. Click &#8220;Launch.&#8221;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="boot.html#select-create-a-new-key-pair">9. Select &#8220;Create a new key pair.&#8221;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="boot.html#enter-name-amazon-key">10. Enter name &#8216;amazon-key&#8217;.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="boot.html#click-download-key-pair">11. Click &#8220;Download key pair.&#8221;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="boot.html#click-launch-instance">12. Click &#8220;Launch instance.&#8221;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="boot.html#select-view-instances-lower-right">13. Select View instances (lower right)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="boot.html#bask-in-the-glory-of-your-running-instance">14. Bask in the glory of your running instance</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="login-shell.html">Log into your instance with the UNIX shell</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="login-shell.html#log-into-your-instance-via-the-unix-shell-mac-linux">Log into your instance via the UNIX shell (Mac/Linux)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="login-shell.html#log-into-your-instance-via-mobaxterm-windows">Log into your instance via MobaXTerm (Windows)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="login-shell-unix.html">Log into your instance from a Mac or Linux machine</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="login-shell-unix.html#change-permissions-and-execute-ssh">Change permissions and execute ssh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="login-shell-unix.html#successful-login">Successful login</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="login-shell-win.html">Log into your instance from a Windows machine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configure-firewall.html">Configure your instance firewall</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="configure-firewall.html#select-security-groups">1. Select &#8216;Security Groups&#8217;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configure-firewall.html#select-inbound">2. Select &#8216;Inbound&#8217;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configure-firewall.html#select-edit">3. Select &#8216;Edit&#8217;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configure-firewall.html#select-add-rule">4. Select &#8216;Add Rule&#8217;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configure-firewall.html#enter-rule-information">5. Enter rule information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configure-firewall.html#select-save">6. Select &#8216;Save&#8217;.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configure-firewall.html#return-to-the-instances-page">7. Return to the Instances page.</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="creating-ami.html">Creating your own Amazon Machine Image</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="creating-ami.html#actions-create-image">1. Actions, Create image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="creating-ami.html#fill-out-name-and-description">2. Fill out name and description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="creating-ami.html#wait-for-it-to-become-available">3. Wait for it to become available</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="volumes-and-snapshots.html">Working with persistent storage: volumes and snapshots</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="volumes-and-snapshots.html#creating-persistent-volumes-to-store-data">Creating persistent volumes to store data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="volumes-and-snapshots.html#creating-snapshots-of-volumes">Creating snapshots of volumes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="terminate-instance.html">Terminating your instance</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="terminate-instance.html#select-actions-instance-state-terminate">1. Select Actions, Instance State, Terminate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="terminate-instance.html#agree-to-terminate">2. Agree to terminate.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="terminate-instance.html#verify-status-on-your-instance-page">3. Verify status on your instance page.</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="things-to-mention.html">Things to mention and discuss</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="things-to-mention.html#when-do-disks-go-away">When do disks go away?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="things-to-mention.html#what-are-you-charged-for">What are you charged for?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="things-to-mention.html#regions-vs-zones">Regions vs zones:</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="install-rstudio-server.html">Running RStudio Server in the cloud</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="install-rstudio-server.html#start-up-an-amazon-instance">1. Start up an Amazon instance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install-rstudio-server.html#configure-your-network-firewall">2. Configure your network firewall</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install-rstudio-server.html#log-in-via-the-shell">3. Log in via the shell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install-rstudio-server.html#set-a-password-for-the-ubuntu-account">4. Set a password for the &#8216;ubuntu&#8217; account</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install-rstudio-server.html#install-r-and-the-gdebi-tool">5. Install R and the gdebi tool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install-rstudio-server.html#download-install-rstudio-server">6. Download &amp; install RStudio Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install-rstudio-server.html#open-your-rstudio-server-instance">7. Open your RStudio Server instance</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><a class="reference internal" href="../genindex.html"><span>Index</span></a></li>
+<li><a class="reference internal" href="../py-modindex.html"><span>Module Index</span></a></li>
+<li><a class="reference internal" href="../search.html"><span>Search Page</span></a></li>
+</ul>
+</div>
+
+
+
+<hr>
+
+<font size="-1"><b>LICENSE:</b>
+This documentation and all textual/graphic site content is released
+under <a href='http://creativecommons.org/publicdomain/zero/1.0/'>
+Creative Commons - 0
+(CC0)</a> -- <a href='https://github.com/ngs-docs/2017-ucsc-metagenomics'>fork @
+github</a>. </font>
+
+<hr>
+
+
+<!-- disqus commenting disabled; set disqus_shortname -->
+
+    </div>
+    
+
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2017, Lab for Data Intensive Biology.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.<br/>
+    </p>
+  </div>
+</footer>
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', '', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+  </body>
+</html>

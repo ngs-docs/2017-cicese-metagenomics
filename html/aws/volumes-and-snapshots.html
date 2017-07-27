@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Working with persistent storage: volumes and snapshots &mdash; 2017-dibsi-metagenomics 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinxcontrib-images/LightBox2/lightbox2/css/lightbox.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/sphinxcontrib-images/LightBox2/lightbox2/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/sphinxcontrib-images/LightBox2/lightbox2/js/lightbox.min.js"></script>
+    <script type="text/javascript" src="../_static/sphinxcontrib-images/LightBox2/lightbox2-customize/jquery-noconflict.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="2017-dibsi-metagenomics 1.0 documentation" href="../toc.html" />
+
+
+<style type="text/css">
+<!-- github-based editing disabled; set github_base_account
+     and github_project -->
+#editor-trap.toggled {
+  display: none;
+}
+</style>
+
+
+
+  </head>
+  <body role="document">
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../toc.html">
+          2017-dibsi-metagenomics</a>
+        <span class="navbar-text navbar-version pull-left"><b>1.0</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../toc.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">2017 Metagenomics workshop at UC Santa Cruz</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../welcome.html">Welcome!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../jetstream/boot.html">Booting a Jetstream Computer Instance for your use!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quality.html">Short read quality and trimming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../assemble.html">Run the MEGAHIT assembler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../prokka_tutorial.html">Annotation with Prokka</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../binning.html">Mapping and Binning a Metagenome Assembly</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../salmon_tutorial.html">Gene Abundance Estimation with Salmon</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mapping.html">Mapping</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../slice.html">Slicing and dicing with k-mers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../circos_tutorial.html">Using and Installing Circos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow and repeatability discussion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DATA.html">Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../INSTALL.html">Building this site on your own</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../README.html">2017 / April / Metagenomics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../day2-install.html">Day 2 - installation instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../kmer_trimming.html">K-mer Spectral Error Trimming</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">Working with persistent storage: volumes and snapshots</a><ul>
+<li><a class="reference internal" href="#creating-persistent-volumes-to-store-data">Creating persistent volumes to store data</a><ul>
+<li><a class="reference internal" href="#locate-your-instance-zone">0. Locate your instance <em>zone</em></a></li>
+<li><a class="reference internal" href="#click-on-the-volumes-tab">1. Click on the volumes tab</a></li>
+<li><a class="reference internal" href="#create-volume">2. &#8216;Create Volume&#8217;</a></li>
+<li><a class="reference internal" href="#configure-your-volume-to-have-the-same-zone-as-your-instance">3. Configure your volume to have the same zone as your instance</a></li>
+<li><a class="reference internal" href="#wait-for-your-volume-to-be-available">4. Wait for your volume to be available</a></li>
+<li><a class="reference internal" href="#select-volume-actions-attach-volume">5. Select volume, Actions, Attach volume</a></li>
+<li><a class="reference internal" href="#select-instance-attachment-point-and-attach">6. Select instance, attachment point, and Attach</a></li>
+<li><a class="reference internal" href="#on-your-instance-list-block-devices">7. On your instance, list block devices</a></li>
+<li><a class="reference internal" href="#detaching-volumes">Detaching volumes</a></li>
+<li><a class="reference internal" href="#unmount-it-from-the-instance">1. Unmount it from the instance</a></li>
+<li><a class="reference internal" href="#detach">2. Detach</a></li>
+<li><a class="reference internal" href="#yes-detach">3. Yes, detach.</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#creating-snapshots-of-volumes">Creating snapshots of volumes</a><ul>
+<li><a class="reference internal" href="#actions-create-snapshot">1. Actions, Create snapshot</a></li>
+<li><a class="reference internal" href="#fill-out-name-and-description">2. Fill out name and description</a></li>
+<li><a class="reference internal" href="#click-close-wait">3. Click &#8216;Close&#8217; &amp; wait.</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+              
+            
+            
+            
+            
+              <li class="hidden-sm">
+<div id="sourcelink">
+  <a href="../_sources/aws/volumes-and-snapshots.txt"
+     rel="nofollow">Source</a>
+</div></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+
+    <div class="col-md-12 content">
+      
+  
+  <div class="section" id="working-with-persistent-storage-volumes-and-snapshots">
+<h1>Working with persistent storage: volumes and snapshots<a class="headerlink" href="#working-with-persistent-storage-volumes-and-snapshots" title="Permalink to this headline">¶</a></h1>
+<p>Volumes are basically UNIX disks (&#8220;block devices&#8221;) that will persist
+after you terminate your instance.  They are tied to a zone within a
+region and can only be mounted on instances within that zone.</p>
+<p>Snapshots are an Amazon-specific thing that let you communicate data
+on volumes between accounts.  They are &#8220;read-only&#8221; backups that are
+created from volumes; they can be used to create new volumes in turn,
+and can also be shared with specific people (or made public).
+Snapshots are tied to a region but not a zone.</p>
+<div class="section" id="creating-persistent-volumes-to-store-data">
+<h2>Creating persistent volumes to store data<a class="headerlink" href="#creating-persistent-volumes-to-store-data" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="locate-your-instance-zone">
+<h3>0. Locate your instance <em>zone</em><a class="headerlink" href="#locate-your-instance-zone" title="Permalink to this headline">¶</a></h3>
+<a class=""
+               data-lightbox="group-99f18db6-00b1-40ce-a75a-ef555874600e"
+               href="../_images/add-volume-1d1.png"
+               title=""
+               data-title=""
+               ><img src="../_images/add-volume-1d1.png"
+                     class=""
+                     width="20%"
+                     height="auto"
+                     alt=""/>
+                </a></div>
+<div class="section" id="click-on-the-volumes-tab">
+<h3>1. Click on the volumes tab<a class="headerlink" href="#click-on-the-volumes-tab" title="Permalink to this headline">¶</a></h3>
+<a class=""
+               data-lightbox="group-f58468fb-b4f4-494a-b3fe-2be59ec8f177"
+               href="../_images/add-volume-11.png"
+               title=""
+               data-title=""
+               ><img src="../_images/add-volume-11.png"
+                     class=""
+                     width="20%"
+                     height="auto"
+                     alt=""/>
+                </a></div>
+<div class="section" id="create-volume">
+<h3>2. &#8216;Create Volume&#8217;<a class="headerlink" href="#create-volume" title="Permalink to this headline">¶</a></h3>
+<a class=""
+               data-lightbox="group-7254de17-0526-47b5-a33c-69e3051dea6f"
+               href="../_images/add-volume-1b1.png"
+               title=""
+               data-title=""
+               ><img src="../_images/add-volume-1b1.png"
+                     class=""
+                     width="20%"
+                     height="auto"
+                     alt=""/>
+                </a></div>
+<div class="section" id="configure-your-volume-to-have-the-same-zone-as-your-instance">
+<h3>3. Configure your volume to have the same zone as your instance<a class="headerlink" href="#configure-your-volume-to-have-the-same-zone-as-your-instance" title="Permalink to this headline">¶</a></h3>
+<a class=""
+               data-lightbox="group-6c43fb1f-c8a6-4fd0-aecf-be92cfdb19d5"
+               href="../_images/add-volume-1c1.png"
+               title=""
+               data-title=""
+               ><img src="../_images/add-volume-1c1.png"
+                     class=""
+                     width="20%"
+                     height="auto"
+                     alt=""/>
+                </a></div>
+<div class="section" id="wait-for-your-volume-to-be-available">
+<h3>4. Wait for your volume to be available<a class="headerlink" href="#wait-for-your-volume-to-be-available" title="Permalink to this headline">¶</a></h3>
+<a class=""
+               data-lightbox="group-e8fcfaa0-ae67-4d70-ac29-21cd2f701ace"
+               href="../_images/add-volume-21.png"
+               title=""
+               data-title=""
+               ><img src="../_images/add-volume-21.png"
+                     class=""
+                     width="20%"
+                     height="auto"
+                     alt=""/>
+                </a></div>
+<div class="section" id="select-volume-actions-attach-volume">
+<h3>5. Select volume, Actions, Attach volume<a class="headerlink" href="#select-volume-actions-attach-volume" title="Permalink to this headline">¶</a></h3>
+<a class=""
+               data-lightbox="group-5a74d9a8-90f3-4524-9e6c-1b7d9f518cbc"
+               href="../_images/add-volume-31.png"
+               title=""
+               data-title=""
+               ><img src="../_images/add-volume-31.png"
+                     class=""
+                     width="20%"
+                     height="auto"
+                     alt=""/>
+                </a></div>
+<div class="section" id="select-instance-attachment-point-and-attach">
+<h3>6. Select instance, attachment point, and Attach<a class="headerlink" href="#select-instance-attachment-point-and-attach" title="Permalink to this headline">¶</a></h3>
+<p>Here, your attachment point will be &#8216;/dev/sdf&#8217; and your block device will
+be named &#8216;/dev/xvdf&#8217;.</p>
+<a class=""
+               data-lightbox="group-bc19a124-d49d-475d-9c08-e081c2b1fef2"
+               href="../_images/add-volume-41.png"
+               title=""
+               data-title=""
+               ><img src="../_images/add-volume-41.png"
+                     class=""
+                     width="20%"
+                     height="auto"
+                     alt=""/>
+                </a></div>
+<div class="section" id="on-your-instance-list-block-devices">
+<h3>7. On your instance, list block devices<a class="headerlink" href="#on-your-instance-list-block-devices" title="Permalink to this headline">¶</a></h3>
+<p>Type:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">lsblk</span>
+</pre></div>
+</div>
+<p>You should see something like this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>NAME    MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+xvda    202:0    0    8G  0 disk
+`-xvda1 202:1    0    8G  0 part /
+xvdf    202:80   0  100G  0 disk
+</pre></div>
+</div>
+<p>Now format the disk (ONLY ON EMPTY DISKS - THIS WILL ERASE ANY DATA ON
+THE DISK):</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>sudo mkfs -t ext4 /dev/xvdf
+</pre></div>
+</div>
+<p>and mount the disk:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>sudo mkdir /disk
+sudo mount /dev/xvdf /disk
+sudo chmod a+rwxt /disk
+</pre></div>
+</div>
+<p>and voila, anything you put on /disk will be on the volume that you allocated!</p>
+<p>The command &#8216;df -h&#8217; will show you what disks are actually mounted &amp; where.</p>
+</div>
+<div class="section" id="detaching-volumes">
+<h3>Detaching volumes<a class="headerlink" href="#detaching-volumes" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="unmount-it-from-the-instance">
+<h3>1. Unmount it from the instance<a class="headerlink" href="#unmount-it-from-the-instance" title="Permalink to this headline">¶</a></h3>
+<p>Change out of the directory, stop any running programs using it, and then:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>sudo umount /disk
+</pre></div>
+</div>
+</div>
+<div class="section" id="detach">
+<h3>2. Detach<a class="headerlink" href="#detach" title="Permalink to this headline">¶</a></h3>
+<p>On the &#8216;volumes&#8217; tab in your EC2 console, go to Actions, Detach.</p>
+<a class=""
+               data-lightbox="group-e0702204-6751-4d96-b153-12c1214c7861"
+               href="../_images/add-volume-51.png"
+               title=""
+               data-title=""
+               ><img src="../_images/add-volume-51.png"
+                     class=""
+                     width="20%"
+                     height="auto"
+                     alt=""/>
+                </a></div>
+<div class="section" id="yes-detach">
+<h3>3. Yes, detach.<a class="headerlink" href="#yes-detach" title="Permalink to this headline">¶</a></h3>
+<a class=""
+               data-lightbox="group-5b2bdaf5-3ff9-4205-92db-ab868854b525"
+               href="../_images/add-volume-61.png"
+               title=""
+               data-title=""
+               ><img src="../_images/add-volume-61.png"
+                     class=""
+                     width="20%"
+                     height="auto"
+                     alt=""/>
+                </a><p>Note, volumes remain attached when you reboot or stop an instance, but
+are (of course) detached when you terminate an instance.</p>
+</div>
+</div>
+<div class="section" id="creating-snapshots-of-volumes">
+<h2>Creating snapshots of volumes<a class="headerlink" href="#creating-snapshots-of-volumes" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="actions-create-snapshot">
+<h3>1. Actions, Create snapshot<a class="headerlink" href="#actions-create-snapshot" title="Permalink to this headline">¶</a></h3>
+<a class=""
+               data-lightbox="group-db1bc61d-a83e-4271-b0fa-fcba5fde0856"
+               href="../_images/create-snapshot-11.png"
+               title=""
+               data-title=""
+               ><img src="../_images/create-snapshot-11.png"
+                     class=""
+                     width="20%"
+                     height="auto"
+                     alt=""/>
+                </a></div>
+<div class="section" id="fill-out-name-and-description">
+<h3>2. Fill out name and description<a class="headerlink" href="#fill-out-name-and-description" title="Permalink to this headline">¶</a></h3>
+<a class=""
+               data-lightbox="group-515fc320-d96b-4d1d-8fac-b2d72675b2a3"
+               href="../_images/create-snapshot-21.png"
+               title=""
+               data-title=""
+               ><img src="../_images/create-snapshot-21.png"
+                     class=""
+                     width="20%"
+                     height="auto"
+                     alt=""/>
+                </a></div>
+<div class="section" id="click-close-wait">
+<h3>3. Click &#8216;Close&#8217; &amp; wait.<a class="headerlink" href="#click-close-wait" title="Permalink to this headline">¶</a></h3>
+<a class=""
+               data-lightbox="group-cd08a849-6b34-4e8c-8791-bfd8b95974c7"
+               href="../_images/create-snapshot-31.png"
+               title=""
+               data-title=""
+               ><img src="../_images/create-snapshot-31.png"
+                     class=""
+                     width="20%"
+                     height="auto"
+                     alt=""/>
+                </a></div>
+</div>
+</div>
+
+
+
+<hr>
+
+<font size="-1"><b>LICENSE:</b>
+This documentation and all textual/graphic site content is released
+under <a href='http://creativecommons.org/publicdomain/zero/1.0/'>
+Creative Commons - 0
+(CC0)</a> -- <a href='https://github.com/ngs-docs/2017-ucsc-metagenomics'>fork @
+github</a>. </font>
+
+<hr>
+
+
+<!-- disqus commenting disabled; set disqus_shortname -->
+
+    </div>
+    
+
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2017, Lab for Data Intensive Biology.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.<br/>
+    </p>
+  </div>
+</footer>
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', '', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+  </body>
+</html>

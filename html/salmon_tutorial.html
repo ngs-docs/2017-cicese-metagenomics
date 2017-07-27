@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Gene Abundance Estimation with Salmon &mdash; 2017-dibsi-metagenomics 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinxcontrib-images/LightBox2/lightbox2/css/lightbox.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/sphinxcontrib-images/LightBox2/lightbox2/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/sphinxcontrib-images/LightBox2/lightbox2/js/lightbox.min.js"></script>
+    <script type="text/javascript" src="_static/sphinxcontrib-images/LightBox2/lightbox2-customize/jquery-noconflict.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="2017-dibsi-metagenomics 1.0 documentation" href="toc.html" />
+    <link rel="next" title="Mapping" href="mapping.html" />
+    <link rel="prev" title="Binning a Metagenomic Assembly" href="binning.html" />
+
+
+<style type="text/css">
+<!-- github-based editing disabled; set github_base_account
+     and github_project -->
+#editor-trap.toggled {
+  display: none;
+}
+</style>
+
+
+
+  </head>
+  <body role="document">
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="toc.html">
+          2017-dibsi-metagenomics</a>
+        <span class="navbar-text navbar-version pull-left"><b>1.0</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="toc.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">2017 DIBSI Metagenomics Workshop at UC Davis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="welcome.html">Welcome!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jetstream/boot.html">Booting a Jetstream Computer Instance for your use!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command-line.html">Intro to Shell Lesson</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command-line.html#the-shell">The Shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command-line.html#for-future-reference">For Future Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command-line.html#finding-files">Finding files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running-command-line-blast.html">Running command-line BLAST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quality.html">Short read quality and trimming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="assemble.html">Run the MEGAHIT assembler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prokka_tutorial.html">Annotation with Prokka</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sourmash.html">A sourmash tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sourmash.html#k-mers-k-mer-specificity-and-comparing-samples-with-k-mer-jaccard-distance">K-mers, k-mer specificity, and comparing samples with k-mer Jaccard distance.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="binning.html">Binning a Metagenomic Assembly</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Gene Abundance Estimation with Salmon</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mapping.html">Mapping</a></li>
+<li class="toctree-l1"><a class="reference internal" href="slice.html">Slicing and dicing with k-mers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="anvio.html">Anvi&#8217;o</a></li>
+<li class="toctree-l1"><a class="reference internal" href="circos_tutorial.html">Using and Installing Circos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="workflow.html">Workflow and repeatability discussion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DATA.html">Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="INSTALL.html">Building this site on your own</a></li>
+<li class="toctree-l1"><a class="reference internal" href="README.html">2017 / April / Metagenomics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="day2-install.html">Day 2 - installation instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="kmer_trimming.html">K-mer Spectral Error Trimming</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">Gene Abundance Estimation with Salmon</a><ul>
+<li><a class="reference internal" href="#installing-salmon">Installing Salmon</a></li>
+<li><a class="reference internal" href="#running-salmon">Running Salmon</a></li>
+<li><a class="reference internal" href="#working-with-count-data">Working with count data</a></li>
+<li><a class="reference internal" href="#plotting-the-results">Plotting the results</a></li>
+<li><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="binning.html" title="Previous Chapter: Binning a Metagenomic Assembly"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Binning a Met...</span>
+    </a>
+  </li>
+  <li>
+    <a href="mapping.html" title="Next Chapter: Mapping"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Mapping &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+              <li class="hidden-sm">
+<div id="sourcelink">
+  <a href="_sources/salmon_tutorial.txt"
+     rel="nofollow">Source</a>
+</div></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+
+    <div class="col-md-12 content">
+      
+  
+  <div class="section" id="gene-abundance-estimation-with-salmon">
+<h1>Gene Abundance Estimation with Salmon<a class="headerlink" href="#gene-abundance-estimation-with-salmon" title="Permalink to this headline">¶</a></h1>
+<p>Salmon is one of a breed of new, very fast RNAseq counting packages. Like Kallisto and Sailfish, Salmon counts fragments without doing up-front read mapping. Salmon can be used with edgeR and others to do differential expression analysis (if you are quantifying RNAseq data).</p>
+<p>Today we will use it to get a handle on the relative distribution of genomic reads across the predicted protein regions.</p>
+<p>The goals of this tutorial are to:</p>
+<ul class="simple">
+<li>Install salmon</li>
+<li>Use salmon to estimate gene coverage in our metagenome dataset</li>
+</ul>
+<p>Extra resources:</p>
+<ul class="simple">
+<li>see the <a class="reference external" href="https://github.com/ngs-docs/2016-metagenomics-sio/blob/master/files/plot-quant.ipynb">finished plotting notebook</a>.</li>
+<li>see the <a class="reference external" href="https://github.com/ngs-docs/2016-metagenomics-sio/blob/master/files/extract-sequences.py">extract-sequences.py</a> script.</li>
+</ul>
+<div class="section" id="installing-salmon">
+<h2>Installing Salmon<a class="headerlink" href="#installing-salmon" title="Permalink to this headline">¶</a></h2>
+<p>Download and extract the latest version of Salmon and add it to your PATH:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>cd
+wget https://github.com/COMBINE-lab/salmon/releases/download/v0.7.2/Salmon-0.7.2_linux_x86_64.tar.gz
+tar -xvzf Salmon-0.7.2_linux_x86_64.tar.gz
+cd Salmon-0.7.2_linux_x86_64
+export PATH=$PATH:$HOME/Salmon-0.7.2_linux_x86_64/bin
+</pre></div>
+</div>
+</div>
+<div class="section" id="running-salmon">
+<h2>Running Salmon<a class="headerlink" href="#running-salmon" title="Permalink to this headline">¶</a></h2>
+<p>Go to the data directory and download the prokka annotated sequences, assembled metagenome, and fastq files:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>cd ~
+mkdir -p data
+cd data
+
+curl -L -O https://s3-us-west-1.amazonaws.com/dib-training.ucdavis.edu/metagenomics-scripps-2016-10-12/SRR1976948.abundtrim.subset.pe.fq.gz
+curl -L -O https://s3-us-west-1.amazonaws.com/dib-training.ucdavis.edu/metagenomics-scripps-2016-10-12/SRR1977249.abundtrim.subset.pe.fq.gz
+</pre></div>
+</div>
+<p>#  This file was created this morning, inside the annotation/prokka_annotation folder
+#  curl -L -O <a class="reference external" href="https://s3-us-west-1.amazonaws.com/dib-training.ucdavis.edu/metagenomics-scripps-2016-10-12/prokka_annotation_assembly.tar.gz">https://s3-us-west-1.amazonaws.com/dib-training.ucdavis.edu/metagenomics-scripps-2016-10-12/prokka_annotation_assembly.tar.gz</a>
+#  tar -xvzf prokka_annotation_assembly.tar.gz</p>
+<p>Make a new directory for the quantification of data with Salmon:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>mkdir ~/quant
+cd ~/quant
+</pre></div>
+</div>
+<p>Grab the nucleotide (<code class="docutils literal"><span class="pre">*ffn</span></code>) predicted protein regions from Prokka and link them here. Also grab the trimmed sequence data (<code class="docutils literal"><span class="pre">*fq</span></code>)</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>ln -fs ~/annotation/prokka_annotation/metagG.ffn .
+ln -fs ~/data/*.abundtrim.subset.pe.fq.gz .
+</pre></div>
+</div>
+<p>Create the salmon index:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>salmon index -t metagG.ffn -i transcript_index --type quasi -k 31
+</pre></div>
+</div>
+<p>Salmon requires that paired reads be separated into two files. We can split the reads using the <code class="docutils literal"><span class="pre">split-paired-reads.py</span></code> from the khmer package:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>pip install khmer
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span></span>for file in *.abundtrim.subset.pe.fq.gz
+do
+  tail=.fq.gz
+  BASE=${file/$tail/}
+  split-paired-reads.py $BASE$tail -1 ${file/$tail/}.1.fq -2 ${file/$tail/}.2.fq
+done
+</pre></div>
+</div>
+<p>Now, we can quantify our reads against this reference:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>for file in *.pe.1.fq
+do
+tail1=.abundtrim.subset.pe.1.fq
+tail2=.abundtrim.subset.pe.2.fq
+BASE=${file/$tail1/}
+salmon quant -i transcript_index --libType IU \
+      -1 $BASE$tail1 -2 $BASE$tail2 -o $BASE.quant;
+ done
+</pre></div>
+</div>
+<p>(Note that &#8211;libType must come before the read files!)</p>
+<p>This will create a bunch of directories named after the fastq files that we just pushed through. Take a look at what files there are within one of these directories:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>find SRR1976948.quant -type f
+</pre></div>
+</div>
+</div>
+<div class="section" id="working-with-count-data">
+<h2>Working with count data<a class="headerlink" href="#working-with-count-data" title="Permalink to this headline">¶</a></h2>
+<p>Now, the <code class="docutils literal"><span class="pre">quant.sf</span></code> files actually contain the relevant information about expression – take a look:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>head -10 SRR1976948.quant/quant.sf
+</pre></div>
+</div>
+<p>The first column contains the transcript names, and the fourth column is what we will want down the road - the normalized counts (TPM). However, they’re not in a convenient location / format for use; let&#8217;s fix that.</p>
+<p>Download the gather-counts.py script:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>curl -L -O https://raw.githubusercontent.com/ngs-docs/2016-metagenomics-sio/master/gather-counts.py
+</pre></div>
+</div>
+<p>and run it:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>python2 ./gather-counts.py
+</pre></div>
+</div>
+<p>This will give you a bunch of .counts files, which are processed from the quant.sf files and named for the directory from which they emanate.</p>
+</div>
+<div class="section" id="plotting-the-results">
+<h2>Plotting the results<a class="headerlink" href="#plotting-the-results" title="Permalink to this headline">¶</a></h2>
+<p>In Jupyter Notebook, open a new Python3 notebook and enter:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>%matplotlib inline
+import numpy
+from pylab import *
+</pre></div>
+</div>
+<p>In another cell:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>cd ~/data/quant
+</pre></div>
+</div>
+<p>In another cell:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">counts1</span> <span class="o">=</span> <span class="p">[</span> <span class="n">x</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;SRR1976948.quant.counts&#39;</span><span class="p">)]</span>
+<span class="n">counts1</span> <span class="o">=</span> <span class="p">[</span> <span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">counts1</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="p">]</span>
+<span class="n">counts1</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">counts1</span><span class="p">)</span>
+
+<span class="n">counts2</span> <span class="o">=</span> <span class="p">[</span> <span class="n">x</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;SRR1977249.quant.counts&#39;</span><span class="p">)]</span>
+<span class="n">counts2</span> <span class="o">=</span> <span class="p">[</span> <span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">counts2</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="p">]</span>
+<span class="n">counts2</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">counts2</span><span class="p">)</span>
+
+<span class="n">plot</span><span class="p">(</span><span class="n">counts1</span><span class="p">,</span> <span class="n">counts2</span><span class="p">,</span> <span class="s1">&#39;*&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="http://salmon.readthedocs.io/en/latest/salmon.html">http://salmon.readthedocs.io/en/latest/salmon.html</a></li>
+<li><a class="reference external" href="http://biorxiv.org/content/early/2016/08/30/021592">http://biorxiv.org/content/early/2016/08/30/021592</a></li>
+</ul>
+</div>
+</div>
+
+
+
+<hr>
+
+<font size="-1"><b>LICENSE:</b>
+This documentation and all textual/graphic site content is released
+under <a href='http://creativecommons.org/publicdomain/zero/1.0/'>
+Creative Commons - 0
+(CC0)</a> -- <a href='https://github.com/ngs-docs/2017-ucsc-metagenomics'>fork @
+github</a>. </font>
+
+<hr>
+
+
+<!-- disqus commenting disabled; set disqus_shortname -->
+
+    </div>
+    
+
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2017, Lab for Data Intensive Biology.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.<br/>
+    </p>
+  </div>
+</footer>
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', '', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+  </body>
+</html>

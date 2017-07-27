@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Slicing and dicing with k-mers &mdash; 2017-dibsi-metagenomics 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinxcontrib-images/LightBox2/lightbox2/css/lightbox.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/sphinxcontrib-images/LightBox2/lightbox2/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/sphinxcontrib-images/LightBox2/lightbox2/js/lightbox.min.js"></script>
+    <script type="text/javascript" src="_static/sphinxcontrib-images/LightBox2/lightbox2-customize/jquery-noconflict.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="2017-dibsi-metagenomics 1.0 documentation" href="toc.html" />
+    <link rel="next" title="Using and Installing Circos" href="circos_tutorial.html" />
+    <link rel="prev" title="Mapping" href="mapping.html" />
+
+
+<style type="text/css">
+<!-- github-based editing disabled; set github_base_account
+     and github_project -->
+#editor-trap.toggled {
+  display: none;
+}
+</style>
+
+
+
+  </head>
+  <body role="document">
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="toc.html">
+          2017-dibsi-metagenomics</a>
+        <span class="navbar-text navbar-version pull-left"><b>1.0</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="toc.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">2017 Metagenomics workshop at UC Santa Cruz</a></li>
+<li class="toctree-l1"><a class="reference internal" href="welcome.html">Welcome!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jetstream/boot.html">Booting a Jetstream Computer Instance for your use!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quality.html">Short read quality and trimming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="assemble.html">Run the MEGAHIT assembler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prokka_tutorial.html">Annotation with Prokka</a></li>
+<li class="toctree-l1"><a class="reference internal" href="binning.html">Mapping and Binning a Metagenome Assembly</a></li>
+<li class="toctree-l1"><a class="reference internal" href="salmon_tutorial.html">Gene Abundance Estimation with Salmon</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mapping.html">Mapping</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Slicing and dicing with k-mers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="circos_tutorial.html">Using and Installing Circos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="workflow.html">Workflow and repeatability discussion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DATA.html">Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="INSTALL.html">Building this site on your own</a></li>
+<li class="toctree-l1"><a class="reference internal" href="README.html">2017 / April / Metagenomics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="day2-install.html">Day 2 - installation instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="kmer_trimming.html">K-mer Spectral Error Trimming</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">Slicing and dicing with k-mers</a><ul>
+<li><a class="reference internal" href="#assemble-the-slice">Assemble the slice</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="mapping.html" title="Previous Chapter: Mapping"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Mapping</span>
+    </a>
+  </li>
+  <li>
+    <a href="circos_tutorial.html" title="Next Chapter: Using and Installing Circos"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Using and Ins... &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+              <li class="hidden-sm">
+<div id="sourcelink">
+  <a href="_sources/slice.txt"
+     rel="nofollow">Source</a>
+</div></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+
+    <div class="col-md-12 content">
+      
+  
+  <div class="section" id="slicing-and-dicing-with-k-mers">
+<h1>Slicing and dicing with k-mers<a class="headerlink" href="#slicing-and-dicing-with-k-mers" title="Permalink to this headline">¶</a></h1>
+<p>(Note, this won&#8217;t work with amplified data.)</p>
+<p>Extra resources:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/ngs-docs/2016-metagenomics-sio/blob/master/files/coverage.ipynb">plotting notebook</a></li>
+</ul>
+<p>&#8212;</p>
+<p>At the command line, create a new directory and extract some data:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>cd /mnt
+mkdir slice
+cd slice
+</pre></div>
+</div>
+<p>We&#8217;re going to work with half the read data set for speed reasons &#8211;</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>gunzip -c ../mapping/SRR1976948.abundtrim.subset.pe.fq.gz | \
+   head -6000000 &gt; SRR1976948.half.fq
+</pre></div>
+</div>
+<p>In a Jupyter Notebook (go to &#8216;<a class="reference external" href="http://">http://</a>&#8216; + machine name + &#8216;:8000&#8217;), password
+&#8216;davis&#8217;, create new Python notebook &#8220;conda root&#8221;, run:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">/</span><span class="n">mnt</span><span class="o">/</span><span class="nb">slice</span>
+</pre></div>
+</div>
+<p>and then in another cell:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>!load-into-counting.py -M 4e9 -k 31 SRR1976948.kh SRR1976948.half.fq
+</pre></div>
+</div>
+<p>and in another cell:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>!abundance-dist.py SRR1976948.kh SRR1976948.half.fq SRR1976948.dist
+</pre></div>
+</div>
+<p>and in yet another cell:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>%matplotlib inline
+import numpy
+from pylab import *
+dist1 = numpy.loadtxt(&#39;SRR1976948.dist&#39;, skiprows=1, delimiter=&#39;,&#39;)
+plot(dist1[:,0], dist1[:,1])
+axis(ymax=10000, xmax=1000)
+</pre></div>
+</div>
+<p>Then:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>python2 ~/khmer/sandbox/calc-median-distribution.py SRR1976948.kh \
+   SRR1976948.half.fq SRR1976948.readdist
+</pre></div>
+</div>
+<p>And:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>python2 ~/khmer/sandbox/slice-reads-by-coverage.py SRR1976948.kh SRR1976948.half.fq slice.fq -m 0 -M 60
+</pre></div>
+</div>
+<div class="section" id="assemble-the-slice">
+<h2>Assemble the slice<a class="headerlink" href="#assemble-the-slice" title="Permalink to this headline">¶</a></h2>
+<p>(Re)install megahit:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>cd
+git clone https://github.com/voutcn/megahit.git
+cd megahit
+make
+</pre></div>
+</div>
+<p>Go back to the slice directory and extract paired ends:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>cd /mnt/slice
+extract-paired-ends.py slice.fq
+</pre></div>
+</div>
+<p>Assemble!</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>~/megahit/megahit --12 slice.fq.pe -o slice
+</pre></div>
+</div>
+<p>The contigs will be in <code class="docutils literal"><span class="pre">slice/final.contigs.fa</span></code>.</p>
+</div>
+</div>
+
+
+
+<hr>
+
+<font size="-1"><b>LICENSE:</b>
+This documentation and all textual/graphic site content is released
+under <a href='http://creativecommons.org/publicdomain/zero/1.0/'>
+Creative Commons - 0
+(CC0)</a> -- <a href='https://github.com/ngs-docs/2017-ucsc-metagenomics'>fork @
+github</a>. </font>
+
+<hr>
+
+
+<!-- disqus commenting disabled; set disqus_shortname -->
+
+    </div>
+    
+
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2017, Lab for Data Intensive Biology.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.<br/>
+    </p>
+  </div>
+</footer>
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', '', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+  </body>
+</html>

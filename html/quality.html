@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Short read quality and trimming &mdash; 2017-dibsi-metagenomics 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinxcontrib-images/LightBox2/lightbox2/css/lightbox.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/sphinxcontrib-images/LightBox2/lightbox2/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/sphinxcontrib-images/LightBox2/lightbox2/js/lightbox.min.js"></script>
+    <script type="text/javascript" src="_static/sphinxcontrib-images/LightBox2/lightbox2-customize/jquery-noconflict.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="2017-dibsi-metagenomics 1.0 documentation" href="toc.html" />
+    <link rel="next" title="Run the MEGAHIT assembler" href="assemble.html" />
+    <link rel="prev" title="Running command-line BLAST" href="running-command-line-blast.html" />
+
+
+<style type="text/css">
+<!-- github-based editing disabled; set github_base_account
+     and github_project -->
+#editor-trap.toggled {
+  display: none;
+}
+</style>
+
+
+
+  </head>
+  <body role="document">
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="toc.html">
+          2017-dibsi-metagenomics</a>
+        <span class="navbar-text navbar-version pull-left"><b>1.0</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="toc.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">2017 DIBSI Metagenomics Workshop at UC Davis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="welcome.html">Welcome!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jetstream/boot.html">Booting a Jetstream Computer Instance for your use!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command-line.html">Intro to Shell Lesson</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command-line.html#the-shell">The Shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command-line.html#for-future-reference">For Future Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command-line.html#finding-files">Finding files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running-command-line-blast.html">Running command-line BLAST</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Short read quality and trimming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="assemble.html">Run the MEGAHIT assembler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prokka_tutorial.html">Annotation with Prokka</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sourmash.html">A sourmash tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sourmash.html#k-mers-k-mer-specificity-and-comparing-samples-with-k-mer-jaccard-distance">K-mers, k-mer specificity, and comparing samples with k-mer Jaccard distance.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="binning.html">Binning a Metagenomic Assembly</a></li>
+<li class="toctree-l1"><a class="reference internal" href="salmon_tutorial.html">Gene Abundance Estimation with Salmon</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mapping.html">Mapping</a></li>
+<li class="toctree-l1"><a class="reference internal" href="slice.html">Slicing and dicing with k-mers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="anvio.html">Using Anvi&#8217;o to Knit Everything Together</a></li>
+<li class="toctree-l1"><a class="reference internal" href="circos_tutorial.html">Using and Installing Circos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="workflow.html">Workflow and repeatability discussion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DATA.html">Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="INSTALL.html">Building this site on your own</a></li>
+<li class="toctree-l1"><a class="reference internal" href="README.html">2017 / April / Metagenomics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="day2-install.html">Day 2 - installation instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="kmer_trimming.html">K-mer Spectral Error Trimming</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">Short read quality and trimming</a><ul>
+<li><a class="reference internal" href="#installing-software-for-the-workshop">Installing software for the workshop</a></li>
+<li><a class="reference internal" href="#running-jupyter-notebook">Running Jupyter Notebook</a></li>
+<li><a class="reference internal" href="#data-source">Data source</a></li>
+<li><a class="reference internal" href="#copying-in-some-data-to-work-with">1. Copying in some data to work with.</a></li>
+<li><a class="reference internal" href="#copying-data-into-a-working-location">1. Copying data into a working location</a></li>
+<li><a class="reference internal" href="#fastqc">2. FastQC</a></li>
+<li><a class="reference internal" href="#trimmomatic">3. Trimmomatic</a></li>
+<li><a class="reference internal" href="#fastqc-again">4. FastQC again</a></li>
+<li><a class="reference internal" href="#multiqc">5. MultiQC</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="running-command-line-blast.html" title="Previous Chapter: Running command-line BLAST"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Running comma...</span>
+    </a>
+  </li>
+  <li>
+    <a href="assemble.html" title="Next Chapter: Run the MEGAHIT assembler"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Run the MEGAH... &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+              <li class="hidden-sm">
+<div id="sourcelink">
+  <a href="_sources/quality.txt"
+     rel="nofollow">Source</a>
+</div></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+
+    <div class="col-md-12 content">
+      
+  
+  <div class="section" id="short-read-quality-and-trimming">
+<h1>Short read quality and trimming<a class="headerlink" href="#short-read-quality-and-trimming" title="Permalink to this headline">¶</a></h1>
+<p>(Jetstream startup instructions <a class="reference external" href="https://2017-ucsc-metagenomics.readthedocs.io/en/latest/jetstream/boot.html">HERE</a>.)</p>
+<p>&#8212;</p>
+<p>You should now be logged into your Jetstream computer!  You should see
+something like this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>ubuntu@ip-172-30-1-252:~$
+</pre></div>
+</div>
+<p>this is the command prompt.</p>
+<div class="section" id="installing-software-for-the-workshop">
+<h2>Installing software for the workshop<a class="headerlink" href="#installing-software-for-the-workshop" title="Permalink to this headline">¶</a></h2>
+<p>First, let&#8217;s install software for short read quality assessment, trimming and python virtual environments:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>sudo apt-get -y update &amp;&amp; \
+sudo apt-get -y install trimmomatic python-pip \
+   samtools zlib1g-dev ncurses-dev python-dev
+sudo apt-get install -y python3.5-dev python3.5-venv make \
+    libc6-dev g++ zlib1g-dev
+
+ wget -c http://www.bioinformatics.babraham.ac.uk/projects/fastqc/fastqc_v0.11.5.zip
+ unzip fastqc_v0.11.5.zip
+ cd FastQC
+ chmod +x fastqc
+ cd
+</pre></div>
+</div>
+<p>Now, create a python 3.5 virtual environment and install software within:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>python3.5 -m venv ~/py3
+. ~/py3/bin/activate
+pip install -U pip
+pip install -U Cython
+pip install -U jupyter jupyter_client ipython pandas matplotlib scipy scikit-learn khmer
+
+pip install -U https://github.com/dib-lab/sourmash/archive/master.zip
+</pre></div>
+</div>
+</div>
+<div class="section" id="running-jupyter-notebook">
+<h2>Running Jupyter Notebook<a class="headerlink" href="#running-jupyter-notebook" title="Permalink to this headline">¶</a></h2>
+<p>Let&#8217;s also run a Jupyter Notebook. First, configure it a teensy bit
+more securely, and also have it run in the background:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>jupyter notebook --generate-config
+
+cat &gt;&gt;~/.jupyter/jupyter_notebook_config.py &lt;&lt;EOF
+c = get_config()
+c.NotebookApp.ip = &#39;*&#39;
+c.NotebookApp.open_browser = False
+c.NotebookApp.password = u&#39;sha1:5d813e5d59a7:b4e430cf6dbd1aad04838c6e9cf684f4d76e245c&#39;
+c.NotebookApp.port = 8000
+
+EOF
+</pre></div>
+</div>
+<p>Now, run!</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>jupyter notebook &amp;
+</pre></div>
+</div>
+<p>On the Jetstream webshell, you can get the Web page address for the jupyter notebook you just launched. Press enter, then execute</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>echo http://$(hostname):8000/
+</pre></div>
+</div>
+<p>Copy the output from echo and paste it into the url bar of a new tab in your web browser.</p>
+<p>Note, the password is &#8216;davis&#8217;.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>If your network blocks port 8000 (e.g. cruznet at UCSC), you can run:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>ssh -N -f -L localhost:8000:localhost:8000 username@remotehost
+</pre></div>
+</div>
+<p class="last">to tunnel the remote Jupyter notebook server over SSH.</p>
+</div>
+</div>
+<div class="section" id="data-source">
+<h2>Data source<a class="headerlink" href="#data-source" title="Permalink to this headline">¶</a></h2>
+<p>We&#8217;re going to be using a subset of data from <a class="reference external" href="http://mbio.asm.org/content/7/1/e01669-15.full">Hu et al.,
+2016</a>. This paper
+from the Banfield lab samples some relatively low diversity environments
+and finds a bunch of nearly complete genomes.</p>
+<p>(See <a class="reference external" href="DATA.html">DATA.html</a> for a list of the data sets we&#8217;re using in this tutorial.)</p>
+</div>
+<div class="section" id="copying-in-some-data-to-work-with">
+<h2>1. Copying in some data to work with.<a class="headerlink" href="#copying-in-some-data-to-work-with" title="Permalink to this headline">¶</a></h2>
+<p>We&#8217;ve loaded subsets of the data onto an Amazon location for you, to
+make everything faster for today&#8217;s work.  We&#8217;re going to put the
+files on your computer locally under the directory <code class="docutils literal"><span class="pre">~/data</span></code>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>mkdir ~/data
+</pre></div>
+</div>
+<p>Next, let&#8217;s grab part of the data set:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>cd ~/data
+curl -O -L https://s3-us-west-1.amazonaws.com/dib-training.ucdavis.edu/metagenomics-scripps-2016-10-12/SRR1976948_1.fastq.gz
+curl -O -L https://s3-us-west-1.amazonaws.com/dib-training.ucdavis.edu/metagenomics-scripps-2016-10-12/SRR1976948_2.fastq.gz
+</pre></div>
+</div>
+<p>Let&#8217;s make sure we downloaded all of our data using md5sum.:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>md5sum SRR1976948_1.fastq.gz SRR1976948_2.fastq.gz
+</pre></div>
+</div>
+<p>You should see this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>37bc70919a21fccb134ff2fefcda03ce  SRR1976948_1.fastq.gz
+29919864e4650e633cc409688b9748e2  SRR1976948_2.fastq.gz
+</pre></div>
+</div>
+<p>Now if you type:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">ls</span> <span class="o">-</span><span class="n">l</span>
+</pre></div>
+</div>
+<p>you should see something like:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>total 346936
+-rw-rw-r-- 1 ubuntu ubuntu 169620631 Oct 11 23:37 SRR1976948_1.fastq.gz
+-rw-rw-r-- 1 ubuntu ubuntu 185636992 Oct 11 23:38 SRR1976948_2.fastq.gz
+</pre></div>
+</div>
+<p>These are 1m read subsets of the original data, taken from the beginning
+of the file.</p>
+<p>One problem with these files is that they are writeable - by default, UNIX
+makes things writeable by the file owner.  This poses an issue with creating typos or errors in raw data.  Let&#8217;s fix that before we go
+on any further:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>chmod u-w *
+</pre></div>
+</div>
+<p>We&#8217;ll talk about what these files are below.</p>
+</div>
+<div class="section" id="copying-data-into-a-working-location">
+<h2>1. Copying data into a working location<a class="headerlink" href="#copying-data-into-a-working-location" title="Permalink to this headline">¶</a></h2>
+<p>First, make a working directory; this will be a place where you can futz
+around with a copy of the data without messing up your primary data:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>mkdir ~/work
+cd ~/work
+</pre></div>
+</div>
+<p>Now, make a &#8220;virtual copy&#8221; of the data in your working directory by
+linking it in &#8211;</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>ln -fs ~/data/* .
+</pre></div>
+</div>
+<p>These are FASTQ files &#8211; let&#8217;s take a look at them:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>less SRR1976948_1.fastq.gz
+</pre></div>
+</div>
+<p>(use the spacebar to scroll down, and type &#8216;q&#8217; to exit &#8216;less&#8217;)</p>
+<p>Question:</p>
+<ul class="simple">
+<li>where does the filename come from?</li>
+<li>why are there 1 and 2 in the file names?</li>
+</ul>
+<p>Links:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://en.wikipedia.org/wiki/FASTQ_format">FASTQ Format</a></li>
+</ul>
+</div>
+<div class="section" id="fastqc">
+<h2>2. FastQC<a class="headerlink" href="#fastqc" title="Permalink to this headline">¶</a></h2>
+<p>We&#8217;re going to use <a class="reference external" href="http://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a> to
+summarize the data. We already installed &#8216;fastqc&#8217; on our computer for
+you.</p>
+<p>Now, run FastQC on two files:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>fastqc SRR1976948_1.fastq.gz
+fastqc SRR1976948_2.fastq.gz
+</pre></div>
+</div>
+<p>Now type &#8216;ls&#8217;:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>ls -d *fastqc.zip*
+</pre></div>
+</div>
+<p>to list the files, and you should see:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">SRR1976948_1_fastqc</span><span class="o">.</span><span class="n">zip</span>
+<span class="n">SRR1976948_2_fastqc</span><span class="o">.</span><span class="n">zip</span>
+</pre></div>
+</div>
+<p>Inside each of the fatqc directories you will find reports from the fastqc. You can download these files using your Jupyter Notebook console, if you like;
+or you can look at these copies of them:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://2017-ucsc-metagenomics.readthedocs.io/en/latest/_static/SRR1976948_1_fastqc/fastqc_report.html">SRR1976948_1_fastqc/fastqc_report.html</a></li>
+<li><a class="reference external" href="http://2017-ucsc-metagenomics.readthedocs.io/en/latest/_static/SRR1976948_2_fastqc/fastqc_report.html">SRR1976948_2_fastqc/fastqc_report.html</a></li>
+</ul>
+<p>Questions:</p>
+<ul class="simple">
+<li>What should you pay attention to in the FastQC report?</li>
+<li>Which is &#8220;better&#8221;, file 1 or file 2? And why?</li>
+</ul>
+<p>Links:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a></li>
+<li><a class="reference external" href="http://www.youtube.com/watch?v=bz93ReOv87Y">FastQC tutorial video</a></li>
+</ul>
+<p>There are several caveats about FastQC - the main one is that it only
+calculates certain statistics (like duplicated sequences) for subsets
+of the data (e.g. duplicate sequences are only analyzed for the first</p>
+</div>
+<div class="section" id="trimmomatic">
+<h2>3. Trimmomatic<a class="headerlink" href="#trimmomatic" title="Permalink to this headline">¶</a></h2>
+<p>Now we&#8217;re going to do some trimming!  We&#8217;ll be using
+<a class="reference external" href="http://www.usadellab.org/cms/?page=trimmomatic">Trimmomatic</a>, which
+(as with fastqc) we&#8217;ve already installed via apt-get.</p>
+<p>The first thing we&#8217;ll need are the adapters to trim off:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>curl -O -L http://dib-training.ucdavis.edu.s3.amazonaws.com/mRNAseq-semi-2015-03-04/TruSeq2-PE.fa
+</pre></div>
+</div>
+<p>Now, to run Trimmomatic:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>TrimmomaticPE SRR1976948_1.fastq.gz \
+              SRR1976948_2.fastq.gz \
+     SRR1976948_1.qc.fq.gz s1_se \
+     SRR1976948_2.qc.fq.gz s2_se \
+     ILLUMINACLIP:TruSeq2-PE.fa:2:40:15 \
+     LEADING:2 TRAILING:2 \
+     SLIDINGWINDOW:4:2 \
+     MINLEN:25
+</pre></div>
+</div>
+<p>You should see output that looks like this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>...
+Input Read Pairs: 1000000 Both Surviving: 885734 (88.57%) Forward Only Surviving: 114262 (11.43%) Reverse Only Surviving: 4 (0.00%) Dropped: 0 (0.00%)
+TrimmomaticPE: Completed successfully
+</pre></div>
+</div>
+<p>Questions:</p>
+<ul class="simple">
+<li>How do you figure out what the parameters mean?</li>
+<li>How do you figure out what parameters to use?</li>
+<li>What adapters do you use?</li>
+<li>What version of Trimmomatic are we using here? (And FastQC?)</li>
+<li>Do you think parameters are different for RNAseq and genomic data sets?</li>
+<li>What&#8217;s with these annoyingly long and complicated filenames?</li>
+<li>why are we running R1 and R2 together?</li>
+</ul>
+<p>For a discussion of optimal trimming strategies, see <a class="reference external" href="http://journal.frontiersin.org/Journal/10.3389/fgene.2014.00013/abstract">MacManes, 2014</a>
+&#8211; it&#8217;s about RNAseq but similar arguments should apply to metagenome
+assembly.</p>
+<p>Links:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://www.usadellab.org/cms/?page=trimmomatic">Trimmomatic</a></li>
+</ul>
+</div>
+<div class="section" id="fastqc-again">
+<h2>4. FastQC again<a class="headerlink" href="#fastqc-again" title="Permalink to this headline">¶</a></h2>
+<p>Run FastQC again on the trimmed files:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>fastqc SRR1976948_1.qc.fq.gz
+fastqc SRR1976948_2.qc.fq.gz
+</pre></div>
+</div>
+<p>And now view my copies of these files:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://2016-metagenomics-sio.readthedocs.io/en/work/_static/SRR1976948_1.qc_fastqc/fastqc_report.html">SRR1976948_1.qc_fastqc/fastqc_report.html</a></li>
+<li><a class="reference external" href="http://2016-metagenomics-sio.readthedocs.io/en/work/_static/SRR1976948_2.qc_fastqc/fastqc_report.html">SRR1976948_2.qc_fastqc/fastqc_report.html</a></li>
+</ul>
+<p>Let&#8217;s take a look at the output files:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>less SRR1976948_1.qc.fq.gz
+</pre></div>
+</div>
+<p>(again, use spacebar to scroll, &#8216;q&#8217; to exit less).</p>
+</div>
+<div class="section" id="multiqc">
+<h2>5. MultiQC<a class="headerlink" href="#multiqc" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://multiqc.info/">MultiQC</a> aggregates results across many samples into a single report for easy comparison.</p>
+<p>Install MultiQC within the py3 environment:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>pip install multiqc
+</pre></div>
+</div>
+<p>Now, run Mulitqc on both the untrimmed and trimmed files within the work directory:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>multiqc .
+</pre></div>
+</div>
+<p>And now you should see output that looks like this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>[INFO   ]         multiqc : This is MultiQC v1.0
+[INFO   ]         multiqc : Template    : default
+[INFO   ]         multiqc : Searching &#39;.&#39;
+Searching 15 files..  [####################################]  100%
+[INFO   ]          fastqc : Found 4 reports
+[INFO   ]         multiqc : Compressing plot data
+[INFO   ]         multiqc : Report      : multiqc_report.html
+[INFO   ]         multiqc : Data        : multiqc_data
+[INFO   ]         multiqc : MultiQC complete
+</pre></div>
+</div>
+<p>Now we can view the output file using Jupyter Notebook.</p>
+<p>Questions:</p>
+<ul class="simple">
+<li>is the quality trimmed data &#8220;better&#8221; than before?</li>
+<li>Does it matter that you still have adapters!?</li>
+</ul>
+<p>Optional: <a class="reference internal" href="kmer_trimming.html"><em>K-mer Spectral Error Trimming</em></a></p>
+<p>Next: <a class="reference internal" href="assemble.html"><em>Run the MEGAHIT assembler</em></a></p>
+</div>
+</div>
+
+
+
+<hr>
+
+<font size="-1"><b>LICENSE:</b>
+This documentation and all textual/graphic site content is released
+under <a href='http://creativecommons.org/publicdomain/zero/1.0/'>
+Creative Commons - 0
+(CC0)</a> -- <a href='https://github.com/ngs-docs/2017-ucsc-metagenomics'>fork @
+github</a>. </font>
+
+<hr>
+
+
+<!-- disqus commenting disabled; set disqus_shortname -->
+
+    </div>
+    
+
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2017, Lab for Data Intensive Biology.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.<br/>
+    </p>
+  </div>
+</footer>
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', '', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+  </body>
+</html>

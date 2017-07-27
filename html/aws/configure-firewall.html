@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Configure your instance firewall &mdash; 2017-dibsi-metagenomics 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinxcontrib-images/LightBox2/lightbox2/css/lightbox.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/sphinxcontrib-images/LightBox2/lightbox2/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/sphinxcontrib-images/LightBox2/lightbox2/js/lightbox.min.js"></script>
+    <script type="text/javascript" src="../_static/sphinxcontrib-images/LightBox2/lightbox2-customize/jquery-noconflict.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="2017-dibsi-metagenomics 1.0 documentation" href="../toc.html" />
+
+
+<style type="text/css">
+<!-- github-based editing disabled; set github_base_account
+     and github_project -->
+#editor-trap.toggled {
+  display: none;
+}
+</style>
+
+
+
+  </head>
+  <body role="document">
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../toc.html">
+          2017-dibsi-metagenomics</a>
+        <span class="navbar-text navbar-version pull-left"><b>1.0</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../toc.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">2017 Metagenomics workshop at UC Santa Cruz</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../welcome.html">Welcome!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../jetstream/boot.html">Booting a Jetstream Computer Instance for your use!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quality.html">Short read quality and trimming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../assemble.html">Run the MEGAHIT assembler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../prokka_tutorial.html">Annotation with Prokka</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../binning.html">Mapping and Binning a Metagenome Assembly</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../salmon_tutorial.html">Gene Abundance Estimation with Salmon</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mapping.html">Mapping</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../slice.html">Slicing and dicing with k-mers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../circos_tutorial.html">Using and Installing Circos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow and repeatability discussion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DATA.html">Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../INSTALL.html">Building this site on your own</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../README.html">2017 / April / Metagenomics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../day2-install.html">Day 2 - installation instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../kmer_trimming.html">K-mer Spectral Error Trimming</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">Configure your instance firewall</a><ul>
+<li><a class="reference internal" href="#select-security-groups">1. Select &#8216;Security Groups&#8217;</a></li>
+<li><a class="reference internal" href="#select-inbound">2. Select &#8216;Inbound&#8217;</a></li>
+<li><a class="reference internal" href="#select-edit">3. Select &#8216;Edit&#8217;</a></li>
+<li><a class="reference internal" href="#select-add-rule">4. Select &#8216;Add Rule&#8217;</a></li>
+<li><a class="reference internal" href="#enter-rule-information">5. Enter rule information</a></li>
+<li><a class="reference internal" href="#select-save">6. Select &#8216;Save&#8217;.</a></li>
+<li><a class="reference internal" href="#return-to-the-instances-page">7. Return to the Instances page.</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+              
+            
+            
+            
+            
+              <li class="hidden-sm">
+<div id="sourcelink">
+  <a href="../_sources/aws/configure-firewall.txt"
+     rel="nofollow">Source</a>
+</div></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+
+    <div class="col-md-12 content">
+      
+  
+  <div class="section" id="configure-your-instance-firewall">
+<h1>Configure your instance firewall<a class="headerlink" href="#configure-your-instance-firewall" title="Permalink to this headline">¶</a></h1>
+<p>Normally, Amazon computers only allow shell logins via ssh (port 22
+access).  If we want to run a Web service or something else, we need
+to give the outside world access to other network locations on the
+computer.</p>
+<p>Below, we will open ports 8000-9000, which will let us run things like
+RStudio Server.  If you want to run other things, like a Web server,
+you&#8217;ll need to find the port(s) associated with those services and
+open those instead of 8000-9000.  (Tip: Web servers run on port 80.)</p>
+<div class="section" id="select-security-groups">
+<h2>1. Select &#8216;Security Groups&#8217;<a class="headerlink" href="#select-security-groups" title="Permalink to this headline">¶</a></h2>
+<p>Find &#8220;Security Groups&#8221; in the lower pane of your instance&#8217;s
+information page, and click on &#8220;launch-wizard-N&#8221;.</p>
+<a class=""
+               data-lightbox="group-f392abfc-f0a3-4c54-b1be-8b5be53e0aa5"
+               href="../_images/network-01.png"
+               title=""
+               data-title=""
+               ><img src="../_images/network-01.png"
+                     class=""
+                     width="20%"
+                     height="auto"
+                     alt=""/>
+                </a></div>
+<div class="section" id="select-inbound">
+<h2>2. Select &#8216;Inbound&#8217;<a class="headerlink" href="#select-inbound" title="Permalink to this headline">¶</a></h2>
+<a class=""
+               data-lightbox="group-965facde-8731-453a-a2fd-df9713996efc"
+               href="../_images/network-11.png"
+               title=""
+               data-title=""
+               ><img src="../_images/network-11.png"
+                     class=""
+                     width="20%"
+                     height="auto"
+                     alt=""/>
+                </a></div>
+<div class="section" id="select-edit">
+<h2>3. Select &#8216;Edit&#8217;<a class="headerlink" href="#select-edit" title="Permalink to this headline">¶</a></h2>
+<a class=""
+               data-lightbox="group-06c1e213-fc1e-43d0-ae14-6e449a76b9a8"
+               href="../_images/network-21.png"
+               title=""
+               data-title=""
+               ><img src="../_images/network-21.png"
+                     class=""
+                     width="20%"
+                     height="auto"
+                     alt=""/>
+                </a></div>
+<div class="section" id="select-add-rule">
+<h2>4. Select &#8216;Add Rule&#8217;<a class="headerlink" href="#select-add-rule" title="Permalink to this headline">¶</a></h2>
+<a class=""
+               data-lightbox="group-20d28c7a-074a-48c5-9b72-d77fb93b35af"
+               href="../_images/network-31.png"
+               title=""
+               data-title=""
+               ><img src="../_images/network-31.png"
+                     class=""
+                     width="20%"
+                     height="auto"
+                     alt=""/>
+                </a></div>
+<div class="section" id="enter-rule-information">
+<h2>5. Enter rule information<a class="headerlink" href="#enter-rule-information" title="Permalink to this headline">¶</a></h2>
+<p>Add a new rule: Custom TCP, 8000-9000, Source Anywhere.</p>
+</div>
+<div class="section" id="select-save">
+<h2>6. Select &#8216;Save&#8217;.<a class="headerlink" href="#select-save" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="return-to-the-instances-page">
+<h2>7. Return to the Instances page.<a class="headerlink" href="#return-to-the-instances-page" title="Permalink to this headline">¶</a></h2>
+<a class=""
+               data-lightbox="group-6a764883-27c9-4b8b-b9c3-94add43726e7"
+               href="../_images/network-41.png"
+               title=""
+               data-title=""
+               ><img src="../_images/network-41.png"
+                     class=""
+                     width="20%"
+                     height="auto"
+                     alt=""/>
+                </a><hr class="docutils" />
+<p>You&#8217;re done!</p>
+<p>Go back to the index: <a class="reference internal" href="index.html"><em>Starting up an Amazon Web Services machine</em></a></p>
+</div>
+</div>
+
+
+
+<hr>
+
+<font size="-1"><b>LICENSE:</b>
+This documentation and all textual/graphic site content is released
+under <a href='http://creativecommons.org/publicdomain/zero/1.0/'>
+Creative Commons - 0
+(CC0)</a> -- <a href='https://github.com/ngs-docs/2017-ucsc-metagenomics'>fork @
+github</a>. </font>
+
+<hr>
+
+
+<!-- disqus commenting disabled; set disqus_shortname -->
+
+    </div>
+    
+
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2017, Lab for Data Intensive Biology.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.<br/>
+    </p>
+  </div>
+</footer>
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', '', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+  </body>
+</html>
