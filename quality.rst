@@ -1,11 +1,10 @@
+===============================
 Short read quality and trimming
 ===============================
 
-(Jetstream startup instructions `HERE <https://2017-ucsc-metagenomics.readthedocs.io/en/latest/jetstream/boot.html>`__.)
-
 ---
 
-You should now be logged into your Jetstream computer!  You should see
+You should now be logged into your amazon instance!  You should see
 something like this::
 
    ubuntu@ip-172-30-1-252:~$
@@ -19,9 +18,9 @@ First, let's install software for short read quality assessment, trimming and py
 
   sudo apt-get -y update && \
   sudo apt-get -y install trimmomatic python-pip \
-     samtools zlib1g-dev ncurses-dev python-dev
-  sudo apt-get install -y python3.5-dev python3.5-venv make \
-      libc6-dev g++ zlib1g-dev
+     samtools zlib1g-dev ncurses-dev python-dev unzip \
+     python3.5-dev python3.5-venv make \
+     libc6-dev g++ zlib1g-dev
       
    wget -c http://www.bioinformatics.babraham.ac.uk/projects/fastqc/fastqc_v0.11.5.zip
    unzip fastqc_v0.11.5.zip
@@ -44,7 +43,7 @@ Running Jupyter Notebook
 ------------------------
 
 Let's also run a Jupyter Notebook. First, configure it a teensy bit
-more securely, and also have it run in the background::
+more securely, and also have it run in the background:
 
   jupyter notebook --generate-config
   
@@ -53,7 +52,7 @@ more securely, and also have it run in the background::
   c.NotebookApp.ip = '*'
   c.NotebookApp.open_browser = False
   c.NotebookApp.password = u'sha1:5d813e5d59a7:b4e430cf6dbd1aad04838c6e9cf684f4d76e245c'
-  c.NotebookApp.port = 8000
+  c.NotebookApp.port = 8888
 
   EOF
 
@@ -61,21 +60,11 @@ Now, run! ::
 
   jupyter notebook &
 
-On the Jetstream webshell, you can get the Web page address for the jupyter notebook you just launched. Press enter, then execute ::
+Open a new terminal window and type (filling in the path to your key and the your ec2 instance Public DNS 
 
-  echo http://$(hostname):8000/
+  ssh -i ~/xxx.pem -L 8888:localhost:8888 ubuntu@xxx.amazonaws.com
 
-Copy the output from echo and paste it into the url bar of a new tab in your web browser.
-
-Note, the password is 'davis'.
-
-.. note::
-
-   If your network blocks port 8000 (e.g. cruznet at UCSC), you can run::
-
-       ssh -N -f -L localhost:8000:localhost:8000 username@remotehost
-
-   to tunnel the remote Jupyter notebook server over SSH.
+When prompted for a password or token enter the toke provided after the jupter notebook & command was run
 
 Data source
 -----------
@@ -171,8 +160,8 @@ you.
 
 Now, run FastQC on two files::
 
-   fastqc SRR1976948_1.fastq.gz
-   fastqc SRR1976948_2.fastq.gz
+   ~/FastQC/fastqc SRR1976948_1.fastq.gz
+   ~/FastQC/fastqc SRR1976948_2.fastq.gz
 
 Now type 'ls'::
 
@@ -256,8 +245,8 @@ Links:
 
 Run FastQC again on the trimmed files::
 
-   fastqc SRR1976948_1.qc.fq.gz
-   fastqc SRR1976948_2.qc.fq.gz
+   ~/FastQC/fastqc SRR1976948_1.qc.fq.gz
+   ~/FastQC/fastqc SRR1976948_2.qc.fq.gz
 
 And now view my copies of these files: 
 
