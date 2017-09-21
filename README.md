@@ -1,8 +1,8 @@
-2017 / July / Environmental Metagenomics
-========================================
+2017 / September / Environmental Metagenomics
+=============================================
 
-This workshop was given on July 17th - 21st, 2017 at the the Unveristy of California, Davis.
-Lead Instructor: Harriet Alexander
-Instructors: C. Titus Brown, Phillip Brooks, Adelaide Rhodes, Jessica Blanton, Jessica Mitzsi, Shawn Higdon, and Veronika Kivenson
+This workshop was given on September 26th - 29th, 2017 at the CICESE in Ensenada, Baja California. 
 
-See https://2017-dibsi-metagenomics.readthedocs.io/en/latest/ for the rendered version of this site.
+Instructors: C. Titus Brown, Phillip Brooks, Harriet Alexander
+
+See https://2017-cicese-metagenomics.readthedocs.io/en/latest/ for the rendered version of this site.
