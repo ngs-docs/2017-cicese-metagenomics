@@ -13,13 +13,13 @@ We will be using HackMD to take collective notes throughout the course. If you w
 #### Tuesday, Day 1:
 ##### Morning
 * [Logging onto an instance through Amazon Web Services (AWS)](aws/boot.html)
-* **Titus you have a talk at some point?? Not sure about the actual times that we want to do**
+* [Working on Command Line](command-line.html)
 
 ##### Lunch
 
 ##### Afternoon
- * [Working on Command Line](command-line.html)
- * [Command Line Blast](running-command-line-blast.html)
+* [Command Line Blast](running-command-line-blast.html)
+* Sourmash?
 
 ##### Homework
 * Read the [Critical Assessment of Metagenome Interpretation (CAMI) Paper](http://www.biorxiv.org/content/biorxiv/early/2017/01/09/099127.full.pdf);
