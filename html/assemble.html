@@ -202,7 +202,7 @@
 <p>This will take about 15 minutes; at the end you should see output like
 this:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span>   <span class="o">...</span> <span class="mi">7713</span> <span class="n">contigs</span><span class="p">,</span> <span class="n">total</span> <span class="mi">13168567</span> <span class="n">bp</span><span class="p">,</span> <span class="nb">min</span> <span class="mi">200</span> <span class="n">bp</span><span class="p">,</span> <span class="nb">max</span> <span class="mi">54372</span> <span class="n">bp</span><span class="p">,</span> <span class="n">avg</span> <span class="mi">1707</span> <span class="n">bp</span><span class="p">,</span> <span class="n">N50</span> <span class="mi">4305</span> <span class="n">bp</span>
-   <span class="o">...</span> <span class="n">ALL</span> <span class="n">DONE</span><span class="o">.</span> <span class="n">Time</span> <span class="n">elapsed</span><span class="p">:</span> <span class="mf">899.612093</span> <span class="n">seconds</span> 
+   <span class="o">...</span> <span class="n">ALL</span> <span class="n">DONE</span><span class="o">.</span> <span class="n">Time</span> <span class="n">elapsed</span><span class="p">:</span> <span class="mf">899.612093</span> <span class="n">seconds</span>
 </pre></div>
 </div>
 <p>The output assembly will be in <code class="docutils literal"><span class="pre">combined/final.contigs.fa</span></code>.</p>
@@ -233,19 +233,6 @@ The first two come from work by Dr. Sherine Awad on analyzing the data from Shak
 <div class="highlight-python"><div class="highlight"><pre><span></span>    less combined/final.contigs.fa
 </pre></div>
 </div>
-<p>Now we can run a few stats on our assembly. To do this we will use <a class="reference external" href="http://quast.sourceforge.net/quast">QUAST</a>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>    cd ~/
-    git clone https://github.com/ablab/quast.git -b release_4.5
-    export PYTHONPATH=$(pwd)/quast/libs/
-</pre></div>
-</div>
-<p>Now, run QUAST on the assembly:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>    cd ~/assembly
-    ~/quast/quast.py combined/final.contigs.fa -o combined-report
-    cat combined-report/report.txt
-</pre></div>
-</div>
-<p>What does this say about our assembly? What do the stats <em>not</em> tell us? For thought and discussion: a few <a class="reference external" href="files/evaluate_assembly_summary.pdf">nice slides</a> from Jessica Blanton on assessing assembly quality.</p>
 <p>At this point we can do a bunch of things:</p>
 <ul class="simple">
 <li>annotate the assembly with <a class="reference external" href="prokka_tutorial.md">Prokka</a>;</li>

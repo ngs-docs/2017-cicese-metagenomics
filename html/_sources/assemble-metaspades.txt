@@ -1,6 +1,6 @@
 # Assembly with metaSPAdes
 
-Here are the instructions for assembling the metagenomic data with a different assembler. Here we are showing [metaSPAdes](https://www.ncbi.nlm.nih.gov/pubmed/28298430), one of the  assembler options highlighted in the [CAMI](https://www.biorxiv.org/content/early/2017/01/09/099127) paper.
+Here are the instructions for assembling the metagenomic data with a different assembler. Here we are showing [metaSPAdes](https://www.ncbi.nlm.nih.gov/pubmed/28298430), one of the  assembler options highlighted in the [CAMI](https://www.biorxiv.org/content/early/2017/06/12/099127) paper.
 
 metaSPAdes takes longer than MEGAHIT to run the assembly, so we will not be running it during the course. Rather it is available for download [here](LINK). If you are interested in running the assembly yourself, however, please see below.
 
