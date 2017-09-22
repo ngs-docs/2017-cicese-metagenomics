@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Creating your own Amazon Machine Image &mdash; 2017-dibsi-metagenomics 1.0 documentation</title>
+    <title>Creating your own Amazon Machine Image &mdash; 2017-cicese-metagenomics 1.0 documentation</title>
     
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -31,7 +31,7 @@
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
-    <link rel="top" title="2017-dibsi-metagenomics 1.0 documentation" href="../toc.html" />
+    <link rel="top" title="2017-cicese-metagenomics 1.0 documentation" href="../toc.html" />
 
 
 <style type="text/css">
@@ -57,7 +57,7 @@
           <span class="icon-bar"></span>
         </button>
         <a class="navbar-brand" href="../toc.html">
-          2017-dibsi-metagenomics</a>
+          2017-cicese-metagenomics</a>
         <span class="navbar-text navbar-version pull-left"><b>1.0</b></span>
       </div>
 
@@ -74,21 +74,29 @@
   <ul class="dropdown-menu globaltoc"
       role="menu"
       aria-labelledby="dLabelGlobalToc"><ul>
-<li class="toctree-l1"><a class="reference internal" href="../index.html">2017 Metagenomics workshop at UC Santa Cruz</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Environmental Metagenomics Workshop</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../welcome.html">Welcome!</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../jetstream/boot.html">Booting a Jetstream Computer Instance for your use!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="boot.html">Start an Amazon Web Services computer:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../command-line.html">Intro to Shell Lesson</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../command-line.html#the-shell">The Shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../command-line.html#for-future-reference">For Future Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../command-line.html#finding-files">Finding files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../running-command-line-blast.html">Running command-line BLAST</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../quality.html">Short read quality and trimming</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../assemble.html">Run the MEGAHIT assembler</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../prokka_tutorial.html">Annotation with Prokka</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../binning.html">Mapping and Binning a Metagenome Assembly</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sourmash.html">A sourmash tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sourmash.html#k-mers-k-mer-specificity-and-comparing-samples-with-k-mer-jaccard-distance">K-mers, k-mer specificity, and comparing samples with k-mer Jaccard distance.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../binning.html">Binning a Metagenomic Assembly</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../salmon_tutorial.html">Gene Abundance Estimation with Salmon</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../mapping.html">Mapping</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../slice.html">Slicing and dicing with k-mers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../anvio.html">Using Anvi&#8217;o to Knit Everything Together</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../circos_tutorial.html">Using and Installing Circos</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow and repeatability discussion</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../DATA.html">Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../INSTALL.html">Building this site on your own</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../README.html">2017 / April / Metagenomics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../README.html">2017 / September / Environmental Metagenomics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../day2-install.html">Day 2 - installation instructions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../kmer_trimming.html">K-mer Spectral Error Trimming</a></li>
 </ul>
@@ -156,7 +164,7 @@
 <div class="section" id="actions-create-image">
 <h2>1. Actions, Create image<a class="headerlink" href="#actions-create-image" title="Permalink to this headline">¶</a></h2>
 <a class=""
-               data-lightbox="group-b025f7a5-b9fe-452b-a5cd-489fdc5f3027"
+               data-lightbox="group-c3653c56-254c-4a70-b34a-4ad1827bb2f1"
                href="../_images/create-ami-11.png"
                title=""
                data-title=""
@@ -169,7 +177,7 @@
 <div class="section" id="fill-out-name-and-description">
 <h2>2. Fill out name and description<a class="headerlink" href="#fill-out-name-and-description" title="Permalink to this headline">¶</a></h2>
 <a class=""
-               data-lightbox="group-92532d91-951e-46e4-bb7b-06c58c8ccb2d"
+               data-lightbox="group-af84c7ec-66b9-499f-b149-2a4c4132e136"
                href="../_images/create-ami-21.png"
                title=""
                data-title=""
@@ -182,7 +190,7 @@
 <div class="section" id="wait-for-it-to-become-available">
 <h2>3. Wait for it to become available<a class="headerlink" href="#wait-for-it-to-become-available" title="Permalink to this headline">¶</a></h2>
 <a class=""
-               data-lightbox="group-f750cd52-eb9f-4b25-b444-14b6f3ce2df6"
+               data-lightbox="group-0df9f27f-b366-4e59-9e0d-a9e11462d93f"
                href="../_images/create-ami-31.png"
                title=""
                data-title=""

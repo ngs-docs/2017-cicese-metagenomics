@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Short read quality and trimming &mdash; 2017-dibsi-metagenomics 1.0 documentation</title>
+    <title>Short read quality and trimming &mdash; 2017-cicese-metagenomics 1.0 documentation</title>
     
     <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -31,7 +31,7 @@
     <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
     <script type="text/javascript" src="_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
-    <link rel="top" title="2017-dibsi-metagenomics 1.0 documentation" href="toc.html" />
+    <link rel="top" title="2017-cicese-metagenomics 1.0 documentation" href="toc.html" />
     <link rel="next" title="Run the MEGAHIT assembler" href="assemble.html" />
     <link rel="prev" title="Running command-line BLAST" href="running-command-line-blast.html" />
 
@@ -59,7 +59,7 @@
           <span class="icon-bar"></span>
         </button>
         <a class="navbar-brand" href="toc.html">
-          2017-dibsi-metagenomics</a>
+          2017-cicese-metagenomics</a>
         <span class="navbar-text navbar-version pull-left"><b>1.0</b></span>
       </div>
 
@@ -76,9 +76,9 @@
   <ul class="dropdown-menu globaltoc"
       role="menu"
       aria-labelledby="dLabelGlobalToc"><ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="index.html">2017 DIBSI Metagenomics Workshop at UC Davis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Environmental Metagenomics Workshop</a></li>
 <li class="toctree-l1"><a class="reference internal" href="welcome.html">Welcome!</a></li>
-<li class="toctree-l1"><a class="reference internal" href="jetstream/boot.html">Booting a Jetstream Computer Instance for your use!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aws/boot.html">Start an Amazon Web Services computer:</a></li>
 <li class="toctree-l1"><a class="reference internal" href="command-line.html">Intro to Shell Lesson</a></li>
 <li class="toctree-l1"><a class="reference internal" href="command-line.html#the-shell">The Shell</a></li>
 <li class="toctree-l1"><a class="reference internal" href="command-line.html#for-future-reference">For Future Reference</a></li>
@@ -98,7 +98,7 @@
 <li class="toctree-l1"><a class="reference internal" href="workflow.html">Workflow and repeatability discussion</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DATA.html">Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="INSTALL.html">Building this site on your own</a></li>
-<li class="toctree-l1"><a class="reference internal" href="README.html">2017 / April / Metagenomics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="README.html">2017 / September / Environmental Metagenomics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="day2-install.html">Day 2 - installation instructions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="kmer_trimming.html">K-mer Spectral Error Trimming</a></li>
 </ul>
@@ -177,9 +177,8 @@
   
   <div class="section" id="short-read-quality-and-trimming">
 <h1>Short read quality and trimming<a class="headerlink" href="#short-read-quality-and-trimming" title="Permalink to this headline">¶</a></h1>
-<p>(Jetstream startup instructions <a class="reference external" href="https://2017-ucsc-metagenomics.readthedocs.io/en/latest/jetstream/boot.html">HERE</a>.)</p>
 <p>&#8212;</p>
-<p>You should now be logged into your Jetstream computer!  You should see
+<p>You should now be logged into your amazon instance!  You should see
 something like this:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span>ubuntu@ip-172-30-1-252:~$
 </pre></div>
@@ -190,9 +189,9 @@ something like this:</p>
 <p>First, let&#8217;s install software for short read quality assessment, trimming and python virtual environments:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span>sudo apt-get -y update &amp;&amp; \
 sudo apt-get -y install trimmomatic python-pip \
-   samtools zlib1g-dev ncurses-dev python-dev
-sudo apt-get install -y python3.5-dev python3.5-venv make \
-    libc6-dev g++ zlib1g-dev
+   samtools zlib1g-dev ncurses-dev python-dev unzip \
+   python3.5-dev python3.5-venv make \
+   libc6-dev g++ zlib1g-dev
 
  wget -c http://www.bioinformatics.babraham.ac.uk/projects/fastqc/fastqc_v0.11.5.zip
  unzip fastqc_v0.11.5.zip
@@ -216,36 +215,24 @@ pip install -U https://github.com/dib-lab/sourmash/archive/master.zip
 <h2>Running Jupyter Notebook<a class="headerlink" href="#running-jupyter-notebook" title="Permalink to this headline">¶</a></h2>
 <p>Let&#8217;s also run a Jupyter Notebook. First, configure it a teensy bit
 more securely, and also have it run in the background:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>jupyter notebook --generate-config
-
-cat &gt;&gt;~/.jupyter/jupyter_notebook_config.py &lt;&lt;EOF
+<blockquote>
+<div><p>jupyter notebook &#8211;generate-config</p>
+<p>cat &gt;&gt;~/.jupyter/jupyter_notebook_config.py &lt;&lt;EOF
 c = get_config()
-c.NotebookApp.ip = &#39;*&#39;
+c.NotebookApp.ip = &#8216;*&#8217;
 c.NotebookApp.open_browser = False
-c.NotebookApp.password = u&#39;sha1:5d813e5d59a7:b4e430cf6dbd1aad04838c6e9cf684f4d76e245c&#39;
-c.NotebookApp.port = 8000
-
-EOF
-</pre></div>
-</div>
+c.NotebookApp.password = u&#8217;sha1:5d813e5d59a7:b4e430cf6dbd1aad04838c6e9cf684f4d76e245c&#8217;
+c.NotebookApp.port = 8888</p>
+<p>EOF</p>
+</div></blockquote>
 <p>Now, run!</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span>jupyter notebook &amp;
 </pre></div>
 </div>
-<p>On the Jetstream webshell, you can get the Web page address for the jupyter notebook you just launched. Press enter, then execute</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>echo http://$(hostname):8000/
-</pre></div>
-</div>
-<p>Copy the output from echo and paste it into the url bar of a new tab in your web browser.</p>
-<p>Note, the password is &#8216;davis&#8217;.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p>If your network blocks port 8000 (e.g. cruznet at UCSC), you can run:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>ssh -N -f -L localhost:8000:localhost:8000 username@remotehost
-</pre></div>
-</div>
-<p class="last">to tunnel the remote Jupyter notebook server over SSH.</p>
-</div>
+<p>Open a new terminal window and type (filling in the path to your key and the your ec2 instance Public DNS</p>
+<blockquote>
+<div>ssh -i ~/xxx.pem -L 8888:localhost:8888 ubuntu&#64;xxx.amazonaws.com</div></blockquote>
+<p>When prompted for a password or token enter the toke provided after the jupter notebook &amp; command was run</p>
 </div>
 <div class="section" id="data-source">
 <h2>Data source<a class="headerlink" href="#data-source" title="Permalink to this headline">¶</a></h2>
@@ -267,27 +254,29 @@ files on your computer locally under the directory <code class="docutils literal
 <div class="highlight-python"><div class="highlight"><pre><span></span>cd ~/data
 curl -O -L https://s3-us-west-1.amazonaws.com/dib-training.ucdavis.edu/metagenomics-scripps-2016-10-12/SRR1976948_1.fastq.gz
 curl -O -L https://s3-us-west-1.amazonaws.com/dib-training.ucdavis.edu/metagenomics-scripps-2016-10-12/SRR1976948_2.fastq.gz
+curl -O -l https://s3-us-west-1.amazonaws.com/dib-training.ucdavis.edu/metagenomics-scripps-2016-10-12/SRR1977249_1.fastq.gz
+curl -O -l https://s3-us-west-1.amazonaws.com/dib-training.ucdavis.edu/metagenomics-scripps-2016-10-12/SRR1977249_2.fastq.gz
 </pre></div>
 </div>
 <p>Let&#8217;s make sure we downloaded all of our data using md5sum.:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>md5sum SRR1976948_1.fastq.gz SRR1976948_2.fastq.gz
+<div class="highlight-python"><div class="highlight"><pre><span></span>md5sum SRR1976948_1.fastq.gz SRR1976948_2.fastq.gz SRR1977249_1.fastq.gz SRR1977249_2.fastq.g
 </pre></div>
 </div>
 <p>You should see this:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>37bc70919a21fccb134ff2fefcda03ce  SRR1976948_1.fastq.gz
+<p>37bc70919a21fccb134ff2fefcda03ce  SRR1976948_1.fastq.gz
 29919864e4650e633cc409688b9748e2  SRR1976948_2.fastq.gz
-</pre></div>
-</div>
+ee25ae14f84308f972cebd42e55502dd  SRR1977249_1.fastq.gz
+84b15b4f5975cd7941e211336ff27993  SRR1977249_2.fastq.gz</p>
 <p>Now if you type:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">ls</span> <span class="o">-</span><span class="n">l</span>
 </pre></div>
 </div>
 <p>you should see something like:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>total 346936
--rw-rw-r-- 1 ubuntu ubuntu 169620631 Oct 11 23:37 SRR1976948_1.fastq.gz
--rw-rw-r-- 1 ubuntu ubuntu 185636992 Oct 11 23:38 SRR1976948_2.fastq.gz
-</pre></div>
-</div>
+<p>total 704320
+-r&#8211;rw-r&#8211; 1 ubuntu ubuntu 169620631 Sep 21 01:50 SRR1976948_1.fastq.gz
+-r&#8211;rw-r&#8211; 1 ubuntu ubuntu 185636992 Sep 21 01:50 SRR1976948_2.fastq.gz
+-rw-rw-r&#8211; 1 ubuntu ubuntu 177682886 Sep 21 03:26 SRR1977249_1.fastq.gz
+-rw-rw-r&#8211; 1 ubuntu ubuntu 188269868 Sep 21 03:26 SRR1977249_2.fastq.gz</p>
 <p>These are 1m read subsets of the original data, taken from the beginning
 of the file.</p>
 <p>One problem with these files is that they are writeable - by default, UNIX
@@ -332,8 +321,10 @@ linking it in &#8211;</p>
 summarize the data. We already installed &#8216;fastqc&#8217; on our computer for
 you.</p>
 <p>Now, run FastQC on two files:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>fastqc SRR1976948_1.fastq.gz
-fastqc SRR1976948_2.fastq.gz
+<div class="highlight-python"><div class="highlight"><pre><span></span>~/FastQC/fastqc SRR1976948_1.fastq.gz
+~/FastQC/fastqc SRR1976948_2.fastq.gz
+~/FastQC/fastqc SRR1977249_1.fastq.gz
+~/FastQC/fastqc SRR1977249_2.fastq.gz
 </pre></div>
 </div>
 <p>Now type &#8216;ls&#8217;:</p>
@@ -343,6 +334,8 @@ fastqc SRR1976948_2.fastq.gz
 <p>to list the files, and you should see:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">SRR1976948_1_fastqc</span><span class="o">.</span><span class="n">zip</span>
 <span class="n">SRR1976948_2_fastqc</span><span class="o">.</span><span class="n">zip</span>
+<span class="n">SRR1977249_1_fastqc</span><span class="o">.</span><span class="n">zip</span>
+<span class="n">SRR1977249_1_fastqc</span><span class="o">.</span><span class="n">zip</span>
 </pre></div>
 </div>
 <p>Inside each of the fatqc directories you will find reports from the fastqc. You can download these files using your Jupyter Notebook console, if you like;
@@ -374,20 +367,30 @@ of the data (e.g. duplicate sequences are only analyzed for the first</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span>curl -O -L http://dib-training.ucdavis.edu.s3.amazonaws.com/mRNAseq-semi-2015-03-04/TruSeq2-PE.fa
 </pre></div>
 </div>
-<p>Now, to run Trimmomatic:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>TrimmomaticPE SRR1976948_1.fastq.gz \
-              SRR1976948_2.fastq.gz \
-     SRR1976948_1.qc.fq.gz s1_se \
-     SRR1976948_2.qc.fq.gz s2_se \
-     ILLUMINACLIP:TruSeq2-PE.fa:2:40:15 \
-     LEADING:2 TRAILING:2 \
-     SLIDINGWINDOW:4:2 \
-     MINLEN:25
-</pre></div>
-</div>
+<dl class="docutils">
+<dt>Now, to run Trimmomatic::</dt>
+<dd><p class="first">for filename in <a href="#id1"><span class="problematic" id="id2">*</span></a>_1.fastq.gz
+do</p>
+<p>#Use the program basename to remove _1.fastq.gz to generate the base
+base=$(basename $filename _1.fastq.gz)
+echo $base</p>
+<dl class="docutils">
+<dt>TrimmomaticPE ${base}_1.fastq.gz </dt>
+<dd><blockquote class="first">
+<div>${base}_2.fastq.gz </div></blockquote>
+<p class="last">${base}_1.qc.fq.gz ${base}_s1_se ${base}_2.qc.fq.gz ${base}_s2_se ILLUMINACLIP:TruSeq2-PE.fa:2:40:15 LEADING:2 TRAILING:2 SLIDINGWINDOW:4:2 MINLEN:25</p>
+</dd>
+</dl>
+<p class="last">done</p>
+</dd>
+</dl>
 <p>You should see output that looks like this:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span>...
 Input Read Pairs: 1000000 Both Surviving: 885734 (88.57%) Forward Only Surviving: 114262 (11.43%) Reverse Only Surviving: 4 (0.00%) Dropped: 0 (0.00%)
+TrimmomaticPE: Completed successfully
+
+...
+Input Read Pairs: 1000000 Both Surviving: 918983 (91.90%) Forward Only Surviving: 81012 (8.10%) Reverse Only Surviving: 4 (0.00%) Dropped: 1 (0.00%)
 TrimmomaticPE: Completed successfully
 </pre></div>
 </div>
@@ -412,8 +415,10 @@ assembly.</p>
 <div class="section" id="fastqc-again">
 <h2>4. FastQC again<a class="headerlink" href="#fastqc-again" title="Permalink to this headline">¶</a></h2>
 <p>Run FastQC again on the trimmed files:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>fastqc SRR1976948_1.qc.fq.gz
-fastqc SRR1976948_2.qc.fq.gz
+<div class="highlight-python"><div class="highlight"><pre><span></span>~/FastQC/fastqc SRR1976948_1.qc.fq.gz
+~/FastQC/fastqc SRR1976948_2.qc.fq.gz
+~/FastQC/fastqc SRR1977249_1.qc.fq.gz
+~/FastQC/fastqc SRR1977249_2.qc.fq.gz
 </pre></div>
 </div>
 <p>And now view my copies of these files:</p>
@@ -431,7 +436,7 @@ fastqc SRR1976948_2.qc.fq.gz
 <h2>5. MultiQC<a class="headerlink" href="#multiqc" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference external" href="http://multiqc.info/">MultiQC</a> aggregates results across many samples into a single report for easy comparison.</p>
 <p>Install MultiQC within the py3 environment:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>pip install multiqc
+<div class="highlight-python"><div class="highlight"><pre><span></span>pip install git+https://github.com/ewels/MultiQC.git
 </pre></div>
 </div>
 <p>Now, run Mulitqc on both the untrimmed and trimmed files within the work directory:</p>

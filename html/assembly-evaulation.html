@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Building this site on your own &mdash; 2017-cicese-metagenomics 1.0 documentation</title>
+    <title>Run the MEGAHIT assembler &mdash; 2017-cicese-metagenomics 1.0 documentation</title>
     
     <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -32,8 +32,6 @@
     <script type="text/javascript" src="_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="2017-cicese-metagenomics 1.0 documentation" href="toc.html" />
-    <link rel="next" title="2017 / September / Environmental Metagenomics" href="README.html" />
-    <link rel="prev" title="Data" href="DATA.html" />
 
 
 <style type="text/css">
@@ -75,7 +73,7 @@
      href="toc.html">Site <b class="caret"></b></a>
   <ul class="dropdown-menu globaltoc"
       role="menu"
-      aria-labelledby="dLabelGlobalToc"><ul class="current">
+      aria-labelledby="dLabelGlobalToc"><ul>
 <li class="toctree-l1"><a class="reference internal" href="index.html">Environmental Metagenomics Workshop</a></li>
 <li class="toctree-l1"><a class="reference internal" href="welcome.html">Welcome!</a></li>
 <li class="toctree-l1"><a class="reference internal" href="aws/boot.html">Start an Amazon Web Services computer:</a></li>
@@ -97,7 +95,7 @@
 <li class="toctree-l1"><a class="reference internal" href="circos_tutorial.html">Using and Installing Circos</a></li>
 <li class="toctree-l1"><a class="reference internal" href="workflow.html">Workflow and repeatability discussion</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DATA.html">Data</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Building this site on your own</a></li>
+<li class="toctree-l1"><a class="reference internal" href="INSTALL.html">Building this site on your own</a></li>
 <li class="toctree-l1"><a class="reference internal" href="README.html">2017 / September / Environmental Metagenomics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="day2-install.html">Day 2 - installation instructions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="kmer_trimming.html">K-mer Spectral Error Trimming</a></li>
@@ -114,7 +112,14 @@
   <ul class="dropdown-menu localtoc"
       role="menu"
       aria-labelledby="dLabelLocalToc"><ul>
-<li><a class="reference internal" href="#">Building this site on your own</a></li>
+<li><a class="reference internal" href="#">Run the MEGAHIT assembler</a><ul>
+<li><a class="reference internal" href="#while-the-assembly-runs">While the assembly runs...</a><ul>
+<li><a class="reference internal" href="#questions-for-discussion">Questions for Discussion:</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#after-the-assembly-is-finished">After the assembly is finished</a></li>
+</ul>
+</li>
 </ul>
 </ul>
 </li>
@@ -123,14 +128,6 @@
             
               
                 
-  <li>
-    <a href="DATA.html" title="Previous Chapter: Data"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Data</span>
-    </a>
-  </li>
-  <li>
-    <a href="README.html" title="Next Chapter: 2017 / September / Environmental Metagenomics"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">2017 / Septem... &raquo;</span>
-    </a>
-  </li>
               
             
             
@@ -138,7 +135,7 @@
             
               <li class="hidden-sm">
 <div id="sourcelink">
-  <a href="_sources/INSTALL.txt"
+  <a href="_sources/assembly-evaulation.txt"
      rel="nofollow">Source</a>
 </div></li>
             
@@ -164,25 +161,90 @@
     <div class="col-md-12 content">
       
   
-  <div class="section" id="building-this-site-on-your-own">
-<span id="building-this-site-on-your-own"></span><h1>Building this site on your own<a class="headerlink" href="#building-this-site-on-your-own" title="Permalink to this headline">¶</a></h1>
-<ol>
-<li><p class="first">Make a virtualenv:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span> python -m virtualenv ../build
- . ../build/bin/activate
+  <div class="section" id="run-the-megahit-assembler">
+<span id="run-the-megahit-assembler"></span><h1>Run the MEGAHIT assembler<a class="headerlink" href="#run-the-megahit-assembler" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://github.com/voutcn/megahit">MEGAHIT</a> is a very fast, quite good assembler designed for metagenomes.</p>
+<p>First, install it:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>   cd ~/
+   git clone https://github.com/voutcn/megahit.git
+   cd megahit
+   make
 </pre></div>
 </div>
-</li>
-<li><p class="first">Install the requirements:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span> pip install -r requirements.txt
+<p>Now, download some data:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>   mkdir ~/data
+   cd ~/data
+   curl -O https://s3-us-west-1.amazonaws.com/dib-training.ucdavis.edu/metagenomics-scripps-2016-10-12/SRR1976948.abundtrim.subset.pe.fq.gz
+   curl -O https://s3-us-west-1.amazonaws.com/dib-training.ucdavis.edu/metagenomics-scripps-2016-10-12/SRR1977249.abundtrim.subset.pe.fq.gz
 </pre></div>
 </div>
-</li>
-<li><p class="first">Run <code class="docutils literal"><span class="pre">make</span></code></p>
-</li>
-<li><p class="first">Look at the <code class="docutils literal"><span class="pre">html/</span></code> directory.</p>
-</li>
-</ol>
+<p>These are data that have been run through k-mer abundance trimming (see k-mer and subsampled so that we can run an assembly in a fairly short time period).</p>
+<hr class="docutils" />
+<p>Now, finally, run the assembler!</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>   mkdir ~/assembly
+   cd ~/assembly
+   ln -fs ../data/*.subset.pe.fq.gz .
+
+   ~/megahit/megahit --12 SRR1976948.abundtrim.subset.pe.fq.gz,SRR1977249.abundtrim.subset.pe.fq.gz \
+       -o combined
+</pre></div>
+</div>
+<p>This will take about 15 minutes; at the end you should see output like
+this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>   <span class="o">...</span> <span class="mi">7713</span> <span class="n">contigs</span><span class="p">,</span> <span class="n">total</span> <span class="mi">13168567</span> <span class="n">bp</span><span class="p">,</span> <span class="nb">min</span> <span class="mi">200</span> <span class="n">bp</span><span class="p">,</span> <span class="nb">max</span> <span class="mi">54372</span> <span class="n">bp</span><span class="p">,</span> <span class="n">avg</span> <span class="mi">1707</span> <span class="n">bp</span><span class="p">,</span> <span class="n">N50</span> <span class="mi">4305</span> <span class="n">bp</span>
+   <span class="o">...</span> <span class="n">ALL</span> <span class="n">DONE</span><span class="o">.</span> <span class="n">Time</span> <span class="n">elapsed</span><span class="p">:</span> <span class="mf">899.612093</span> <span class="n">seconds</span> 
+</pre></div>
+</div>
+<p>The output assembly will be in <code class="docutils literal"><span class="pre">combined/final.contigs.fa</span></code>.</p>
+<div class="section" id="while-the-assembly-runs">
+<span id="while-the-assembly-runs"></span><h2>While the assembly runs...<a class="headerlink" href="#while-the-assembly-runs" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Discuss CAMI paper.</li>
+<li>What does, and doesn&#8217;t, assemble?</li>
+<li>How good is assembly anyway?</li>
+</ul>
+<div class="section" id="questions-for-discussion">
+<span id="questions-for-discussion"></span><h3>Questions for Discussion:<a class="headerlink" href="#questions-for-discussion" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Why would we assemble, vs looking at raw reads?  What are the advantages and disadvantages?</li>
+<li>What are the technology tradeoffs between Illumina HiSeq, Illumina MiSeq, and PacBio? (Also see [this paper (http://ivory.idyll.org/blog/2015-sharon-paper.html).)</li>
+<li>What kind of experimental design considerations should you have if you plan to assemble?</li>
+</ul>
+<p>Some figures for your consideration:
+The first two come from work by Dr. Sherine Awad on analyzing the data from Shakya et al (2014). The third comes from an analysis of read search vs contig search of a protein database.</p>
+<p><img alt="" src="_images/assembler-runtimes.png" /></p>
+<p><img alt="" src="_images/assembler-mapping.png" /></p>
+<p><img alt="" src="_images/read-vs-contig-alignment.png" /></p>
+</div>
+</div>
+<div class="section" id="after-the-assembly-is-finished">
+<span id="after-the-assembly-is-finished"></span><h2>After the assembly is finished<a class="headerlink" href="#after-the-assembly-is-finished" title="Permalink to this headline">¶</a></h2>
+<p>Let&#8217;s first take a look at the assembly:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>    less combined/final.contigs.fa
+</pre></div>
+</div>
+<p>Now we can run a few stats on our assembly. To do this we will use <a class="reference external" href="http://quast.sourceforge.net/quast">QUAST</a>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>    cd ~/
+    git clone https://github.com/ablab/quast.git -b release_4.5
+    export PYTHONPATH=$(pwd)/quast/libs/
+</pre></div>
+</div>
+<p>Now, run QUAST on the assembly:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>    cd ~/assembly
+    ~/quast/quast.py combined/final.contigs.fa -o combined-report
+    cat combined-report/report.txt
+</pre></div>
+</div>
+<p>What does this say about our assembly? What do the stats <em>not</em> tell us? For thought and discussion: a few <a class="reference external" href="files/evaluate_assembly_summary.pdf">nice slides</a> from Jessica Blanton on assessing assembly quality.</p>
+<p>At this point we can do a bunch of things:</p>
+<ul class="simple">
+<li>annotate the assembly with <a class="reference external" href="prokka_tutorial.md">Prokka</a>;</li>
+<li>evaluate the assembly&#8217;s inclusion of k-mers and reads;</li>
+<li>set up a BLAST database so that we can search it for genes of interest;</li>
+<li>quantify the abundance of the contigs or genes in the assembly, using the original read data set <a class="reference external" href="salmon_tutorial.rst">Salmon</a>;</li>
+<li>Identify contigs with similar tetra-mer abundance and coverage with <a class="reference external" href="binning.md">Binning</a>;</li>
+</ul>
+</div>
 </div>
 
 

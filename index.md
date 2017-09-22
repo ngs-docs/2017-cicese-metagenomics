@@ -1,65 +1,62 @@
-# 2017 DIBSI Metagenomics Workshop at UC Davis
+Environmental Metagenomics Workshop
+===================================
 
-Lead Instructors: Harriet Alexander and C. Titus Brown
+26 - 29 September 2017 at CICESE
+--------------------------------
+*Instructors: Harriet Alexander, Phil Brooks, and C. Titus Brown*
 
-Co-Instructors: Jessica Blanton, Adelaide Rhodes, Shawn Higdon, Jessica Mizzi, Phillip Brooks, Veronika Kivenson  
+These are the online materials for the environmental metagenomics workshop run at [CICESE](http://www.cicese.edu.mx/).
 
-These are the online materials for the environmental metagenomics workshop run as part of the Data Intensive Biology Summer Institute at UC Davis ([DIBSI](http://ivory.idyll.org/dibsi/)).
+We will be using HackMD to take collective notes throughout the course. If you wish to add to or follow along the [HackMD can be found here](https://hackmd.io/BwdgnArApgJgDANgLRQcAjEgLFARhJXGSJAJgGYYQFT0oAzYWoA=).
 
-We will be using HackMD to take collective notes throughout the course:
-[HackMD](https://hackmd.io/MzBmE4FYCMA4HYC08BMtSICwFMCGA2RWTfXRSABnAsxXAGNhJRcg).
+### Schedule
+#### Tuesday, Day 1:
+##### Morning
+* [Logging onto an instance through Amazon Web Services (AWS)](aws/boot.html)
+* **Titus you have a talk at some point?? Not sure about the actual times that we want to do**
 
-## Monday, Day 1:
-11am: Meet in Valley Hall (room TBA), setup, and introductions.
-* [Logging into the cloud (XSEDE Jetstream)](jetstream/boot.html)
+##### Lunch
 
-Noon - 1:15: Lunch
-
-1:15 - 2pm: Group meeting with all of DIBSI
-
-2pm - 4pm:
+##### Afternoon
  * [Working on Command Line](command-line.html)
  * [Command Line Blast](running-command-line-blast.html)
 
-Homework: *Skim* the [Critical Assessment of Metagenome Interpretation (CAMI) Paper](http://www.biorxiv.org/content/biorxiv/early/2017/01/09/099127.full.pdf)
+##### Homework
+* Read the [Critical Assessment of Metagenome Interpretation (CAMI) Paper](http://www.biorxiv.org/content/biorxiv/early/2017/01/09/099127.full.pdf);
+* Read [Hu et al. 2016](http://mbio.asm.org/content/7/1/e01669-15.abstract). This is the paper from which we pulled all of our sample data.
 
-## Tuesday, Day 2:
-9am - Noon:
-* [Introduction to dataset we will be using]()
+#### Wednesday, Day 2:
+##### Morning
+*  Presentation and discussion on types of workflows in metagenomics and introduction to the dataset we will be using
 * [Evaluating your short-read data set quality](quality.html)
-Noon - 1:15: Lunch
 
-1:15 - 4pm:
-* Lecture about assembly from Titus Brown
-* Trying quality trimming and assembly with your own data!
+##### Lunch
 
-## Wednesday, Day 3:
-9am - Noon:
+##### Afternoon
 * [Assembling your short read data set with MEGAHIT](assemble.html)
-* [Quickly searching and comparing your samples with sourmash](sourmash.html)
-
-Noon - 1:15: Lunch
-
-1:15 - 4pm:
+* [Evaluating the assembly](assembly-evaluation.html)
 * [Mapping short reads to the assembly](mapping.html) *time permitting*
-* [Binning genomes out of your metagenome](binning.html)
 
-## Thursday, Day 4:
-9am - Noon:
-* [Annotating your dataset with Prokka](prokka_tutorial.html)
+#### Thursday, Day 3:
+##### Morning
+* [Annotating your assembly with Prokka](prokka_tutorial.html)
 * [Quantifying abundance across samples with Salmon](salmon_tutorial.html)
 
-Noon - 1:15: Lunch
+##### Lunch
 
-1:15 - 4pm:
+##### Afternoon
+* [Binning genomes out of your metagenome](binning.html)
+* [Quickly searching and comparing your samples with sourmash](sourmash.html)
 
-* [Anvi'o](anvio.html)
+#### Friday, Day 4:
+##### Morning
+* [Putting it all together with Anvi'o](anvio.html)
+
+##### Lunch
+
+##### Afternoon
+
 * [A brief discussion of workflows & repeatability](workflows.html)
-
-
-## Friday, Optional Day 5: TBD (plotting, visualization, jupyter notebooks...)
-
-[What next?](whatnext.html)
 
 Resources:
 
@@ -71,11 +68,11 @@ Resources:
 
 [DIB Summer Institute](http://ivory.idyll.org/dibsi/)
 
-## Undone
+### Undone
 
 See [the complete table of contents](toc.html)
 
-## Technical information
+### Technical information
 
 The github repository for this workshop is public at
 https://github.com/ngs-docs/2017-ucsc-metagenomics

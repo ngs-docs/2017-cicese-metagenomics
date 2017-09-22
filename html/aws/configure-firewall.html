@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Configure your instance firewall &mdash; 2017-dibsi-metagenomics 1.0 documentation</title>
+    <title>Configure your instance firewall &mdash; 2017-cicese-metagenomics 1.0 documentation</title>
     
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -31,7 +31,7 @@
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
-    <link rel="top" title="2017-dibsi-metagenomics 1.0 documentation" href="../toc.html" />
+    <link rel="top" title="2017-cicese-metagenomics 1.0 documentation" href="../toc.html" />
 
 
 <style type="text/css">
@@ -57,7 +57,7 @@
           <span class="icon-bar"></span>
         </button>
         <a class="navbar-brand" href="../toc.html">
-          2017-dibsi-metagenomics</a>
+          2017-cicese-metagenomics</a>
         <span class="navbar-text navbar-version pull-left"><b>1.0</b></span>
       </div>
 
@@ -74,21 +74,29 @@
   <ul class="dropdown-menu globaltoc"
       role="menu"
       aria-labelledby="dLabelGlobalToc"><ul>
-<li class="toctree-l1"><a class="reference internal" href="../index.html">2017 Metagenomics workshop at UC Santa Cruz</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Environmental Metagenomics Workshop</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../welcome.html">Welcome!</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../jetstream/boot.html">Booting a Jetstream Computer Instance for your use!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="boot.html">Start an Amazon Web Services computer:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../command-line.html">Intro to Shell Lesson</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../command-line.html#the-shell">The Shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../command-line.html#for-future-reference">For Future Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../command-line.html#finding-files">Finding files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../running-command-line-blast.html">Running command-line BLAST</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../quality.html">Short read quality and trimming</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../assemble.html">Run the MEGAHIT assembler</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../prokka_tutorial.html">Annotation with Prokka</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../binning.html">Mapping and Binning a Metagenome Assembly</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sourmash.html">A sourmash tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sourmash.html#k-mers-k-mer-specificity-and-comparing-samples-with-k-mer-jaccard-distance">K-mers, k-mer specificity, and comparing samples with k-mer Jaccard distance.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../binning.html">Binning a Metagenomic Assembly</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../salmon_tutorial.html">Gene Abundance Estimation with Salmon</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../mapping.html">Mapping</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../slice.html">Slicing and dicing with k-mers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../anvio.html">Using Anvi&#8217;o to Knit Everything Together</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../circos_tutorial.html">Using and Installing Circos</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow and repeatability discussion</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../DATA.html">Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../INSTALL.html">Building this site on your own</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../README.html">2017 / April / Metagenomics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../README.html">2017 / September / Environmental Metagenomics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../day2-install.html">Day 2 - installation instructions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../kmer_trimming.html">K-mer Spectral Error Trimming</a></li>
 </ul>
@@ -170,7 +178,7 @@ open those instead of 8000-9000.  (Tip: Web servers run on port 80.)</p>
 <p>Find &#8220;Security Groups&#8221; in the lower pane of your instance&#8217;s
 information page, and click on &#8220;launch-wizard-N&#8221;.</p>
 <a class=""
-               data-lightbox="group-f392abfc-f0a3-4c54-b1be-8b5be53e0aa5"
+               data-lightbox="group-45232ca6-3a66-4dbe-84ed-d4c3d417ec5f"
                href="../_images/network-01.png"
                title=""
                data-title=""
@@ -183,7 +191,7 @@ information page, and click on &#8220;launch-wizard-N&#8221;.</p>
 <div class="section" id="select-inbound">
 <h2>2. Select &#8216;Inbound&#8217;<a class="headerlink" href="#select-inbound" title="Permalink to this headline">¶</a></h2>
 <a class=""
-               data-lightbox="group-965facde-8731-453a-a2fd-df9713996efc"
+               data-lightbox="group-610f458b-08ca-4268-bdc0-4f4ff4e2f11a"
                href="../_images/network-11.png"
                title=""
                data-title=""
@@ -196,7 +204,7 @@ information page, and click on &#8220;launch-wizard-N&#8221;.</p>
 <div class="section" id="select-edit">
 <h2>3. Select &#8216;Edit&#8217;<a class="headerlink" href="#select-edit" title="Permalink to this headline">¶</a></h2>
 <a class=""
-               data-lightbox="group-06c1e213-fc1e-43d0-ae14-6e449a76b9a8"
+               data-lightbox="group-d8014b51-c384-41ac-9079-71c452ef6a16"
                href="../_images/network-21.png"
                title=""
                data-title=""
@@ -209,7 +217,7 @@ information page, and click on &#8220;launch-wizard-N&#8221;.</p>
 <div class="section" id="select-add-rule">
 <h2>4. Select &#8216;Add Rule&#8217;<a class="headerlink" href="#select-add-rule" title="Permalink to this headline">¶</a></h2>
 <a class=""
-               data-lightbox="group-20d28c7a-074a-48c5-9b72-d77fb93b35af"
+               data-lightbox="group-3c7e26d7-c0d3-4229-bb5f-7ca71a5c7cea"
                href="../_images/network-31.png"
                title=""
                data-title=""
@@ -229,7 +237,7 @@ information page, and click on &#8220;launch-wizard-N&#8221;.</p>
 <div class="section" id="return-to-the-instances-page">
 <h2>7. Return to the Instances page.<a class="headerlink" href="#return-to-the-instances-page" title="Permalink to this headline">¶</a></h2>
 <a class=""
-               data-lightbox="group-6a764883-27c9-4b8b-b9c3-94add43726e7"
+               data-lightbox="group-0ee1b4fb-95a8-45c9-97a4-1dd02d63323c"
                href="../_images/network-41.png"
                title=""
                data-title=""

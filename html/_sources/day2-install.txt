@@ -21,7 +21,7 @@ Then update your environment and install `khmer <http://khmer.readthedocs.io>`__
 and `sourmash <http://sourmash.readthedocs.io/en/latest/>`__::
 
    source ~/.bashrc
-   
+
    conda install -n root pip -y
    pip install https://github.com/dib-lab/khmer/archive/master.zip
    pip install https://github.com/dib-lab/sourmash/archive/2017-ucsc-metagenome.zip
@@ -41,7 +41,7 @@ Generate a config::
 
 Add a password, have it not run a browser, and put it on port 8000
 by default::
-  
+
   cat >> ~/.jupyter/jupyter_notebook_config.py <<EOF
   c = get_config()
   c.NotebookApp.ip = '*'

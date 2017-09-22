@@ -8,11 +8,12 @@ Tutorials:
 
    index
    welcome
-   jetstream/boot
+   aws/boot
    command-line
    running-command-line-blast
    quality
    assemble
+   assembly-evaluation
    prokka_tutorial
 
    sourmash

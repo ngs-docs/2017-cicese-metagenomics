@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 
 
@@ -6,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Index &mdash; 2017-cicese-metagenomics 1.0 documentation</title>
+    <title>Assembly with metaSPAdes &mdash; 2017-cicese-metagenomics 1.0 documentation</title>
     
     <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -33,10 +32,17 @@
     <script type="text/javascript" src="_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="2017-cicese-metagenomics 1.0 documentation" href="toc.html" />
-<meta charset='utf-8'>
-<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
-<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
-<meta name="apple-mobile-web-app-capable" content="yes">
+
+
+<style type="text/css">
+<!-- github-based editing disabled; set github_base_account
+     and github_project -->
+#editor-trap.toggled {
+  display: none;
+}
+</style>
+
+
 
   </head>
   <body role="document">
@@ -105,7 +111,10 @@
      href="#">Page <b class="caret"></b></a>
   <ul class="dropdown-menu localtoc"
       role="menu"
-      aria-labelledby="dLabelLocalToc"></ul>
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">Assembly with metaSPAdes</a></li>
+</ul>
+</ul>
 </li>
               
             
@@ -117,7 +126,11 @@
             
             
             
-              <li class="hidden-sm"></li>
+              <li class="hidden-sm">
+<div id="sourcelink">
+  <a href="_sources/assemble-metaspades.txt"
+     rel="nofollow">Source</a>
+</div></li>
             
           </ul>
 
@@ -137,20 +150,62 @@
 
 <div class="container">
   <div class="row">
+
     <div class="col-md-12 content">
       
+  
+  <div class="section" id="assembly-with-metaspades">
+<span id="assembly-with-metaspades"></span><h1>Assembly with metaSPAdes<a class="headerlink" href="#assembly-with-metaspades" title="Permalink to this headline">¶</a></h1>
+<p>Here are the instructions for assembling the metagenomic data with a different assembler. Here we are showing <a class="reference external" href="https://www.ncbi.nlm.nih.gov/pubmed/28298430">metaSPAdes</a>, one of the  assembler options highlighted in the <a class="reference external" href="https://www.biorxiv.org/content/early/2017/01/09/099127">CAMI</a> paper.</p>
+<p>metaSPAdes takes longer than MEGAHIT to run the assembly, so we will not be running it during the course. Rather it is available for download <a class="reference external" href="LINK">here</a>. If you are interested in running the assembly yourself, however, please see below.</p>
+<p>Install metaSPAdes:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>wget http://cab.spbu.ru/files/release3.10.1/SPAdes-3.10.1-Linux.tar.gz
+tar -xzf SPAdes-3.10.1-Linux.tar.gz
+export PATH=$PATH:~/SPAdes-3.10.1-Linux/bin/
+</pre></div>
+</div>
+<p>Concatenate the two sets of reads:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>cd ~/data
+for x in *gz
+do
+  gunzip $x
+done
 
-<h1 id="index">Index</h1>
+cat *fq &gt; coassembly.fq
 
-<div class="genindex-jumpbox">
- 
+cd ~
+mkdir assembly-spades
+cd assembly-spades
+</pre></div>
+</div>
+<p>And assemble with metaSPAdes:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>metaspades.py --12 ~/data/coassembly.fq -o metaS-assembly
+</pre></div>
+</div>
 </div>
 
+
+
+<hr>
+
+<font size="-1"><b>LICENSE:</b>
+This documentation and all textual/graphic site content is released
+under <a href='http://creativecommons.org/publicdomain/zero/1.0/'>
+Creative Commons - 0
+(CC0)</a> -- <a href='https://github.com/ngs-docs/2017-ucsc-metagenomics'>fork @
+github</a>. </font>
+
+<hr>
+
+
+<!-- disqus commenting disabled; set disqus_shortname -->
 
     </div>
-      
+    
+
   </div>
 </div>
+
 <footer class="footer">
   <div class="container">
     <p class="pull-right">
@@ -163,5 +218,21 @@
     </p>
   </div>
 </footer>
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', '', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
   </body>
 </html>

@@ -1,11 +1,10 @@
+===============================
 Short read quality and trimming
 ===============================
 
-(Jetstream startup instructions `HERE <https://2017-ucsc-metagenomics.readthedocs.io/en/latest/jetstream/boot.html>`__.)
-
 ---
 
-You should now be logged into your Jetstream computer!  You should see
+You should now be logged into your amazon instance!  You should see
 something like this::
 
    ubuntu@ip-172-30-1-252:~$
@@ -19,9 +18,9 @@ First, let's install software for short read quality assessment, trimming and py
 
   sudo apt-get -y update && \
   sudo apt-get -y install trimmomatic python-pip \
-     samtools zlib1g-dev ncurses-dev python-dev
-  sudo apt-get install -y python3.5-dev python3.5-venv make \
-      libc6-dev g++ zlib1g-dev
+     samtools zlib1g-dev ncurses-dev python-dev unzip \
+     python3.5-dev python3.5-venv make \
+     libc6-dev g++ zlib1g-dev
       
    wget -c http://www.bioinformatics.babraham.ac.uk/projects/fastqc/fastqc_v0.11.5.zip
    unzip fastqc_v0.11.5.zip
@@ -44,7 +43,7 @@ Running Jupyter Notebook
 ------------------------
 
 Let's also run a Jupyter Notebook. First, configure it a teensy bit
-more securely, and also have it run in the background::
+more securely, and also have it run in the background:
 
   jupyter notebook --generate-config
   
@@ -53,7 +52,7 @@ more securely, and also have it run in the background::
   c.NotebookApp.ip = '*'
   c.NotebookApp.open_browser = False
   c.NotebookApp.password = u'sha1:5d813e5d59a7:b4e430cf6dbd1aad04838c6e9cf684f4d76e245c'
-  c.NotebookApp.port = 8000
+  c.NotebookApp.port = 8888
 
   EOF
 
@@ -61,21 +60,11 @@ Now, run! ::
 
   jupyter notebook &
 
-On the Jetstream webshell, you can get the Web page address for the jupyter notebook you just launched. Press enter, then execute ::
+Open a new terminal window and type (filling in the path to your key and the your ec2 instance Public DNS 
 
-  echo http://$(hostname):8000/
+  ssh -i ~/xxx.pem -L 8888:localhost:8888 ubuntu@xxx.amazonaws.com
 
-Copy the output from echo and paste it into the url bar of a new tab in your web browser.
-
-Note, the password is 'davis'.
-
-.. note::
-
-   If your network blocks port 8000 (e.g. cruznet at UCSC), you can run::
-
-       ssh -N -f -L localhost:8000:localhost:8000 username@remotehost
-
-   to tunnel the remote Jupyter notebook server over SSH.
+When prompted for a password or token enter the toke provided after the jupter notebook & command was run
 
 Data source
 -----------
@@ -101,15 +90,19 @@ Next, let's grab part of the data set::
    cd ~/data
    curl -O -L https://s3-us-west-1.amazonaws.com/dib-training.ucdavis.edu/metagenomics-scripps-2016-10-12/SRR1976948_1.fastq.gz
    curl -O -L https://s3-us-west-1.amazonaws.com/dib-training.ucdavis.edu/metagenomics-scripps-2016-10-12/SRR1976948_2.fastq.gz
-   
+   curl -O -l https://s3-us-west-1.amazonaws.com/dib-training.ucdavis.edu/metagenomics-scripps-2016-10-12/SRR1977249_1.fastq.gz
+   curl -O -l https://s3-us-west-1.amazonaws.com/dib-training.ucdavis.edu/metagenomics-scripps-2016-10-12/SRR1977249_2.fastq.gz
+
 Let's make sure we downloaded all of our data using md5sum.::
 
-   md5sum SRR1976948_1.fastq.gz SRR1976948_2.fastq.gz
+   md5sum SRR1976948_1.fastq.gz SRR1976948_2.fastq.gz SRR1977249_1.fastq.gz SRR1977249_2.fastq.g
 
 You should see this: ::
 
-   37bc70919a21fccb134ff2fefcda03ce  SRR1976948_1.fastq.gz
-   29919864e4650e633cc409688b9748e2  SRR1976948_2.fastq.gz
+37bc70919a21fccb134ff2fefcda03ce  SRR1976948_1.fastq.gz
+29919864e4650e633cc409688b9748e2  SRR1976948_2.fastq.gz
+ee25ae14f84308f972cebd42e55502dd  SRR1977249_1.fastq.gz
+84b15b4f5975cd7941e211336ff27993  SRR1977249_2.fastq.gz
 
 Now if you type::
 
@@ -117,9 +110,11 @@ Now if you type::
 
 you should see something like::
 
-   total 346936
-   -rw-rw-r-- 1 ubuntu ubuntu 169620631 Oct 11 23:37 SRR1976948_1.fastq.gz
-   -rw-rw-r-- 1 ubuntu ubuntu 185636992 Oct 11 23:38 SRR1976948_2.fastq.gz
+total 704320
+-r--rw-r-- 1 ubuntu ubuntu 169620631 Sep 21 01:50 SRR1976948_1.fastq.gz
+-r--rw-r-- 1 ubuntu ubuntu 185636992 Sep 21 01:50 SRR1976948_2.fastq.gz
+-rw-rw-r-- 1 ubuntu ubuntu 177682886 Sep 21 03:26 SRR1977249_1.fastq.gz
+-rw-rw-r-- 1 ubuntu ubuntu 188269868 Sep 21 03:26 SRR1977249_2.fastq.gz
 
 These are 1m read subsets of the original data, taken from the beginning
 of the file.
@@ -171,8 +166,10 @@ you.
 
 Now, run FastQC on two files::
 
-   fastqc SRR1976948_1.fastq.gz
-   fastqc SRR1976948_2.fastq.gz
+   ~/FastQC/fastqc SRR1976948_1.fastq.gz
+   ~/FastQC/fastqc SRR1976948_2.fastq.gz
+   ~/FastQC/fastqc SRR1977249_1.fastq.gz  
+   ~/FastQC/fastqc SRR1977249_2.fastq.gz
 
 Now type 'ls'::
 
@@ -182,6 +179,8 @@ to list the files, and you should see:
 ::
    SRR1976948_1_fastqc.zip
    SRR1976948_2_fastqc.zip
+   SRR1977249_1_fastqc.zip
+   SRR1977249_1_fastqc.zip
 
 Inside each of the fatqc directories you will find reports from the fastqc. You can download these files using your Jupyter Notebook console, if you like;
 or you can look at these copies of them:
@@ -216,20 +215,31 @@ The first thing we'll need are the adapters to trim off::
   curl -O -L http://dib-training.ucdavis.edu.s3.amazonaws.com/mRNAseq-semi-2015-03-04/TruSeq2-PE.fa
 
 Now, to run Trimmomatic::
-
-   TrimmomaticPE SRR1976948_1.fastq.gz \
-                 SRR1976948_2.fastq.gz \
-        SRR1976948_1.qc.fq.gz s1_se \
-        SRR1976948_2.qc.fq.gz s2_se \
+   for filename in *_1.fastq.gz
+   do 
+   
+   #Use the program basename to remove _1.fastq.gz to generate the base
+   base=$(basename $filename _1.fastq.gz)
+   echo $base
+	
+   TrimmomaticPE ${base}_1.fastq.gz \
+                 ${base}_2.fastq.gz \
+        ${base}_1.qc.fq.gz ${base}_s1_se \
+        ${base}_2.qc.fq.gz ${base}_s2_se \
         ILLUMINACLIP:TruSeq2-PE.fa:2:40:15 \
         LEADING:2 TRAILING:2 \                            
         SLIDINGWINDOW:4:2 \
         MINLEN:25
+   done
 
 You should see output that looks like this::
 
    ...
    Input Read Pairs: 1000000 Both Surviving: 885734 (88.57%) Forward Only Surviving: 114262 (11.43%) Reverse Only Surviving: 4 (0.00%) Dropped: 0 (0.00%)
+   TrimmomaticPE: Completed successfully
+   
+   ...	
+   Input Read Pairs: 1000000 Both Surviving: 918983 (91.90%) Forward Only Surviving: 81012 (8.10%) Reverse Only Surviving: 4 (0.00%) Dropped: 1 (0.00%)
    TrimmomaticPE: Completed successfully
 
 Questions:
@@ -256,8 +266,10 @@ Links:
 
 Run FastQC again on the trimmed files::
 
-   fastqc SRR1976948_1.qc.fq.gz
-   fastqc SRR1976948_2.qc.fq.gz
+   ~/FastQC/fastqc SRR1976948_1.qc.fq.gz
+   ~/FastQC/fastqc SRR1976948_2.qc.fq.gz
+   ~/FastQC/fastqc SRR1977249_1.qc.fq.gz 
+   ~/FastQC/fastqc SRR1977249_2.qc.fq.gz
 
 And now view my copies of these files: 
 
@@ -277,7 +289,7 @@ Let's take a look at the output files::
 
 Install MultiQC within the py3 environment::
 
-   pip install multiqc
+   pip install git+https://github.com/ewels/MultiQC.git
 
 Now, run Mulitqc on both the untrimmed and trimmed files within the work directory::
 
