@@ -30,11 +30,7 @@ Phil Brooks - postdoc at UC Davis.
 
 Titus Brown - prof at UC Davis in the School of Vet Med.
 
-Shannon Joslin - grad student at UC Davis.
-
-Taylor Reiter - grad student at UC Davis.
-
-4. Jetstream and cloud computing - why?!
+4. Amazon Web Service and cloud computing - why?!
 ----------------------------------------
 
 * simplifies software installation;

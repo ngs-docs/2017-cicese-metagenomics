@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Working with persistent storage: volumes and snapshots &mdash; 2017-dibsi-metagenomics 1.0 documentation</title>
+    <title>Working with persistent storage: volumes and snapshots &mdash; 2017-cicese-metagenomics 1.0 documentation</title>
     
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -31,7 +31,7 @@
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
-    <link rel="top" title="2017-dibsi-metagenomics 1.0 documentation" href="../toc.html" />
+    <link rel="top" title="2017-cicese-metagenomics 1.0 documentation" href="../toc.html" />
 
 
 <style type="text/css">
@@ -57,7 +57,7 @@
           <span class="icon-bar"></span>
         </button>
         <a class="navbar-brand" href="../toc.html">
-          2017-dibsi-metagenomics</a>
+          2017-cicese-metagenomics</a>
         <span class="navbar-text navbar-version pull-left"><b>1.0</b></span>
       </div>
 
@@ -74,21 +74,29 @@
   <ul class="dropdown-menu globaltoc"
       role="menu"
       aria-labelledby="dLabelGlobalToc"><ul>
-<li class="toctree-l1"><a class="reference internal" href="../index.html">2017 Metagenomics workshop at UC Santa Cruz</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Environmental Metagenomics Workshop</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../welcome.html">Welcome!</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../jetstream/boot.html">Booting a Jetstream Computer Instance for your use!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="boot.html">Start an Amazon Web Services computer:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../command-line.html">Intro to Shell Lesson</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../command-line.html#the-shell">The Shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../command-line.html#for-future-reference">For Future Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../command-line.html#finding-files">Finding files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../running-command-line-blast.html">Running command-line BLAST</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../quality.html">Short read quality and trimming</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../assemble.html">Run the MEGAHIT assembler</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../prokka_tutorial.html">Annotation with Prokka</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../binning.html">Mapping and Binning a Metagenome Assembly</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sourmash.html">A sourmash tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sourmash.html#k-mers-k-mer-specificity-and-comparing-samples-with-k-mer-jaccard-distance">K-mers, k-mer specificity, and comparing samples with k-mer Jaccard distance.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../binning.html">Binning a Metagenomic Assembly</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../salmon_tutorial.html">Gene Abundance Estimation with Salmon</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../mapping.html">Mapping</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../slice.html">Slicing and dicing with k-mers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../anvio.html">Using Anvi&#8217;o to Knit Everything Together</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../circos_tutorial.html">Using and Installing Circos</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow and repeatability discussion</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../DATA.html">Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../INSTALL.html">Building this site on your own</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../README.html">2017 / April / Metagenomics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../README.html">2017 / September / Environmental Metagenomics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../day2-install.html">Day 2 - installation instructions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../kmer_trimming.html">K-mer Spectral Error Trimming</a></li>
 </ul>
@@ -184,7 +192,7 @@ Snapshots are tied to a region but not a zone.</p>
 <div class="section" id="locate-your-instance-zone">
 <h3>0. Locate your instance <em>zone</em><a class="headerlink" href="#locate-your-instance-zone" title="Permalink to this headline">¶</a></h3>
 <a class=""
-               data-lightbox="group-99f18db6-00b1-40ce-a75a-ef555874600e"
+               data-lightbox="group-5137856b-d210-42e9-90fb-e915740b09d7"
                href="../_images/add-volume-1d1.png"
                title=""
                data-title=""
@@ -197,7 +205,7 @@ Snapshots are tied to a region but not a zone.</p>
 <div class="section" id="click-on-the-volumes-tab">
 <h3>1. Click on the volumes tab<a class="headerlink" href="#click-on-the-volumes-tab" title="Permalink to this headline">¶</a></h3>
 <a class=""
-               data-lightbox="group-f58468fb-b4f4-494a-b3fe-2be59ec8f177"
+               data-lightbox="group-6af61fba-5d3b-4eb3-b5ad-02f3b27de9f7"
                href="../_images/add-volume-11.png"
                title=""
                data-title=""
@@ -210,7 +218,7 @@ Snapshots are tied to a region but not a zone.</p>
 <div class="section" id="create-volume">
 <h3>2. &#8216;Create Volume&#8217;<a class="headerlink" href="#create-volume" title="Permalink to this headline">¶</a></h3>
 <a class=""
-               data-lightbox="group-7254de17-0526-47b5-a33c-69e3051dea6f"
+               data-lightbox="group-81ff8fa2-b626-44ae-8f0a-a5dbdd83a770"
                href="../_images/add-volume-1b1.png"
                title=""
                data-title=""
@@ -223,7 +231,7 @@ Snapshots are tied to a region but not a zone.</p>
 <div class="section" id="configure-your-volume-to-have-the-same-zone-as-your-instance">
 <h3>3. Configure your volume to have the same zone as your instance<a class="headerlink" href="#configure-your-volume-to-have-the-same-zone-as-your-instance" title="Permalink to this headline">¶</a></h3>
 <a class=""
-               data-lightbox="group-6c43fb1f-c8a6-4fd0-aecf-be92cfdb19d5"
+               data-lightbox="group-3667a1ba-4543-47b7-bc8e-c4673312ba27"
                href="../_images/add-volume-1c1.png"
                title=""
                data-title=""
@@ -236,7 +244,7 @@ Snapshots are tied to a region but not a zone.</p>
 <div class="section" id="wait-for-your-volume-to-be-available">
 <h3>4. Wait for your volume to be available<a class="headerlink" href="#wait-for-your-volume-to-be-available" title="Permalink to this headline">¶</a></h3>
 <a class=""
-               data-lightbox="group-e8fcfaa0-ae67-4d70-ac29-21cd2f701ace"
+               data-lightbox="group-59c9e328-76fd-4d5f-b5d7-e5cc429ba137"
                href="../_images/add-volume-21.png"
                title=""
                data-title=""
@@ -249,7 +257,7 @@ Snapshots are tied to a region but not a zone.</p>
 <div class="section" id="select-volume-actions-attach-volume">
 <h3>5. Select volume, Actions, Attach volume<a class="headerlink" href="#select-volume-actions-attach-volume" title="Permalink to this headline">¶</a></h3>
 <a class=""
-               data-lightbox="group-5a74d9a8-90f3-4524-9e6c-1b7d9f518cbc"
+               data-lightbox="group-78faed3c-aedf-4bbf-9cff-57c18619361d"
                href="../_images/add-volume-31.png"
                title=""
                data-title=""
@@ -264,7 +272,7 @@ Snapshots are tied to a region but not a zone.</p>
 <p>Here, your attachment point will be &#8216;/dev/sdf&#8217; and your block device will
 be named &#8216;/dev/xvdf&#8217;.</p>
 <a class=""
-               data-lightbox="group-bc19a124-d49d-475d-9c08-e081c2b1fef2"
+               data-lightbox="group-a77f60d0-fc61-4027-984d-b73659148652"
                href="../_images/add-volume-41.png"
                title=""
                data-title=""
@@ -315,7 +323,7 @@ sudo chmod a+rwxt /disk
 <h3>2. Detach<a class="headerlink" href="#detach" title="Permalink to this headline">¶</a></h3>
 <p>On the &#8216;volumes&#8217; tab in your EC2 console, go to Actions, Detach.</p>
 <a class=""
-               data-lightbox="group-e0702204-6751-4d96-b153-12c1214c7861"
+               data-lightbox="group-9f7e40ad-a615-458e-ae46-229b885f5894"
                href="../_images/add-volume-51.png"
                title=""
                data-title=""
@@ -328,7 +336,7 @@ sudo chmod a+rwxt /disk
 <div class="section" id="yes-detach">
 <h3>3. Yes, detach.<a class="headerlink" href="#yes-detach" title="Permalink to this headline">¶</a></h3>
 <a class=""
-               data-lightbox="group-5b2bdaf5-3ff9-4205-92db-ab868854b525"
+               data-lightbox="group-5011ccff-c1b2-4bf6-ab0e-20e8eb5217e6"
                href="../_images/add-volume-61.png"
                title=""
                data-title=""
@@ -346,7 +354,7 @@ are (of course) detached when you terminate an instance.</p>
 <div class="section" id="actions-create-snapshot">
 <h3>1. Actions, Create snapshot<a class="headerlink" href="#actions-create-snapshot" title="Permalink to this headline">¶</a></h3>
 <a class=""
-               data-lightbox="group-db1bc61d-a83e-4271-b0fa-fcba5fde0856"
+               data-lightbox="group-a1d5e230-6416-44f0-b7d6-66faefe0e6f9"
                href="../_images/create-snapshot-11.png"
                title=""
                data-title=""
@@ -359,7 +367,7 @@ are (of course) detached when you terminate an instance.</p>
 <div class="section" id="fill-out-name-and-description">
 <h3>2. Fill out name and description<a class="headerlink" href="#fill-out-name-and-description" title="Permalink to this headline">¶</a></h3>
 <a class=""
-               data-lightbox="group-515fc320-d96b-4d1d-8fac-b2d72675b2a3"
+               data-lightbox="group-57af1964-5ed2-4705-9aed-4e7aed96bba8"
                href="../_images/create-snapshot-21.png"
                title=""
                data-title=""
@@ -372,7 +380,7 @@ are (of course) detached when you terminate an instance.</p>
 <div class="section" id="click-close-wait">
 <h3>3. Click &#8216;Close&#8217; &amp; wait.<a class="headerlink" href="#click-close-wait" title="Permalink to this headline">¶</a></h3>
 <a class=""
-               data-lightbox="group-cd08a849-6b34-4e8c-8791-bfd8b95974c7"
+               data-lightbox="group-31ed82b9-b311-4d95-b654-ef8f64954dfe"
                href="../_images/create-snapshot-31.png"
                title=""
                data-title=""

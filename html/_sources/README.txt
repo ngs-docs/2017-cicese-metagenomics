@@ -1,16 +1,8 @@
-2017 / April / Metagenomics
-=============================
+2017 / September / Environmental Metagenomics
+=============================================
 
-This workshop was given on April 22nd and 23th, 2017 at the the Unveristy of California, Santa Cruz..
-Instructors: Harriet Alexander, Phillip Brooks and C. Titus Brown
-TAs: Taylor Reitor and Shannon EK Joslin
+This workshop was given on September 26th - 29th, 2017 at the CICESE in Ensenada, Baja California. 
 
-See https://2017-ucsc-metagenomics.readthedocs.io/en/latest/ for the
-rendered version of this site.
+Instructors: C. Titus Brown, Phillip Brooks, Harriet Alexander
 
-----
-
-To look into:
-
-* https://downloads.jbei.org/data/microbial_communities/MaxBin/MaxBin.html for binning
-* https://github.com/DRL/blobtools - blobtools viz
+See https://2017-cicese-metagenomics.readthedocs.io/en/latest/ for the rendered version of this site.

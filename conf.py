@@ -45,7 +45,7 @@ source_suffix = ['.rst', '.md']
 master_doc = 'toc'
 
 # General information about the project.
-project = u'2017-dibsi-metagenomics'
+project = u'2017-cicese-metagenomics'
 copyright = u'2017, Lab for Data Intensive Biology'
 
 # The version info for the project you're documenting, acts as replacement for

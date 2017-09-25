@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Building this site on your own &mdash; 2017-cicese-metagenomics 1.0 documentation</title>
+    <title>Evaluating Metagenomic assemblies &mdash; 2017-cicese-metagenomics 1.0 documentation</title>
     
     <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -32,8 +32,8 @@
     <script type="text/javascript" src="_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="2017-cicese-metagenomics 1.0 documentation" href="toc.html" />
-    <link rel="next" title="2017 / September / Environmental Metagenomics" href="README.html" />
-    <link rel="prev" title="Data" href="DATA.html" />
+    <link rel="next" title="Annotation with Prokka" href="prokka_tutorial.html" />
+    <link rel="prev" title="Run the MEGAHIT assembler" href="assemble.html" />
 
 
 <style type="text/css">
@@ -86,6 +86,7 @@
 <li class="toctree-l1"><a class="reference internal" href="running-command-line-blast.html">Running command-line BLAST</a></li>
 <li class="toctree-l1"><a class="reference internal" href="quality.html">Short read quality and trimming</a></li>
 <li class="toctree-l1"><a class="reference internal" href="assemble.html">Run the MEGAHIT assembler</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Evaluating Metagenomic assemblies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="prokka_tutorial.html">Annotation with Prokka</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sourmash.html">A sourmash tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sourmash.html#k-mers-k-mer-specificity-and-comparing-samples-with-k-mer-jaccard-distance">K-mers, k-mer specificity, and comparing samples with k-mer Jaccard distance.</a></li>
@@ -97,7 +98,7 @@
 <li class="toctree-l1"><a class="reference internal" href="circos_tutorial.html">Using and Installing Circos</a></li>
 <li class="toctree-l1"><a class="reference internal" href="workflow.html">Workflow and repeatability discussion</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DATA.html">Data</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Building this site on your own</a></li>
+<li class="toctree-l1"><a class="reference internal" href="INSTALL.html">Building this site on your own</a></li>
 <li class="toctree-l1"><a class="reference internal" href="README.html">2017 / September / Environmental Metagenomics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="day2-install.html">Day 2 - installation instructions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="kmer_trimming.html">K-mer Spectral Error Trimming</a></li>
@@ -114,7 +115,7 @@
   <ul class="dropdown-menu localtoc"
       role="menu"
       aria-labelledby="dLabelLocalToc"><ul>
-<li><a class="reference internal" href="#">Building this site on your own</a></li>
+<li><a class="reference internal" href="#">Evaluating Metagenomic assemblies</a></li>
 </ul>
 </ul>
 </li>
@@ -124,11 +125,11 @@
               
                 
   <li>
-    <a href="DATA.html" title="Previous Chapter: Data"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Data</span>
+    <a href="assemble.html" title="Previous Chapter: Run the MEGAHIT assembler"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Run the MEGAH...</span>
     </a>
   </li>
   <li>
-    <a href="README.html" title="Next Chapter: 2017 / September / Environmental Metagenomics"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">2017 / Septem... &raquo;</span>
+    <a href="prokka_tutorial.html" title="Next Chapter: Annotation with Prokka"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Annotation wi... &raquo;</span>
     </a>
   </li>
               
@@ -138,7 +139,7 @@
             
               <li class="hidden-sm">
 <div id="sourcelink">
-  <a href="_sources/INSTALL.txt"
+  <a href="_sources/assembly-evaluation.txt"
      rel="nofollow">Source</a>
 </div></li>
             
@@ -164,25 +165,30 @@
     <div class="col-md-12 content">
       
   
-  <div class="section" id="building-this-site-on-your-own">
-<span id="building-this-site-on-your-own"></span><h1>Building this site on your own<a class="headerlink" href="#building-this-site-on-your-own" title="Permalink to this headline">¶</a></h1>
-<ol>
-<li><p class="first">Make a virtualenv:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span> python -m virtualenv ../build
- . ../build/bin/activate
+  <div class="section" id="evaluating-metagenomic-assemblies">
+<span id="evaluating-metagenomic-assemblies"></span><h1>Evaluating Metagenomic assemblies<a class="headerlink" href="#evaluating-metagenomic-assemblies" title="Permalink to this headline">¶</a></h1>
+<p>So, you have generated an assembly of your metagenome from short-read data. What now? How can you tell how <em>good</em> it is?</p>
+<p>Now, onto getting quantitative metrics:</p>
+<p>Now we can run a few stats on our assembly. To do this we will use <a class="reference external" href="http://quast.sourceforge.net/quast">QUAST</a>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>    cd ~/
+    git clone https://github.com/ablab/quast.git -b release_4.5
+    export PYTHONPATH=$(pwd)/quast/libs/
 </pre></div>
 </div>
-</li>
-<li><p class="first">Install the requirements:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span> pip install -r requirements.txt
+<p>Now, run QUAST on the assembly:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>    cd ~/assembly
+    ~/quast/quast.py combined/final.contigs.fa -o combined-report
+    cat combined-report/report.txt
 </pre></div>
 </div>
-</li>
-<li><p class="first">Run <code class="docutils literal"><span class="pre">make</span></code></p>
-</li>
-<li><p class="first">Look at the <code class="docutils literal"><span class="pre">html/</span></code> directory.</p>
-</li>
-</ol>
+<p>What does this say about our assembly? What do the stats <em>not</em> tell us?</p>
+<p>For thought and discussion: a few <a class="reference external" href="files/evaluate_assembly_summary.pdf">nice slides</a> from Jessica Blanton on assessing assembly quality.</p>
+<p>The stats that are reported by QUAST do not mean much on their own&#8211; for them to be more meaningful it is helpful to have another assembly against which to compare them. For that reason we have assembled the same data using a different assembler&#8211; metaSPAdes. To see how the assembly was generated and to try running the assembly on your own later you can follow the <a class="reference external" href="assembly-spades.html">metaSPAdes tutorial</a>. *** INclude time of run***</p>
+<p>But, for now, download the metaSPAdes assembly:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>CURL FIX ME *********
+</pre></div>
+</div>
+<p>Now, adjust the scripts used previously to calculate the same metrics for the new assembly. How do the two compare? What metrics should you care about?</p>
 </div>
 
 

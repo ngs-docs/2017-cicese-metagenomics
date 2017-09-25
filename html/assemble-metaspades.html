@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Building this site on your own &mdash; 2017-cicese-metagenomics 1.0 documentation</title>
+    <title>Assembly with metaSPAdes &mdash; 2017-cicese-metagenomics 1.0 documentation</title>
     
     <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -32,8 +32,6 @@
     <script type="text/javascript" src="_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="2017-cicese-metagenomics 1.0 documentation" href="toc.html" />
-    <link rel="next" title="2017 / September / Environmental Metagenomics" href="README.html" />
-    <link rel="prev" title="Data" href="DATA.html" />
 
 
 <style type="text/css">
@@ -75,7 +73,7 @@
      href="toc.html">Site <b class="caret"></b></a>
   <ul class="dropdown-menu globaltoc"
       role="menu"
-      aria-labelledby="dLabelGlobalToc"><ul class="current">
+      aria-labelledby="dLabelGlobalToc"><ul>
 <li class="toctree-l1"><a class="reference internal" href="index.html">Environmental Metagenomics Workshop</a></li>
 <li class="toctree-l1"><a class="reference internal" href="welcome.html">Welcome!</a></li>
 <li class="toctree-l1"><a class="reference internal" href="aws/boot.html">Start an Amazon Web Services computer:</a></li>
@@ -97,7 +95,7 @@
 <li class="toctree-l1"><a class="reference internal" href="circos_tutorial.html">Using and Installing Circos</a></li>
 <li class="toctree-l1"><a class="reference internal" href="workflow.html">Workflow and repeatability discussion</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DATA.html">Data</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Building this site on your own</a></li>
+<li class="toctree-l1"><a class="reference internal" href="INSTALL.html">Building this site on your own</a></li>
 <li class="toctree-l1"><a class="reference internal" href="README.html">2017 / September / Environmental Metagenomics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="day2-install.html">Day 2 - installation instructions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="kmer_trimming.html">K-mer Spectral Error Trimming</a></li>
@@ -114,7 +112,7 @@
   <ul class="dropdown-menu localtoc"
       role="menu"
       aria-labelledby="dLabelLocalToc"><ul>
-<li><a class="reference internal" href="#">Building this site on your own</a></li>
+<li><a class="reference internal" href="#">Assembly with metaSPAdes</a></li>
 </ul>
 </ul>
 </li>
@@ -123,14 +121,6 @@
             
               
                 
-  <li>
-    <a href="DATA.html" title="Previous Chapter: Data"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Data</span>
-    </a>
-  </li>
-  <li>
-    <a href="README.html" title="Next Chapter: 2017 / September / Environmental Metagenomics"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">2017 / Septem... &raquo;</span>
-    </a>
-  </li>
               
             
             
@@ -138,7 +128,7 @@
             
               <li class="hidden-sm">
 <div id="sourcelink">
-  <a href="_sources/INSTALL.txt"
+  <a href="_sources/assemble-metaspades.txt"
      rel="nofollow">Source</a>
 </div></li>
             
@@ -164,25 +154,34 @@
     <div class="col-md-12 content">
       
   
-  <div class="section" id="building-this-site-on-your-own">
-<span id="building-this-site-on-your-own"></span><h1>Building this site on your own<a class="headerlink" href="#building-this-site-on-your-own" title="Permalink to this headline">¶</a></h1>
-<ol>
-<li><p class="first">Make a virtualenv:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span> python -m virtualenv ../build
- . ../build/bin/activate
+  <div class="section" id="assembly-with-metaspades">
+<span id="assembly-with-metaspades"></span><h1>Assembly with metaSPAdes<a class="headerlink" href="#assembly-with-metaspades" title="Permalink to this headline">¶</a></h1>
+<p>Here are the instructions for assembling the metagenomic data with a different assembler. Here we are showing <a class="reference external" href="https://www.ncbi.nlm.nih.gov/pubmed/28298430">metaSPAdes</a>, one of the  assembler options highlighted in the <a class="reference external" href="https://www.biorxiv.org/content/early/2017/06/12/099127">CAMI</a> paper.</p>
+<p>metaSPAdes takes longer than MEGAHIT to run the assembly, so we will not be running it during the course. Rather it is available for download <a class="reference external" href="LINK">here</a>. If you are interested in running the assembly yourself, however, please see below.</p>
+<p>Install metaSPAdes:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>wget http://cab.spbu.ru/files/release3.10.1/SPAdes-3.10.1-Linux.tar.gz
+tar -xzf SPAdes-3.10.1-Linux.tar.gz
+export PATH=$PATH:~/SPAdes-3.10.1-Linux/bin/
 </pre></div>
 </div>
-</li>
-<li><p class="first">Install the requirements:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span> pip install -r requirements.txt
+<p>Concatenate the two sets of reads:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>cd ~/data
+for x in *gz
+do
+  gunzip $x
+done
+
+cat *fq &gt; coassembly.fq
+
+cd ~
+mkdir assembly-spades
+cd assembly-spades
 </pre></div>
 </div>
-</li>
-<li><p class="first">Run <code class="docutils literal"><span class="pre">make</span></code></p>
-</li>
-<li><p class="first">Look at the <code class="docutils literal"><span class="pre">html/</span></code> directory.</p>
-</li>
-</ol>
+<p>And assemble with metaSPAdes:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>metaspades.py --12 ~/data/coassembly.fq -o metaS-assembly
+</pre></div>
+</div>
 </div>
 
 

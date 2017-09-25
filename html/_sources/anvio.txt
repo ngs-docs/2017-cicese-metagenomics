@@ -1,6 +1,4 @@
-# Anvi'o
-
-## Using Anvi'o to Knit Everything Together
+# Using Anvi'o to Knit Everything Together
 Now we are going bring it all together and visuzlize our assembly with [Anvi'o](http://merenlab.org/software/anvio/). Anvi'o is a powerful and extensible tool that might be easily applied to pan-genomic analysis as well as metagenomic analysis. The anvi'o group has a series of fantstic online tutorials, including one on [metagenomic analysis](http://merenlab.org/2016/06/22/anvio-tutorial-v2/). They also run workshops periodically ([schedule here](http://merenlab.org/2016/08/18/events/)) that throughly cover the use of the software.
 
 Today, we are adapting their tutorial on metagenomic analysis to work with the subset dataset that we have.
@@ -167,8 +165,7 @@ anvi-merge *ANVIO_PROFILE/PROFILE.db -o MERGED-SAMPLES -c anvio-contigs.db --enf
 
 Now we can visualize our data!
 ```
-anvi-interactive -p MERGED-SAMPLES/PROFILE.db
--c anvio-contigs.db
+anvi-interactive -p MERGED-SAMPLES/PROFILE.db -c anvio-contigs.db
 ```
 
 ## Identifing and refining genome bins
@@ -183,8 +180,7 @@ Take a look at the output in `SAMPLES-SUMMARY`. What does it report?
 Now you can visuzlize those data in the anvi'o style by simply adding the -C flag to the previous anvi-interactive command:
 
 ```
-anvi-interactive -p MERGED-SAMPLES/PROFILE.db
--c anvio-contigs.db -C CONCOCT
+anvi-interactive -p MERGED-SAMPLES/PROFILE.db -c anvio-contigs.db -C CONCOCT
 ```
 
 Now, we can actually refine the genome bins using anvi'o. This allows us to use human intutition and pattern recognition to better identify contigs that should co-occur.
@@ -192,3 +188,9 @@ Now, we can actually refine the genome bins using anvi'o. This allows us to use 
 ```
  anvi-refine -p MERGED-SAMPLES/PROFILE.db -c anvio-contigs.db -b Bin_4 -C CONCOCT
 ```
+
+Finally, it is time to interact with the anvi'o interface. [Here](files/interacting-with-anvio.pdf) are some screenshots to help guide you in your quest. 
+
+---
+
+And of course a big thank you to [Meren](http://merenlab.org/people/) for providing us with extra materials to help create this tutorial! 

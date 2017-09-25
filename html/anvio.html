@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Anvi’o &mdash; 2017-dibsi-metagenomics 1.0 documentation</title>
+    <title>Using Anvi’o to Knit Everything Together &mdash; 2017-cicese-metagenomics 1.0 documentation</title>
     
     <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -31,7 +31,7 @@
     <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
     <script type="text/javascript" src="_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
-    <link rel="top" title="2017-dibsi-metagenomics 1.0 documentation" href="toc.html" />
+    <link rel="top" title="2017-cicese-metagenomics 1.0 documentation" href="toc.html" />
     <link rel="next" title="Using and Installing Circos" href="circos_tutorial.html" />
     <link rel="prev" title="Slicing and dicing with k-mers" href="slice.html" />
 
@@ -59,7 +59,7 @@
           <span class="icon-bar"></span>
         </button>
         <a class="navbar-brand" href="toc.html">
-          2017-dibsi-metagenomics</a>
+          2017-cicese-metagenomics</a>
         <span class="navbar-text navbar-version pull-left"><b>1.0</b></span>
       </div>
 
@@ -76,9 +76,9 @@
   <ul class="dropdown-menu globaltoc"
       role="menu"
       aria-labelledby="dLabelGlobalToc"><ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="index.html">2017 DIBSI Metagenomics Workshop at UC Davis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Environmental Metagenomics Workshop</a></li>
 <li class="toctree-l1"><a class="reference internal" href="welcome.html">Welcome!</a></li>
-<li class="toctree-l1"><a class="reference internal" href="jetstream/boot.html">Booting a Jetstream Computer Instance for your use!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aws/boot.html">Start an Amazon Web Services computer:</a></li>
 <li class="toctree-l1"><a class="reference internal" href="command-line.html">Intro to Shell Lesson</a></li>
 <li class="toctree-l1"><a class="reference internal" href="command-line.html#the-shell">The Shell</a></li>
 <li class="toctree-l1"><a class="reference internal" href="command-line.html#for-future-reference">For Future Reference</a></li>
@@ -93,12 +93,12 @@
 <li class="toctree-l1"><a class="reference internal" href="salmon_tutorial.html">Gene Abundance Estimation with Salmon</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mapping.html">Mapping</a></li>
 <li class="toctree-l1"><a class="reference internal" href="slice.html">Slicing and dicing with k-mers</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Anvi&#8217;o</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Using Anvi&#8217;o to Knit Everything Together</a></li>
 <li class="toctree-l1"><a class="reference internal" href="circos_tutorial.html">Using and Installing Circos</a></li>
 <li class="toctree-l1"><a class="reference internal" href="workflow.html">Workflow and repeatability discussion</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DATA.html">Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="INSTALL.html">Building this site on your own</a></li>
-<li class="toctree-l1"><a class="reference internal" href="README.html">2017 / April / Metagenomics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="README.html">2017 / September / Environmental Metagenomics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="day2-install.html">Day 2 - installation instructions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="kmer_trimming.html">K-mer Spectral Error Trimming</a></li>
 </ul>
@@ -114,8 +114,7 @@
   <ul class="dropdown-menu localtoc"
       role="menu"
       aria-labelledby="dLabelLocalToc"><ul>
-<li><a class="reference internal" href="#">Anvi&#8217;o</a><ul>
-<li><a class="reference internal" href="#using-anvi-o-to-knit-everything-together">Using Anvi&#8217;o to Knit Everything Together</a></li>
+<li><a class="reference internal" href="#">Using Anvi&#8217;o to Knit Everything Together</a><ul>
 <li><a class="reference internal" href="#installing-anvi-o-and-a-few-other-programs">Installing anvi&#8217;o (and a few other programs)</a></li>
 <li><a class="reference internal" href="#getting-it-into-anvi-o-format">Getting it into Anvi&#8217;o format</a></li>
 <li><a class="reference internal" href="#mapping-data">Mapping data</a></li>
@@ -172,10 +171,8 @@
     <div class="col-md-12 content">
       
   
-  <div class="section" id="anvi-o">
-<span id="anvi-o"></span><h1>Anvi&#8217;o<a class="headerlink" href="#anvi-o" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="using-anvi-o-to-knit-everything-together">
-<span id="using-anvi-o-to-knit-everything-together"></span><h2>Using Anvi&#8217;o to Knit Everything Together<a class="headerlink" href="#using-anvi-o-to-knit-everything-together" title="Permalink to this headline">¶</a></h2>
+  <div class="section" id="using-anvi-o-to-knit-everything-together">
+<span id="using-anvi-o-to-knit-everything-together"></span><h1>Using Anvi&#8217;o to Knit Everything Together<a class="headerlink" href="#using-anvi-o-to-knit-everything-together" title="Permalink to this headline">¶</a></h1>
 <p>Now we are going bring it all together and visuzlize our assembly with <a class="reference external" href="http://merenlab.org/software/anvio/">Anvi&#8217;o</a>. Anvi&#8217;o is a powerful and extensible tool that might be easily applied to pan-genomic analysis as well as metagenomic analysis. The anvi&#8217;o group has a series of fantstic online tutorials, including one on <a class="reference external" href="http://merenlab.org/2016/06/22/anvio-tutorial-v2/">metagenomic analysis</a>. They also run workshops periodically (<a class="reference external" href="http://merenlab.org/2016/08/18/events/">schedule here</a>) that throughly cover the use of the software.</p>
 <p>Today, we are adapting their tutorial on metagenomic analysis to work with the subset dataset that we have.</p>
 <p>The goals of this tutorial are to:</p>
@@ -186,7 +183,6 @@
 <li>Become familiar with the anvi&#8217;o interface</li>
 <li>Learn how to refine and visuzlize genome bins with anvi&#8217;o</li>
 </ul>
-</div>
 <div class="section" id="installing-anvi-o-and-a-few-other-programs">
 <span id="installing-anvi-o-and-a-few-other-programs"></span><h2>Installing anvi&#8217;o (and a few other programs)<a class="headerlink" href="#installing-anvi-o-and-a-few-other-programs" title="Permalink to this headline">¶</a></h2>
 <p>The first thing we need to do is install anvi&#8217;o. To install anvi&#8217;o we will be be using <a class="reference external" href="https://www.continuum.io/what-is-anaconda">Anaconda</a>.</p>
@@ -305,8 +301,7 @@ done
 </pre></div>
 </div>
 <p>Now we can visualize our data!</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>anvi-interactive -p MERGED-SAMPLES/PROFILE.db
--c anvio-contigs.db
+<div class="highlight-python"><div class="highlight"><pre><span></span>anvi-interactive -p MERGED-SAMPLES/PROFILE.db -c anvio-contigs.db
 </pre></div>
 </div>
 </div>
@@ -318,14 +313,16 @@ done
 </div>
 <p>Take a look at the output in <code class="docutils literal"><span class="pre">SAMPLES-SUMMARY</span></code>. What does it report?</p>
 <p>Now you can visuzlize those data in the anvi&#8217;o style by simply adding the -C flag to the previous anvi-interactive command:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>anvi-interactive -p MERGED-SAMPLES/PROFILE.db
--c anvio-contigs.db -C CONCOCT
+<div class="highlight-python"><div class="highlight"><pre><span></span>anvi-interactive -p MERGED-SAMPLES/PROFILE.db -c anvio-contigs.db -C CONCOCT
 </pre></div>
 </div>
 <p>Now, we can actually refine the genome bins using anvi&#8217;o. This allows us to use human intutition and pattern recognition to better identify contigs that should co-occur.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span> anvi-refine -p MERGED-SAMPLES/PROFILE.db -c anvio-contigs.db -b Bin_4 -C CONCOCT
 </pre></div>
 </div>
+<p>Finally, it is time to interact with the anvi&#8217;o interface. <a class="reference external" href="files/interacting-with-anvio.pdf">Here</a> are some screenshots to help guide you in your quest.</p>
+<hr class="docutils" />
+<p>And of course a big thank you to <a class="reference external" href="http://merenlab.org/people/">Meren</a> for providing us with extra materials to help create this tutorial!</p>
 </div>
 </div>
 

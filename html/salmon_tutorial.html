@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Gene Abundance Estimation with Salmon &mdash; 2017-dibsi-metagenomics 1.0 documentation</title>
+    <title>Gene Abundance Estimation with Salmon &mdash; 2017-cicese-metagenomics 1.0 documentation</title>
     
     <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -31,7 +31,7 @@
     <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
     <script type="text/javascript" src="_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
-    <link rel="top" title="2017-dibsi-metagenomics 1.0 documentation" href="toc.html" />
+    <link rel="top" title="2017-cicese-metagenomics 1.0 documentation" href="toc.html" />
     <link rel="next" title="Mapping" href="mapping.html" />
     <link rel="prev" title="Binning a Metagenomic Assembly" href="binning.html" />
 
@@ -59,7 +59,7 @@
           <span class="icon-bar"></span>
         </button>
         <a class="navbar-brand" href="toc.html">
-          2017-dibsi-metagenomics</a>
+          2017-cicese-metagenomics</a>
         <span class="navbar-text navbar-version pull-left"><b>1.0</b></span>
       </div>
 
@@ -76,9 +76,9 @@
   <ul class="dropdown-menu globaltoc"
       role="menu"
       aria-labelledby="dLabelGlobalToc"><ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="index.html">2017 DIBSI Metagenomics Workshop at UC Davis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Environmental Metagenomics Workshop</a></li>
 <li class="toctree-l1"><a class="reference internal" href="welcome.html">Welcome!</a></li>
-<li class="toctree-l1"><a class="reference internal" href="jetstream/boot.html">Booting a Jetstream Computer Instance for your use!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aws/boot.html">Start an Amazon Web Services computer:</a></li>
 <li class="toctree-l1"><a class="reference internal" href="command-line.html">Intro to Shell Lesson</a></li>
 <li class="toctree-l1"><a class="reference internal" href="command-line.html#the-shell">The Shell</a></li>
 <li class="toctree-l1"><a class="reference internal" href="command-line.html#for-future-reference">For Future Reference</a></li>
@@ -93,12 +93,12 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="">Gene Abundance Estimation with Salmon</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mapping.html">Mapping</a></li>
 <li class="toctree-l1"><a class="reference internal" href="slice.html">Slicing and dicing with k-mers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="anvio.html">Anvi&#8217;o</a></li>
+<li class="toctree-l1"><a class="reference internal" href="anvio.html">Using Anvi&#8217;o to Knit Everything Together</a></li>
 <li class="toctree-l1"><a class="reference internal" href="circos_tutorial.html">Using and Installing Circos</a></li>
 <li class="toctree-l1"><a class="reference internal" href="workflow.html">Workflow and repeatability discussion</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DATA.html">Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="INSTALL.html">Building this site on your own</a></li>
-<li class="toctree-l1"><a class="reference internal" href="README.html">2017 / April / Metagenomics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="README.html">2017 / September / Environmental Metagenomics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="day2-install.html">Day 2 - installation instructions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="kmer_trimming.html">K-mer Spectral Error Trimming</a></li>
 </ul>
@@ -189,6 +189,8 @@
 <h2>Installing Salmon<a class="headerlink" href="#installing-salmon" title="Permalink to this headline">¶</a></h2>
 <p>Download and extract the latest version of Salmon and add it to your PATH:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span>cd
+. ~/py3/bin/activate
+pip install pandas
 wget https://github.com/COMBINE-lab/salmon/releases/download/v0.7.2/Salmon-0.7.2_linux_x86_64.tar.gz
 tar -xvzf Salmon-0.7.2_linux_x86_64.tar.gz
 cd Salmon-0.7.2_linux_x86_64
@@ -198,18 +200,6 @@ export PATH=$PATH:$HOME/Salmon-0.7.2_linux_x86_64/bin
 </div>
 <div class="section" id="running-salmon">
 <h2>Running Salmon<a class="headerlink" href="#running-salmon" title="Permalink to this headline">¶</a></h2>
-<p>Go to the data directory and download the prokka annotated sequences, assembled metagenome, and fastq files:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>cd ~
-mkdir -p data
-cd data
-
-curl -L -O https://s3-us-west-1.amazonaws.com/dib-training.ucdavis.edu/metagenomics-scripps-2016-10-12/SRR1976948.abundtrim.subset.pe.fq.gz
-curl -L -O https://s3-us-west-1.amazonaws.com/dib-training.ucdavis.edu/metagenomics-scripps-2016-10-12/SRR1977249.abundtrim.subset.pe.fq.gz
-</pre></div>
-</div>
-<p>#  This file was created this morning, inside the annotation/prokka_annotation folder
-#  curl -L -O <a class="reference external" href="https://s3-us-west-1.amazonaws.com/dib-training.ucdavis.edu/metagenomics-scripps-2016-10-12/prokka_annotation_assembly.tar.gz">https://s3-us-west-1.amazonaws.com/dib-training.ucdavis.edu/metagenomics-scripps-2016-10-12/prokka_annotation_assembly.tar.gz</a>
-#  tar -xvzf prokka_annotation_assembly.tar.gz</p>
 <p>Make a new directory for the quantification of data with Salmon:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span>mkdir ~/quant
 cd ~/quant
@@ -217,6 +207,7 @@ cd ~/quant
 </div>
 <p>Grab the nucleotide (<code class="docutils literal"><span class="pre">*ffn</span></code>) predicted protein regions from Prokka and link them here. Also grab the trimmed sequence data (<code class="docutils literal"><span class="pre">*fq</span></code>)</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span>ln -fs ~/annotation/prokka_annotation/metagG.ffn .
+ln -fs ~/annotation/prokka_annotation/metagG.gff .
 ln -fs ~/data/*.abundtrim.subset.pe.fq.gz .
 </pre></div>
 </div>
@@ -269,31 +260,40 @@ salmon quant -i transcript_index --libType IU \
 </pre></div>
 </div>
 <p>This will give you a bunch of .counts files, which are processed from the quant.sf files and named for the directory from which they emanate.</p>
+<p>Now, we can create one file:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>for file in *counts
+do
+   name=${file%%.*}
+   sed -e &quot;s/count/$name/g&quot; $file &gt; tmp
+   mv tmp $x
+done
+paste *counts |cut -f 1,2,4 &gt; Combined-counts.tab
+</pre></div>
+</div>
 </div>
 <div class="section" id="plotting-the-results">
 <h2>Plotting the results<a class="headerlink" href="#plotting-the-results" title="Permalink to this headline">¶</a></h2>
-<p>In Jupyter Notebook, open a new Python3 notebook and enter:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>%matplotlib inline
-import numpy
-from pylab import *
+<p>In Jupyter Notebook, open a new Python3 notebook and name it. Then, into the first cell enter:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>import pandas as pd
+import matplotlib.pyplot as plt
+%matplotlib inline
 </pre></div>
 </div>
-<p>In another cell:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>cd ~/data/quant
+<p>In another cell (to make sure we are in the correct directory) enter:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>cd ~/quant
 </pre></div>
 </div>
-<p>In another cell:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">counts1</span> <span class="o">=</span> <span class="p">[</span> <span class="n">x</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;SRR1976948.quant.counts&#39;</span><span class="p">)]</span>
-<span class="n">counts1</span> <span class="o">=</span> <span class="p">[</span> <span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">counts1</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="p">]</span>
-<span class="n">counts1</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">counts1</span><span class="p">)</span>
-
-<span class="n">counts2</span> <span class="o">=</span> <span class="p">[</span> <span class="n">x</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;SRR1977249.quant.counts&#39;</span><span class="p">)]</span>
-<span class="n">counts2</span> <span class="o">=</span> <span class="p">[</span> <span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">counts2</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="p">]</span>
-<span class="n">counts2</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">counts2</span><span class="p">)</span>
-
-<span class="n">plot</span><span class="p">(</span><span class="n">counts1</span><span class="p">,</span> <span class="n">counts2</span><span class="p">,</span> <span class="s1">&#39;*&#39;</span><span class="p">)</span>
+<p>Now, we can read our data into a pandas dataframe. This is similar to dataframes in R or an Excel spreadsheet. Paste the following into a new cell.:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">count_df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_table</span><span class="p">(</span><span class="s1">&#39;Combined-counts.tab&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="s1">&#39;transcript&#39;</span><span class="p">)</span>
+<span class="n">count_df</span>
 </pre></div>
 </div>
+<p>And, finally we can plot it!:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1">#set up a figure and axis handle</span>
+<span class="n">count_df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;scatter&#39;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;SRR1976948&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;SRR1977249&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span> <span class="c1">#plot scatter plot</span>
+</pre></div>
+</div>
+<p>The wonderful thing about Jupyter notebooks is that you can go back and modify a plot really easily! Let&#8217;s try a few modifications with the above plot.</p>
 </div>
 <div class="section" id="references">
 <h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>

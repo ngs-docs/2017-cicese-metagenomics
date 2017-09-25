@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Start an Amazon Web Services computer: &mdash; 2017-dibsi-metagenomics 1.0 documentation</title>
+    <title>Start an Amazon Web Services computer: &mdash; 2017-cicese-metagenomics 1.0 documentation</title>
     
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -31,7 +31,9 @@
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
-    <link rel="top" title="2017-dibsi-metagenomics 1.0 documentation" href="../toc.html" />
+    <link rel="top" title="2017-cicese-metagenomics 1.0 documentation" href="../toc.html" />
+    <link rel="next" title="Intro to Shell Lesson" href="../command-line.html" />
+    <link rel="prev" title="Welcome!" href="../welcome.html" />
 
 
 <style type="text/css">
@@ -57,7 +59,7 @@
           <span class="icon-bar"></span>
         </button>
         <a class="navbar-brand" href="../toc.html">
-          2017-dibsi-metagenomics</a>
+          2017-cicese-metagenomics</a>
         <span class="navbar-text navbar-version pull-left"><b>1.0</b></span>
       </div>
 
@@ -73,22 +75,30 @@
      href="../toc.html">Site <b class="caret"></b></a>
   <ul class="dropdown-menu globaltoc"
       role="menu"
-      aria-labelledby="dLabelGlobalToc"><ul>
-<li class="toctree-l1"><a class="reference internal" href="../index.html">2017 Metagenomics workshop at UC Santa Cruz</a></li>
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Environmental Metagenomics Workshop</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../welcome.html">Welcome!</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../jetstream/boot.html">Booting a Jetstream Computer Instance for your use!</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Start an Amazon Web Services computer:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../command-line.html">Intro to Shell Lesson</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../command-line.html#the-shell">The Shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../command-line.html#for-future-reference">For Future Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../command-line.html#finding-files">Finding files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../running-command-line-blast.html">Running command-line BLAST</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../quality.html">Short read quality and trimming</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../assemble.html">Run the MEGAHIT assembler</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../prokka_tutorial.html">Annotation with Prokka</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../binning.html">Mapping and Binning a Metagenome Assembly</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sourmash.html">A sourmash tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sourmash.html#k-mers-k-mer-specificity-and-comparing-samples-with-k-mer-jaccard-distance">K-mers, k-mer specificity, and comparing samples with k-mer Jaccard distance.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../binning.html">Binning a Metagenomic Assembly</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../salmon_tutorial.html">Gene Abundance Estimation with Salmon</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../mapping.html">Mapping</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../slice.html">Slicing and dicing with k-mers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../anvio.html">Using Anvi&#8217;o to Knit Everything Together</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../circos_tutorial.html">Using and Installing Circos</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow and repeatability discussion</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../DATA.html">Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../INSTALL.html">Building this site on your own</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../README.html">2017 / April / Metagenomics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../README.html">2017 / September / Environmental Metagenomics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../day2-install.html">Day 2 - installation instructions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../kmer_trimming.html">K-mer Spectral Error Trimming</a></li>
 </ul>
@@ -130,6 +140,14 @@
             
               
                 
+  <li>
+    <a href="../welcome.html" title="Previous Chapter: Welcome!"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Welcome!</span>
+    </a>
+  </li>
+  <li>
+    <a href="../command-line.html" title="Next Chapter: Intro to Shell Lesson"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Intro to Shel... &raquo;</span>
+    </a>
+  </li>
               
             
             
@@ -173,7 +191,7 @@ sign in to the console).</p>
 <div class="section" id="select-ec2-virtual-servers-in-the-cloud">
 <h2>0. Select &#8220;EC2 - virtual servers in the cloud&#8221;<a class="headerlink" href="#select-ec2-virtual-servers-in-the-cloud" title="Permalink to this headline">¶</a></h2>
 <a class=""
-               data-lightbox="group-e1541acc-a936-4505-b560-4387c2e06594"
+               data-lightbox="group-34077c40-6339-4da4-92fb-a1b5e4cd21a6"
                href="../_images/boot-01.png"
                title=""
                data-title=""
@@ -186,7 +204,7 @@ sign in to the console).</p>
 <div class="section" id="switch-to-zone-us-west-n-california">
 <h2>1. Switch to zone US West (N California)<a class="headerlink" href="#switch-to-zone-us-west-n-california" title="Permalink to this headline">¶</a></h2>
 <a class=""
-               data-lightbox="group-3d465a95-17ea-4435-9a78-404b220b7e4b"
+               data-lightbox="group-0f7f763b-f3d0-481f-aea1-abfe4b3ffa4c"
                href="../_images/boot-11.png"
                title=""
                data-title=""
@@ -202,7 +220,7 @@ sign in to the console).</p>
 <div class="section" id="select-community-amis">
 <h2>3. Select &#8220;Community AMIs.&#8221;<a class="headerlink" href="#select-community-amis" title="Permalink to this headline">¶</a></h2>
 <a class=""
-               data-lightbox="group-2f4db6e3-cf46-4f0a-9f54-0bfd50f7287f"
+               data-lightbox="group-34621b7e-feda-4d3d-8887-3080369a58ce"
                href="../_images/boot-21.png"
                title=""
                data-title=""
@@ -216,7 +234,7 @@ sign in to the console).</p>
 <h2>4. Search for ami-05384865 (ubuntu-wily-15.10-amd64-server)<a class="headerlink" href="#search-for-ami-05384865-ubuntu-wily-15-10-amd64-server" title="Permalink to this headline">¶</a></h2>
 <p>Use ami-05384865.</p>
 <a class=""
-               data-lightbox="group-5189296f-69d9-4cc3-92d0-81548b06f191"
+               data-lightbox="group-1d015321-6d64-43f1-92ee-c48a82b6105c"
                href="../_images/boot-31.png"
                title=""
                data-title=""
@@ -232,7 +250,7 @@ sign in to the console).</p>
 <div class="section" id="choose-m4-xlarge">
 <h2>6. Choose m4.xlarge.<a class="headerlink" href="#choose-m4-xlarge" title="Permalink to this headline">¶</a></h2>
 <a class=""
-               data-lightbox="group-bb0cd28c-e5bd-4409-be1a-0b4748d0ad58"
+               data-lightbox="group-60de322e-41dc-499d-b787-02a090455af9"
                href="../_images/boot-41.png"
                title=""
                data-title=""
@@ -248,7 +266,7 @@ sign in to the console).</p>
 <div class="section" id="click-launch">
 <h2>8. Click &#8220;Launch.&#8221;<a class="headerlink" href="#click-launch" title="Permalink to this headline">¶</a></h2>
 <a class=""
-               data-lightbox="group-3d38a75a-cb5c-43ab-854b-538860253b49"
+               data-lightbox="group-59fb0944-3a37-4f2c-9b52-1c6608dfa2d3"
                href="../_images/boot-51.png"
                title=""
                data-title=""
@@ -266,7 +284,7 @@ existing key pair&#8217; here.  But you can always create a new key pair if
 you want, too.</p>
 <p>If you have an existing key pair, go to step 12, &#8220;Launch instance.&#8221;</p>
 <a class=""
-               data-lightbox="group-6673225f-29cf-40a8-b3bc-d5a1a4b59317"
+               data-lightbox="group-c9246076-cfd1-420b-adf3-1aa0d4fda303"
                href="../_images/boot-61.png"
                title=""
                data-title=""
@@ -288,7 +306,7 @@ you want, too.</p>
 <div class="section" id="select-view-instances-lower-right">
 <h2>13. Select View instances (lower right)<a class="headerlink" href="#select-view-instances-lower-right" title="Permalink to this headline">¶</a></h2>
 <a class=""
-               data-lightbox="group-2f2f0675-fb25-4fdf-b808-7ede85f4d597"
+               data-lightbox="group-fb5e5768-55aa-4588-88d0-28429a803b98"
                href="../_images/boot-81.png"
                title=""
                data-title=""
@@ -303,7 +321,7 @@ you want, too.</p>
 <p>Note that for your instance name you can use either &#8220;Public IP&#8221; or
 &#8220;Public DNS&#8221;. Here, the machine only has a public IP.</p>
 <a class=""
-               data-lightbox="group-79ce1c30-97fc-4518-8c86-246b14c6aee3"
+               data-lightbox="group-2fed9895-6c29-4ff1-b073-5baf40057250"
                href="../_images/boot-91.png"
                title=""
                data-title=""

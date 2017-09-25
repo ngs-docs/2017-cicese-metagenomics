@@ -119,7 +119,7 @@ Alternative Annotation Tools (if Time Allows or for Homework)
 Kraken is a system for assigning taxonomic labels to short DNA sequences, usually obtained through metagenomic studies. Kraken aims to achieve high sensitivity and high speed by utilizing exact alignments of k-mers and a novel classification algorithm.  See `Kraken Home Page <https://ccb.jhu.edu/software/kraken/>`__ for more information.
 
 Prodigal (Prokaryotic Dynamic Programming Genefinding Algorithm) is a microbial (bacterial and archaeal) gene finding program developed at Oak Ridge National Laboratory and the University of Tennessee. See the `Prodigal home page <http://prodigal.ornl.gov>`__ for more info.
-`Citation<http://denbi-metagenomics-workshop.readthedocs.io/en/latest/geneprediction/index.html>`__
+`Citation <http://denbi-metagenomics-workshop.readthedocs.io/en/latest/geneprediction/index.html>`__
 
 Prodigal is already installed inside the prokka wrapper, but sometimes it is handy to generate a standalone .gff file for annotation.
 
@@ -203,7 +203,7 @@ Example output::
 
 Why use Kraken?
 
-For a simulated metagenome of 100 bp reads in its fastest mode of operation, , Kraken processed over 4 million reads per minute on a single core, over 900 times faster than Megablast and over 11 times faster than the abundance estimation program MetaPhlAn. Kraken's accuracy is comparable with Megablast, with slightly lower sensitivity and very high precision.`Citation<http://denbi-metagenomics-workshop.readthedocs.io/en/latest/classification/kraken.html>`__
+For a simulated metagenome of 100 bp reads in its fastest mode of operation, , Kraken processed over 4 million reads per minute on a single core, over 900 times faster than Megablast and over 11 times faster than the abundance estimation program MetaPhlAn. Kraken's accuracy is comparable with Megablast, with slightly lower sensitivity and very high precision. `Citation <http://denbi-metagenomics-workshop.readthedocs.io/en/latest/classification/kraken.html>`__
 
 However, kraken is only as sensitive as the provided database, so for unusual samples, a custom database needs to be constructed . The accuracy is very sensitive to the quantity of samples in the database.
 
