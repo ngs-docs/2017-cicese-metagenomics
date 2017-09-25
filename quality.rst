@@ -66,6 +66,10 @@ Open a new terminal window and type (filling in the path to your key and the you
 
 When prompted for a password or token enter the toke provided after the jupter notebook & command was run
 
+Now type the following into your bowser
+
+  http://localhost:8888/tree/
+
 Data source
 -----------
 
@@ -90,8 +94,8 @@ Next, let's grab part of the data set::
    cd ~/data
    curl -O -L https://s3-us-west-1.amazonaws.com/dib-training.ucdavis.edu/metagenomics-scripps-2016-10-12/SRR1976948_1.fastq.gz
    curl -O -L https://s3-us-west-1.amazonaws.com/dib-training.ucdavis.edu/metagenomics-scripps-2016-10-12/SRR1976948_2.fastq.gz
-   curl -O -l https://s3-us-west-1.amazonaws.com/dib-training.ucdavis.edu/metagenomics-scripps-2016-10-12/SRR1977249_1.fastq.gz
-   curl -O -l https://s3-us-west-1.amazonaws.com/dib-training.ucdavis.edu/metagenomics-scripps-2016-10-12/SRR1977249_2.fastq.gz
+   curl -O -L https://s3-us-west-1.amazonaws.com/dib-training.ucdavis.edu/metagenomics-scripps-2016-10-12/SRR1977249_1.fastq.gz
+   curl -O -L https://s3-us-west-1.amazonaws.com/dib-training.ucdavis.edu/metagenomics-scripps-2016-10-12/SRR1977249_2.fastq.gz
 
 Let's make sure we downloaded all of our data using md5sum.::
 
@@ -164,7 +168,7 @@ We're going to use `FastQC
 summarize the data. We already installed 'fastqc' on our computer for
 you.
 
-Now, run FastQC on two files::
+Now, run FastQC on these files::
 
    ~/FastQC/fastqc SRR1976948_1.fastq.gz
    ~/FastQC/fastqc SRR1976948_2.fastq.gz
