@@ -117,7 +117,7 @@ sourmash search -k 51 SRR1976948.reads.scaled10k.k51.sig SRR1976948.megahit.scal
 sourmash search -k 51 SRR1976948.reads.scaled10k.k51.sig SRR1976948.spades.scaled10k.k51.sig --containment
 ```
 You should see something like: 
-
+```
 loaded query: SRR1976948.abundtrim.subset.pe... (k=51, DNA)
 loaded 1 signatures and 0 databases total.                                     
 1 matches:
@@ -131,7 +131,7 @@ loaded 1 signatures and 0 databases total.
 similarity   match
 ----------   -----
  47.5%       SRR1976948.spades.abundtrim.subset.pe.assembly.fa
-
+```
 Why are only ~40% of our reads in the genome?
 
 Try the reverse - why is it bigger?
@@ -139,6 +139,7 @@ Try the reverse - why is it bigger?
 ```
 sourmash search -k 51 SRR1976948.megahit.scaled10k.k51.sig SRR1976948.reads.scaled10k.k51.sig --containment
 sourmash search -k 51 SRR1976948.spades.scaled10k.k51.sig SRR1976948.reads.scaled10k.k51.sig  --containment
+```
 ```
 loaded query: SRR1976948.megahit.abundtrim.s... (k=51, DNA)
 loaded 1 signatures and 0 databases total.                                     
@@ -153,6 +154,7 @@ loaded 1 signatures and 0 databases total.
 similarity   match
 ----------   -----
  99.9%       SRR1976948.abundtrim.subset.pe.fq.gz
+ ```
 (...but ~ 99% of our k-mers from the genome are in the reads!?)
 
 This is basically because of sequencing error! Illumina data contains
