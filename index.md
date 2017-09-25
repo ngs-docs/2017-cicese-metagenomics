@@ -13,7 +13,7 @@ We will be using HackMD to take collective notes throughout the course. If you w
 #### Tuesday, Day 1:
 ##### Morning
 * [Logging onto an instance through Amazon Web Services (AWS)](aws/boot.html)
-* [Working on Command Line](command-line.html)
+* [Working on the Command Line](command-line.html)
 
 ##### Lunch
 
