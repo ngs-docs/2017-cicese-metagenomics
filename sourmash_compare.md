@@ -1,4 +1,4 @@
-=================================
+
 Comparing datasets using sourmash
 =================================
 
@@ -199,7 +199,7 @@ Image("Hu_metagenomes.matrix.png")
 
 Here's a PNG version:
 
-![Hu_metagenomes](_static/Hu_metagenomes.dendro.png)
+![Hu_metagenomes](_static/Hu_metagenomes.matrix.png)
 
 What can we do now? 
 - More k-mer exploration 
