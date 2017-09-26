@@ -21,12 +21,12 @@ First, let's install software for short read quality assessment, trimming and py
      samtools zlib1g-dev ncurses-dev python-dev unzip \
      python3.5-dev python3.5-venv make \
      libc6-dev g++ zlib1g-dev
-      
+
    wget -c http://www.bioinformatics.babraham.ac.uk/projects/fastqc/fastqc_v0.11.5.zip
    unzip fastqc_v0.11.5.zip
    cd FastQC
    chmod +x fastqc
-   cd 
+   cd
 
 Now, create a python 3.5 virtual environment and install software within::
 
@@ -46,7 +46,7 @@ Let's also run a Jupyter Notebook. First, configure it a teensy bit
 more securely, and also have it run in the background:
 
   jupyter notebook --generate-config
-  
+
   cat >>~/.jupyter/jupyter_notebook_config.py <<EOF
   c = get_config()
   c.NotebookApp.ip = '*'
@@ -60,7 +60,7 @@ Now, run! ::
 
   jupyter notebook &
 
-Open a new terminal window and type (filling in the path to your key and the your ec2 instance Public DNS 
+Open a new terminal window and type (filling in the path to your key and the your ec2 instance Public DNS
 
   ssh -i ~/xxx.pem -L 8888:localhost:8888 ubuntu@xxx.amazonaws.com
 
@@ -172,7 +172,7 @@ Now, run FastQC on these files::
 
    ~/FastQC/fastqc SRR1976948_1.fastq.gz
    ~/FastQC/fastqc SRR1976948_2.fastq.gz
-   ~/FastQC/fastqc SRR1977249_1.fastq.gz  
+   ~/FastQC/fastqc SRR1977249_1.fastq.gz
    ~/FastQC/fastqc SRR1977249_2.fastq.gz
 
 Now type 'ls'::
@@ -220,18 +220,18 @@ The first thing we'll need are the adapters to trim off::
 
 Now, to run Trimmomatic::
    for filename in *_1.fastq.gz
-   do 
-   
+   do
+
    #Use the program basename to remove _1.fastq.gz to generate the base
    base=$(basename $filename _1.fastq.gz)
    echo $base
-	
+
    TrimmomaticPE ${base}_1.fastq.gz \
                  ${base}_2.fastq.gz \
         ${base}_1.qc.fq.gz ${base}_s1_se \
         ${base}_2.qc.fq.gz ${base}_s2_se \
         ILLUMINACLIP:TruSeq2-PE.fa:2:40:15 \
-        LEADING:2 TRAILING:2 \                            
+        LEADING:2 TRAILING:2 \
         SLIDINGWINDOW:4:2 \
         MINLEN:25
    done
@@ -241,8 +241,8 @@ You should see output that looks like this::
    ...
    Input Read Pairs: 1000000 Both Surviving: 885734 (88.57%) Forward Only Surviving: 114262 (11.43%) Reverse Only Surviving: 4 (0.00%) Dropped: 0 (0.00%)
    TrimmomaticPE: Completed successfully
-   
-   ...	
+
+   ...
    Input Read Pairs: 1000000 Both Surviving: 918983 (91.90%) Forward Only Surviving: 81012 (8.10%) Reverse Only Surviving: 4 (0.00%) Dropped: 1 (0.00%)
    TrimmomaticPE: Completed successfully
 
@@ -272,10 +272,10 @@ Run FastQC again on the trimmed files::
 
    ~/FastQC/fastqc SRR1976948_1.qc.fq.gz
    ~/FastQC/fastqc SRR1976948_2.qc.fq.gz
-   ~/FastQC/fastqc SRR1977249_1.qc.fq.gz 
+   ~/FastQC/fastqc SRR1977249_1.qc.fq.gz
    ~/FastQC/fastqc SRR1977249_2.qc.fq.gz
 
-And now view my copies of these files: 
+And now view my copies of these files:
 
 * `SRR1976948_1.qc_fastqc/fastqc_report.html <http://2016-metagenomics-sio.readthedocs.io/en/work/_static/SRR1976948_1.qc_fastqc/fastqc_report.html>`__
 * `SRR1976948_2.qc_fastqc/fastqc_report.html <http://2016-metagenomics-sio.readthedocs.io/en/work/_static/SRR1976948_2.qc_fastqc/fastqc_report.html>`__
@@ -312,7 +312,7 @@ And now you should see output that looks like this::
    [INFO   ]         multiqc : MultiQC complete
 
 Now we can view the output file using Jupyter Notebook.
-   
+
 Questions:
 
 * is the quality trimmed data "better" than before?
