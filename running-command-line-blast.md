@@ -25,10 +25,11 @@ language and NCBI BLAST+.
 
 First! We need some data.  Let's grab the mouse and zebrafish RefSeq
 protein data sets from NCBI, and put them in our home directory. If you've just logged
-in, you should be there already, but if you're unsure, just run `cd` and hit enter. Now,
-we'll use `curl` to download the files:
+in, you should be there already, but to be sure, we'll start by running `cd`.
+Now, we'll use `curl` to download the files:
 
 ```
+cd
 curl -O ftp://ftp.ncbi.nih.gov/refseq/M_musculus/mRNA_Prot/mouse.1.protein.faa.gz
 curl -O ftp://ftp.ncbi.nih.gov/refseq/M_musculus/mRNA_Prot/mouse.2.protein.faa.gz
 curl -O ftp://ftp.ncbi.nih.gov/refseq/M_musculus/mRNA_Prot/mouse.3.protein.faa.gz
@@ -48,19 +49,11 @@ ls -l
 should show you:
 
 ```
-total 29056
-drwxr-xr-x 2 titus titus     4096 May  5 08:26 Desktop
-drwxr-xr-x 2 titus titus     4096 Jun 14 18:03 Documents
-drwxr-xr-x 2 titus titus     4096 Jun 14 18:03 Downloads
--rw-rw-r-- 1 titus titus  3610407 Jun 14 18:11 mouse.1.protein.faa.gz
--rw-rw-r-- 1 titus titus  6080985 Jun 14 18:11 mouse.2.protein.faa.gz
--rw-rw-r-- 1 titus titus  7520591 Jun 14 18:11 mouse.3.protein.faa.gz
-drwxr-xr-x 2 titus titus     4096 Jun 14 18:03 Music
-drwxr-xr-x 2 titus titus     4096 Jun 14 18:03 Pictures
-drwxr-xr-x 2 titus titus     4096 Jun 14 18:03 Public
-drwxr-xr-x 2 titus titus     4096 Jun 14 18:03 Templates
-drwxr-xr-x 2 titus titus     4096 Jun 14 18:03 Videos
--rw-rw-r-- 1 titus titus 12500932 Jun 14 18:11 zebrafish.1.protein.faa.gz
+total 21220
+-rw-rw-r-- 1 ubuntu ubuntu  1961399 Sep 25 13:24 mouse.1.protein.faa.gz
+-rw-rw-r-- 1 ubuntu ubuntu  2612053 Sep 25 13:24 mouse.2.protein.faa.gz
+-rw-rw-r-- 1 ubuntu ubuntu  3138707 Sep 25 13:24 mouse.3.protein.faa.gz
+-rw-rw-r-- 1 ubuntu ubuntu 14008886 Sep 25 13:24 zebrafish.1.protein.faa.gz
 ```
 
 All four of the files are FASTA protein files (that's what the .faa
@@ -189,3 +182,8 @@ Other topics to discuss:
 
 * when you shut down, you lose all your data
 * what computer(s) is this all happening on?
+
+-----
+
+Next: [Comparing data sets with sourmash](sourmash_compare.html)
+

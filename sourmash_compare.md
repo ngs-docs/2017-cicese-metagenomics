@@ -74,10 +74,11 @@ pip install -U https://github.com/dib-lab/sourmash/archive/master.zip
 Download some reads and the assembled metagenome:
 
 ```
+mkdir ~/work
 cd ~/work
-curl -O -L https://s3-us-west-1.amazonaws.com/dib-training.ucdavis.edu/metagenomics-scripps-2016-10-12/SRR1976948.abundtrim.subset.pe.fq.gz
-curl -L -o SRR1976948.megahit.abundtrim.subset.pe.assembly.fa https://files.osf.io/v1/resources/b5feu/providers/osfstorage/59c8baca9ad5a10260b5fe1f?action=download&version=1&direct
-curl -L -o SRR1976948.spades.abundtrim.subset.pe.assembly.fa https://files.osf.io/v1/resources/b5feu/providers/osfstorage/59c8bad9b83f69025c69de43?action=download&version=1&direct
+curl -O -o SRR1976948.abundtrim.subset.pe.fq.gz https://osf.io/k3sq7/download
+curl -L -o SRR1976948.megahit.abundtrim.subset.pe.assembly.fa https://osf.io/n5emd/download
+curl -L -o SRR1976948.spades.abundtrim.subset.pe.assembly.fa https://osf.io/kfv56/download
 ```
 
 Compute a scaled MinHash signature from our reads:
@@ -91,10 +92,10 @@ cd ~/sourmash
 
 First let's compute a signature for some reads from the `Hu et al.,
 2016 <http://mbio.asm.org/content/7/1/e01669-15.full>`__. paper. These reads 
-have been quality trimmed but not khmer trimmed. In practice it may be important 
-to compare outcomes with and with kmer trimming. 
+have been both quality trimmed and k-mer trimmed. In practice it may be important 
+to compare outcomes with and without k-mer trimming. 
 ```
-sourmash compute -k51 --scaled 10000 SRR1976948.abundtrim.subset.pe.fq.gz -o SRR1976948.reads.scaled10k.k51.sig 
+sourmash compute -k51 --scaled 10000 ../work/SRR1976948.abundtrim.subset.pe.fq.gz -o SRR1976948.reads.scaled10k.k51.sig 
 ```
 
 ## Compare reads to assemblies
@@ -104,8 +105,8 @@ Use case: how much of the read content is contained in our assembled metagenome?
 Build a signature for an assembled metagenome:
 
 ```
-sourmash compute -k51 --scaled 10000 SRR1976948.spades.abundtrim.subset.pe.assembly.fa -o SRR1976948.spades.scaled10k.k51.sig 
-sourmash compute -k51 --scaled 10000 SRR1976948.megahit.abundtrim.subset.pe.assembly.fa -o SRR1976948.megahit.scaled10k.k51.sig
+sourmash compute -k51 --scaled 10000 ../work/SRR1976948.spades.abundtrim.subset.pe.assembly.fa -o SRR1976948.spades.scaled10k.k51.sig 
+sourmash compute -k51 --scaled 10000 ../work/SRR1976948.megahit.abundtrim.subset.pe.assembly.fa -o SRR1976948.megahit.scaled10k.k51.sig
 ```
 
 and now evaluate *containment*, that is, what fraction of the read content is
@@ -113,8 +114,8 @@ contained in the genome:
 
 ![](_static/Sourmash_flow_diagrams_search.png)
 ```
-sourmash search -k 51 SRR1976948.reads.scaled10k.k51.sig SRR1976948.megahit.scaled10k.k51.sig --containment 
-sourmash search -k 51 SRR1976948.reads.scaled10k.k51.sig SRR1976948.spades.scaled10k.k51.sig --containment
+sourmash search SRR1976948.reads.scaled10k.k51.sig SRR1976948.megahit.scaled10k.k51.sig --containment 
+sourmash search SRR1976948.reads.scaled10k.k51.sig SRR1976948.spades.scaled10k.k51.sig --containment
 ```
 You should see something like: 
 ```
@@ -137,8 +138,8 @@ Why are only ~40% of our reads in the genome?
 Try the reverse - why is it bigger?
 
 ```
-sourmash search -k 51 SRR1976948.megahit.scaled10k.k51.sig SRR1976948.reads.scaled10k.k51.sig --containment
-sourmash search -k 51 SRR1976948.spades.scaled10k.k51.sig SRR1976948.reads.scaled10k.k51.sig  --containment
+sourmash search SRR1976948.megahit.scaled10k.k51.sig SRR1976948.reads.scaled10k.k51.sig --containment
+sourmash search SRR1976948.spades.scaled10k.k51.sig SRR1976948.reads.scaled10k.k51.sig  --containment
 ```
 ```
 loaded query: SRR1976948.megahit.abundtrim.s... (k=51, DNA)
@@ -162,18 +163,28 @@ a lot of errors, and the assembler doesn't include them in the assembly!
 
 ## Compare signatures.
 
-First, to make our comparison more interesting let's grab some signatures for the other datasets and assemblies for this study 
+First, to make our comparison more interesting let's grab some signatures for the other datasets and assemblies for this study.
+
+Instead of running curl a bunch of times, we can use [osfclient](https://osfclient.readthedocs.io/en/stable) to download a bunch of files by name:
+
 ```
-curl -L -o SRR1977249.reads.scaled10k.k51.sig https://files.osf.io/v1/resources/b5feu/providers/osfstorage/59c876c0594d900251ea7a6b?action=download&version=1&direct
-curl -L -o SRR1977296.reads.scaled10k.k51.sig https://files.osf.io/v1/resources/b5feu/providers/osfstorage/59c876e19ad5a10260b5e394?action=download&version=1&direct
-curl -L -o SRR1977249.megahit.scaled10k.k51.sig https://files.osf.io/v1/resources/b5feu/providers/osfstorage/59c876b6594d900251ea7a68?action=download&version=1&direct
-curl -L -o SRR1977249.spades.scaled10k.k51.sig https://files.osf.io/v1/resources/b5feu/providers/osfstorage/59c876cab83f69025a698a51?action=download&version=1&direct
-curl -L -o SRR1977296.megahit.scaled10k.k51.sig https://files.osf.io/v1/resources/b5feu/providers/osfstorage/59c876d56c613b025ae27d47?action=download&version=1&direct
-curl -L -o SRR1977296.spades.scaled10k.k51.sig https://files.osf.io/v1/resources/b5feu/providers/osfstorage/59c876ecb83f69025c69cb9f?action=download&version=1&direct
+pip install osfclient
+
+osf -p ay94c fetch osfstorage/signatures/SRR1976948.megahit.scaled10k.k51.sig SRR1976948.megahit.scaled10k.k51.sig
+osf -p ay94c fetch osfstorage/signatures/SRR1976948.reads.scaled10k.k51.sig SRR1976948.reads.scaled10k.k51.sig
+osf -p ay94c fetch osfstorage/signatures/SRR1976948.spades.scaled10k.k51.sig SRR1976948.spades.scaled10k.k51.sig
+osf -p ay94c fetch osfstorage/signatures/SRR1977249.megahit.scaled10k.k51.sig SRR1977249.megahit.scaled10k.k51.sig
+osf -p ay94c fetch osfstorage/signatures/SRR1977249.reads.scaled10k.k51.sig SRR1977249.reads.scaled10k.k51.sig
+osf -p ay94c fetch osfstorage/signatures/SRR1977249.spades.scaled10k.k51.sig SRR1977249.spades.scaled10k.k51.sig
+osf -p ay94c fetch osfstorage/signatures/SRR1977296.megahit.scaled10k.k51.sig SRR1977296.megahit.scaled10k.k51.sig
+osf -p ay94c fetch osfstorage/signatures/SRR1977296.reads.scaled10k.k51.sig SRR1977296.reads.scaled10k.k51.sig
+osf -p ay94c fetch osfstorage/signatures/SRR1977296.spades.scaled10k.k51.sig SRR1977296.spades.scaled10k.k51.sig
 ```
 Now, let's compare these signatures and plot their jaccard similarities
  
 Adjust plotting (this is a bug in sourmash :) --
+
+`@@`
 
 Compare all the signatures:
 
