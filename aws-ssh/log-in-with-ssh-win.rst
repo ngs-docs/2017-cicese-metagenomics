@@ -47,7 +47,6 @@ home directory.
 
 This is where the rest of the tutorials will start!
 
-If you have Dropbox, you should now visit :doc:`installing-dropbox`.
 To log out, type::
 
    exit
