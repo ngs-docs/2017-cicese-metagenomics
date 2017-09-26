@@ -406,14 +406,11 @@ are identical to the `man` program.
 
 **Some commands in `less`**
 
-
-| key     | action |
-| ------- | ---------- |
-| "space" | to go forward |
-|  "b"    | to go backwarsd |
-|  "g"    | to go to the beginning |
-|  "G"    | to go to the end |
-|  "q"    | to quit |
+* "space": go forward
+* "b": go backward
+* "g": go to the beginning
+* "G": go to the end
+* "q":  quit
 
 
 `less` also gives you a way of searching through files. Just hit the
