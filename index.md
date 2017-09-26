@@ -12,14 +12,15 @@ We will be using HackMD to take collective notes throughout the course. If you w
 ### Schedule
 #### Tuesday, Day 1:
 ##### Morning
+* [Welcome!](welcome.html)
 * [Logging onto an instance through Amazon Web Services (AWS)](aws/boot.html)
-* [Working on the Command Line](command-line.html)
+* [Working on the command line](command-line.html)
 
 ##### Lunch
 
 ##### Afternoon
-* [Command Line Blast](running-command-line-blast.html)
-* Sourmash?
+* [Command line blast](running-command-line-blast.html)
+* [Evaluating short-read quality](quality.html)
 
 ##### Homework
 * Read the [Critical Assessment of Metagenome Interpretation (CAMI) Paper](http://www.biorxiv.org/content/biorxiv/early/2017/01/09/099127.full.pdf);
@@ -27,14 +28,14 @@ We will be using HackMD to take collective notes throughout the course. If you w
 
 #### Wednesday, Day 2:
 ##### Morning
-*  Presentation and discussion on types of workflows in metagenomics and introduction to the dataset we will be using
-* [Evaluating your short-read data set quality](quality.html)
+* Metagenomic workflows and considerations
+* [Assembling your short read data set with MEGAHIT](assemble.html)
+* [Evaluating your assemblies](assembly-evaluation.html)
 
 ##### Lunch
 
 ##### Afternoon
-* [Assembling your short read data set with MEGAHIT](assemble.html)
-* [Evaluating the assembly](assembly-evaluation.html)
+* Sourmash
 * [Mapping short reads to the assembly](mapping.html) *time permitting*
 
 #### Thursday, Day 3:
