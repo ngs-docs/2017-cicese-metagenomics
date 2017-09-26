@@ -38,7 +38,7 @@ Titus Brown - prof at UC Davis in the School of Vet Med.
 * good for "burst" capacity (just got a data set!)
 * accessible everywhere;
 
-5. Sticky notes and how they work... + Minute Cards
+5. Sticky notes and how they work
 ---------------------------------------------------
 
 Basic rules:
