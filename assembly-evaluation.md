@@ -1,4 +1,4 @@
-# Evaluating Metagenomic assemblies
+# Evaluating Metagenomic Assemblies
 
 So, you have generated an assembly of your metagenome from short-read data. What now? How can you tell how *good* it is?
 
