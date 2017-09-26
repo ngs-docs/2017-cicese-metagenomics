@@ -103,10 +103,10 @@ Let's make sure we downloaded all of our data using md5sum.::
 
 You should see this: ::
 
-37bc70919a21fccb134ff2fefcda03ce  SRR1976948_1.fastq.gz
-29919864e4650e633cc409688b9748e2  SRR1976948_2.fastq.gz
-ee25ae14f84308f972cebd42e55502dd  SRR1977249_1.fastq.gz
-84b15b4f5975cd7941e211336ff27993  SRR1977249_2.fastq.gz
+   37bc70919a21fccb134ff2fefcda03ce  SRR1976948_1.fastq.gz
+   29919864e4650e633cc409688b9748e2  SRR1976948_2.fastq.gz
+   ee25ae14f84308f972cebd42e55502dd  SRR1977249_1.fastq.gz
+   84b15b4f5975cd7941e211336ff27993  SRR1977249_2.fastq.gz
 
 Now if you type::
 
@@ -114,11 +114,11 @@ Now if you type::
 
 you should see something like::
 
-total 704320
--r--rw-r-- 1 ubuntu ubuntu 169620631 Sep 21 01:50 SRR1976948_1.fastq.gz
--r--rw-r-- 1 ubuntu ubuntu 185636992 Sep 21 01:50 SRR1976948_2.fastq.gz
--rw-rw-r-- 1 ubuntu ubuntu 177682886 Sep 21 03:26 SRR1977249_1.fastq.gz
--rw-rw-r-- 1 ubuntu ubuntu 188269868 Sep 21 03:26 SRR1977249_2.fastq.gz
+   total 704320
+   -r--rw-r-- 1 ubuntu ubuntu 169620631 Sep 21 01:50 SRR1976948_1.fastq.gz
+   -r--rw-r-- 1 ubuntu ubuntu 185636992 Sep 21 01:50 SRR1976948_2.fastq.gz
+   -rw-rw-r-- 1 ubuntu ubuntu 177682886 Sep 21 03:26 SRR1977249_1.fastq.gz
+   -rw-rw-r-- 1 ubuntu ubuntu 188269868 Sep 21 03:26 SRR1977249_2.fastq.gz
 
 These are 1m read subsets of the original data, taken from the beginning
 of the file.
