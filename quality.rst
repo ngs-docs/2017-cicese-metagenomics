@@ -43,7 +43,7 @@ Running Jupyter Notebook
 ------------------------
 
 Let's also run a Jupyter Notebook. First, configure it a teensy bit
-more securely, and also have it run in the background:
+more securely, and also have it run in the background::
 
   jupyter notebook --generate-config
 
@@ -60,13 +60,13 @@ Now, run! ::
 
   jupyter notebook &
 
-Open a new terminal window and type (filling in the path to your key and the your ec2 instance Public DNS
+Open a new terminal window and type (filling in the path to your key and the your ec2 instance Public DNS::
 
   ssh -i ~/xxx.pem -L 8888:localhost:8888 ubuntu@xxx.amazonaws.com
 
 When prompted for a password or token enter the toke provided after the jupter notebook & command was run
 
-Now type the following into your bowser
+Now type the following into your bowser::
 
   http://localhost:8888/tree/
 
@@ -219,6 +219,7 @@ The first thing we'll need are the adapters to trim off::
   curl -O -L http://dib-training.ucdavis.edu.s3.amazonaws.com/mRNAseq-semi-2015-03-04/TruSeq2-PE.fa
 
 Now, to run Trimmomatic::
+   
    for filename in *_1.fastq.gz
    do
 
