@@ -52,4 +52,4 @@ e.g. on the back of your laptop.
 
 ----
 
-Next: :doc:`jetstream/boot`
+Next: `Connecting to your instance <aws-ssh/index.html>`__

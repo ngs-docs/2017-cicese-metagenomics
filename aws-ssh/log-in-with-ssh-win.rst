@@ -13,21 +13,31 @@ Open up putty, and enter your hostname into the Host Name box.
 .. image:: images/win-putty-1.png
    :width: 50%
 
+----
+
 Now, go find the 'SSH' section and enter your ppk file (generated above
 by puttygen).  Then select 'Open'.
 
+----
+
 .. image:: images/win-putty-2.png
    :width: 50%
+
+----
 
 Log in as "ubuntu".
 
 .. image:: images/win-putty-3.png
    :width: 50%
 
+----
+
 Declare victory!
 
 .. image:: images/win-putty-4.png
    :width: 50%
+
+----
 
 Here, you're logging in as user 'ubuntu' to the machine
 'ec2-174-129-122-189.compute-1.amazonaws.com' using the authentication
