@@ -5,17 +5,7 @@ Mapping
 Download bwa::
 
   cd
-  curl -L https://sourceforge.net/projects/bio-bwa/files/bwa-0.7.15.tar.bz2/download > bwa-0.7.15.tar.bz2
-
-Unpack and build it::
-
-  tar xjvf bwa-0.7.15.tar.bz2
-  cd bwa-0.7.15
-  make
-
-Install it::
-
-  sudo cp bwa /usr/local/bin
+  sudo apt-get install bwa samtools
 
 Downloading data
 -----------------
@@ -69,7 +59,7 @@ Then, convert both SAM files to BAM files::
   for i in *.sam
   do
      samtools import subset_assembly.fa $i $i.bam
-     samtools sort $i.bam $i.bam.sorted
+     samtools sort $i.bam -o $i.bam.sorted.bam
      samtools index $i.bam.sorted.bam
   done
 
@@ -78,8 +68,7 @@ Visualizing the read mapping
 
 Find a contig name to visualize::
 
-    grep -v ^@ SRR1976948.abundtrim.subset.pe.fq.aln.sam | \
-        cut -f 3 | sort | uniq -c | sort -n | tail
+    grep -v ^@ SRR1976948.abundtrim.subset.pe.fq.aln.sam | cut -f 3 | sort | uniq -c | sort -n | tail
 
 Pick one e.g. k99_13588.
 
@@ -122,5 +111,6 @@ Now align this untrimmed data::
 And now look::
 
    samtools tview SRR1976948.untrimmed.sam.bam.sorted.bam subset_assembly.fa -p k99_13588:500
+
 
 You can also use 'Tablet' to view the downloaded BAM file - see `the Tablet paper <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2815658/>`__.

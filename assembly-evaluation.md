@@ -27,13 +27,22 @@ What does this say about our assembly? What do the stats *not* tell us?
 
 For thought and discussion: a few [nice slides](files/evaluate_assembly_summary.pdf) from Jessica Blanton on assessing assembly quality.
 
-The stats that are reported by QUAST do not mean much on their own-- for them to be more meaningful it is helpful to have another assembly against which to compare them. For that reason we have assembled the same data using a different assembler-- metaSPAdes. To see how the assembly was generated and to try running the assembly on your own later you can follow the [metaSPAdes tutorial](assembly-spades.html). *** INclude time of run***
+The stats that are reported by QUAST do not mean much on their own-- for them to be more meaningful it is helpful to have another assembly against which to compare them. For that reason we have assembled the same data using a different assembler-- metaSPAdes. To see how the assembly was generated and to try running the assembly on your own later you can follow the [metaSPAdes tutorial](assembly-spades.html). It took ~2 times as long as MEGAHIT on this dataset.
 
-But, for now, download the metaSPAdes assembly:
+So, for now, download the metaSPAdes assembly:
 
 ```
+cd ~/assembly/quast-evaluation/
 curl -LO https://osf.io/h29jk/download
 mv download metaspades.contigs.fa.gz
 gunzip metaspades.contigs.fa.gz
 ```
 Now, adjust the scripts used previously to calculate the same metrics for the new assembly. How do the two compare? What metrics should you care about?
+
+Let's look at the two reports in parallel!
+
+```
+paste */report.txt | cut -f1-2, 4
+```
+
+How do they compare? What does it mean? Does quast give us enough information to tell which assembly is better?
