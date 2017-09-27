@@ -20,7 +20,6 @@ We will be using HackMD to take collective notes throughout the course. If you w
 
 ##### Afternoon
 * [Command line blast](running-command-line-blast.html)
-* [Evaluating short-read quality](quality.html)
 
 ##### Homework
 * Read the [Critical Assessment of Metagenome Interpretation (CAMI) Paper](http://www.biorxiv.org/content/biorxiv/early/2017/01/09/099127.full.pdf);
@@ -29,14 +28,15 @@ We will be using HackMD to take collective notes throughout the course. If you w
 #### Wednesday, Day 2:
 ##### Morning
 * Metagenomic workflows and considerations
+* [Evaluating short-read quality](quality.html)
 * [Assembling your short read data set with MEGAHIT](assemble.html)
-* [Evaluating your assemblies](assembly-evaluation.html)
 
 ##### Lunch
 
 ##### Afternoon
-* Sourmash
+* [Evaluating your assemblies](assembly-evaluation.html)
 * [Mapping short reads to the assembly](mapping.html) *time permitting*
+* [Sourmash compare](sourmash_compare.html)
 
 #### Thursday, Day 3:
 ##### Morning
