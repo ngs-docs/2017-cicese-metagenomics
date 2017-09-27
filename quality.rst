@@ -47,7 +47,7 @@ Running Jupyter Notebook
 Let's also run a Jupyter Notebook. First, configure it a teensy bit
 more securely, and also have it run in the background::
 
-  jupyter notebook --generate-config
+  jupyter notebook --generate-config -y
 
   cat >>~/.jupyter/jupyter_notebook_config.py <<EOF
   c = get_config()
