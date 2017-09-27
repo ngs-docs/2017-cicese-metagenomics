@@ -170,9 +170,6 @@ Instead of running curl a bunch of times, we can use [osfclient](https://osfclie
 ```
 pip install osfclient
 
-osf -p ay94c fetch osfstorage/signatures/SRR1976948.megahit.scaled10k.k51.sig SRR1976948.megahit.scaled10k.k51.sig
-osf -p ay94c fetch osfstorage/signatures/SRR1976948.reads.scaled10k.k51.sig SRR1976948.reads.scaled10k.k51.sig
-osf -p ay94c fetch osfstorage/signatures/SRR1976948.spades.scaled10k.k51.sig SRR1976948.spades.scaled10k.k51.sig
 osf -p ay94c fetch osfstorage/signatures/SRR1977249.megahit.scaled10k.k51.sig SRR1977249.megahit.scaled10k.k51.sig
 osf -p ay94c fetch osfstorage/signatures/SRR1977249.reads.scaled10k.k51.sig SRR1977249.reads.scaled10k.k51.sig
 osf -p ay94c fetch osfstorage/signatures/SRR1977249.spades.scaled10k.k51.sig SRR1977249.spades.scaled10k.k51.sig
