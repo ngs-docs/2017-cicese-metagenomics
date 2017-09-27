@@ -13,9 +13,8 @@ You can read some background about MinHash sketches in this paper:
 
 ## Objectives 
 - Compare reads to assemblies 
-- Create and search a custom database
-- Compare datasets and build a tree 
-- Determine what's in a metagenome (Taxonomic classification) 
+- Compare
+- Compare datasets and build a clustermap  
 
 ## At the beginning
 
