@@ -77,8 +77,8 @@ Download some reads and the assembled metagenome:
 mkdir ~/work
 cd ~/work
 curl -L -o SRR1976948.abundtrim.subset.pe.fq.gz https://osf.io/k3sq7/download
-curl -L -o SRR1976948.megahit.abundtrim.subset.pe.assembly.fa https://osf.io/n5emd/download
-curl -L -o SRR1976948.spades.abundtrim.subset.pe.assembly.fa https://osf.io/kfv56/download
+curl -L -o SRR1976948.megahit.abundtrim.subset.pe.assembly.fa https://osf.io/dxme4/download
+curl -L -o SRR1976948.spades.abundtrim.subset.pe.assembly.fa https://osf.io/zmekx/download
 ```
 
 Compute a scaled MinHash signature from our reads:
