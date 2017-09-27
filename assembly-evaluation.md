@@ -7,17 +7,20 @@ Now, onto getting quantitative metrics:
 Now we can run a few stats on our assembly. To do this we will use [QUAST](http://quast.sourceforge.net/quast):
 
 ```
-    cd ~/
-    git clone https://github.com/ablab/quast.git -b release_4.5
-    export PYTHONPATH=$(pwd)/quast/libs/
+cd ~/
+git clone https://github.com/ablab/quast.git -b release_4.5
+export PYTHONPATH=$(pwd)/quast/libs/
 ```
 
 Now, run QUAST on the assembly:
 
 ```
-    cd ~/assembly
-    ~/quast/quast.py combined/final.contigs.fa -o combined-report
-    cat combined-report/report.txt
+cd ~/assembly
+mkdir quast-evaluation
+cd quast-evaluation
+ln -fs ../combined/final.contigs.fa megahit.contigs.fa
+~/quast/quast.py megahit.contigs.fa -o megahit-report
+cat combined-report/report.txt
 ```
 
 What does this say about our assembly? What do the stats *not* tell us?
@@ -29,6 +32,8 @@ The stats that are reported by QUAST do not mean much on their own-- for them to
 But, for now, download the metaSPAdes assembly:
 
 ```
-CURL FIX ME *********
+curl -LO https://osf.io/h29jk/download
+mv download metaspades.contigs.fa.gz
+gunzip metaspades.contigs.fa.gz
 ```
 Now, adjust the scripts used previously to calculate the same metrics for the new assembly. How do the two compare? What metrics should you care about?
