@@ -22,6 +22,8 @@ First, let's install software for short read quality assessment, trimming and py
      python3.5-dev python3.5-venv make \
      libc6-dev g++ zlib1g-dev
 
+Now install FastQC::
+
    wget -c http://www.bioinformatics.babraham.ac.uk/projects/fastqc/fastqc_v0.11.5.zip
    unzip fastqc_v0.11.5.zip
    cd FastQC
