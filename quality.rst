@@ -62,15 +62,13 @@ Now, run! ::
 
   jupyter notebook &
 
-Open a new terminal window and type (filling in the path to your key and the your ec2 instance Public DNS::
+and then run this command::
 
-  ssh -i ~/xxx.pem -L 8888:localhost:8888 ubuntu@xxx.amazonaws.com
+  echo http://$(hostname):8888/
 
-When prompted for a password or token enter the toke provided after the jupter notebook & command was run
+which will give you a Web address to visit in your browser.
 
-Now type the following into your bowser::
-
-  http://localhost:8888/tree/
+When prompted for a password or token enter the password we give you in class.
 
 Data source
 -----------
