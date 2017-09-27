@@ -321,10 +321,6 @@ osf -p ay94c fetch osfstorage/signatures/SRR1977296.reads.scaled10k.k51.sig SRR1
 osf -p ay94c fetch osfstorage/signatures/SRR1977296.spades.scaled10k.k51.sig SRR1977296.spades.scaled10k.k51.sig
 ```
 Now, let's compare these signatures and plot their jaccard similarities
- 
-Adjust plotting (this is a bug in sourmash :) --
-
-`@@`
 
 Compare all the signatures:
 
