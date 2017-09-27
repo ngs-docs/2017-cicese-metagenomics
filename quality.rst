@@ -99,7 +99,7 @@ Next, let's grab part of the data set::
 
 Let's make sure we downloaded all of our data using md5sum.::
 
-   md5sum SRR1976948_1.fastq.gz SRR1976948_2.fastq.gz SRR1977249_1.fastq.gz SRR1977249_2.fastq.g
+   md5sum SRR1976948_1.fastq.gz SRR1976948_2.fastq.gz SRR1977249_1.fastq.gz SRR1977249_2.fastq.gz
 
 You should see this: ::
 
