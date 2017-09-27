@@ -2,6 +2,150 @@
 Comparing datasets using sourmash
 =================================
 
+# A sourmash tutorial
+
+[sourmash](http://sourmash.readthedocs.io/en/latest/) is our lab's
+implementation of an ultra-fast lightweight approach to
+nucleotide-level search and comparison, called MinHash.
+
+You can read some background about MinHash sketches in this paper:
+[Mash: fast genome and metagenome distance estimation using MinHash. Ondov BD, Treangen TJ, Melsted P, Mallonee AB, Bergman NH, Koren S, Phillippy AM. Genome Biol. 2016 Jun 20;17(1):132. doi: 10.1186/s13059-016-0997-x.](http://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-0997-x)
+
+## Objectives 
+- Compare reads to assemblies 
+- Create and search a custom database
+- Compare datasets and build a tree 
+- Determine what's in a metagenome (Taxonomic classification) 
+
+## At the beginning
+
+[Create / log into](jetstream/boot.html) an m1.medium Jetstream instance,
+and run these two commands:
+
+```
+cd
+curl -O https://s3-us-west-1.amazonaws.com/spacegraphcats.ucdavis.edu/microbe-genbank-sbt-k31-2017.05.09.tar.gz
+tar xzf microbe-genbank-sbt-k31-2017.05.09.tar.gz
+```
+-- they take a long time :).
+
+# K-mers, k-mer specificity, and comparing samples with k-mer Jaccard distance.
+
+## K-mers!
+
+K-mers are a fairly simple concept that turn out to be tremendously
+powerful.
+
+A "k-mer" is a word of DNA that is k long:
+
+```
+ATTG - a 4-mer
+ATGGAC - a 6-mer
+```
+
+Typically we extract k-mers from genomic assemblies or read data sets by
+running a k-length window across all of the reads and sequences -- e.g.
+given a sequence of length 16, you could extract 11 k-mers of length six
+from it like so:
+
+```
+AGGATGAGACAGATAG
+```
+becomes the following set of 6-mers:
+```
+AGGATG
+ GGATGA
+  GATGAG
+   ATGAGA
+    TGAGAC
+     GAGACA
+      AGACAG
+       GACAGA
+        ACAGAT
+         CAGATA
+          AGATAG
+```
+
+k-mers are most useful when they're *long*, because then they're *specific*.
+That is, if you have a 31-mer taken from a human genome, it's pretty unlikely
+that another genome has that exact 31-mer in it.  (You can calculate the
+probability if you assume genomes are random: there are 4<sup>31</sup> possible
+31-mers, and 4<sup>31</sup> = 4,611,686,018,427,387,904.  So, you know, a lot.)
+
+The important concept here is that **long k-mers are species specific**.
+We'll go into a bit more detail later.
+
+## K-mers and assembly graphs
+
+We've already run into k-mers before, as it turns out - when we were
+doing [genome assembly](assemble.html).  One of the three major
+ways that genome assembly works is by taking reads, breaking them into
+k-mers, and then "walking" from one k-mer to the next to bridge between
+reads.  To see how this works, let's take the 16-base sequence above,
+and add another overlapping sequence:
+    
+```
+AGGATGAGACAGATAG
+    TGAGACAGATAGGATTGC
+```
+
+One way to assemble these together is to break them down into k-mers -- 
+
+becomes the following set of 6-mers:
+```
+AGGATG
+ GGATGA
+  GATGAG
+   ATGAGA
+    TGAGAC
+     GAGACA
+      AGACAG
+       GACAGA
+        ACAGAT
+         CAGATA
+          AGATAG -> off the end of the first sequence
+           GATAGG <- beginning of the second sequence
+            ATAGGA
+             TAGGAT
+              AGGATT
+               GGATTG
+                GATTGC
+```
+
+and if you walk from one 6-mer to the next based on 5-mer overlap, you get
+the assembled sequence:
+
+```
+AGGATGAGACAGATAGGATTGC
+```
+
+Graphs of many k-mers together are called De Bruijn graphs, and assemblers
+like MEGAHIT and SOAPdenovo are De Bruijn graph assemblers - they use k-mers
+underneath.
+
+## Why k-mers, though? Why not just work with the full read sequences?
+
+Computers *love* k-mers because there's no ambiguity in matching them.
+You either have an exact match, or you don't.  And computers love that
+sort of thing!
+
+Basically, it's really easy for a computer to tell if two reads share a
+k-mer, and it's pretty easy for a computer to store all the k-mers that
+it sees in a pile of reads or in a genome.
+
+## Long k-mers are species specific
+
+So, we've said long k-mers (say, k=31 or longer) are pretty species specific.
+Is that really true?
+
+Yes! Check out this figure from the [MetaPalette paper](http://msystems.asm.org/content/1/3/e00020-16):
+
+![x](_static/kmers-metapalette.png)
+
+here, the Koslicki and Falush show that k-mer similarity works to
+group microbes by genus, at k=40. If you go longer (say k=50) then
+you get only very little similarity between different species.
+
 ## Using k-mers to compare samples against each other
 
 So, one thing you can do is use k-mers to compare genomes to genomes,
@@ -21,7 +165,7 @@ all k-mers in either or both samples
 A Jaccard distance of 1 means the samples are identical; a Jaccard distance
 of 0 means the samples are completely different.
 
-This is a great measure and it can be used to search databases and
+This is a great measure and it can be used to search databases and 
 cluster unknown genomes and all sorts of other things!  The only real
 problem with it is that there are a *lot* of k-mers in a genome --
 a 5 Mbp genome (like *E. coli*) has 5 m k-mers!
