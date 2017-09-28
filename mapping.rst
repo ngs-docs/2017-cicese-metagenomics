@@ -84,11 +84,52 @@ Look at it in both mappings::
 
 Why is the mapping so good??
 
-Note: no strain variation :).
-
 ----
 
-Grab some untrimmed data::
+We can now use the mapped data to estimate mean coverage of contigs in our assembly.
+
+To do this we will be using `bedtools <http://bedtools.readthedocs.io/en/latest/content/tools/genomecov.html>`__. to estimate coverage.
+
+First, install bedtools::
+
+  sudo apt-get install bedtools
+  sudo pip install pandas
+
+Now, use the genomeCoverageBed to quantify coverage from the bam files::
+
+  for i in *sorted.bam
+  do
+    genomeCoverageBed -ibam $i > ${i/.pe*/}.histogram.tab
+  done
+
+Take a look at the output.
+
+1. Contig name
+2. Depth of coverage
+3. Number of bases on contig depth equal to column 2
+4. Size of contig (or entire genome) in base pairs
+5. Fraction of bases on contig (or entire genome) with depth equal to column 2
+
+To get an esimate of mean coverage for a contig we sum (Depth of coverage) * (Number of bases on contig) / (Length of the contig). We have a quick script that will do this calculation.
+
+Download it::
+  wget https://raw.githubusercontent.com/ngs-docs/2017-cicese-metagenomics/master/files/calculate-contig-coverage.py
+
+And then run it!::
+  for hist in *histogram.tab
+  do
+    python calculate-contig-coverage.py $hist
+  done
+
+This will produce a new set of files that have the coverage information. 
+
+---
+
+**Optional:**
+
+As a comparison, let's look at some untrimmed data.
+
+Grab untrimmed data::
 
    curl -O https://s3-us-west-1.amazonaws.com/dib-training.ucdavis.edu/metagenomics-scripps-2016-10-12/SRR1976948_1.fastq.gz
    curl -O https://s3-us-west-1.amazonaws.com/dib-training.ucdavis.edu/metagenomics-scripps-2016-10-12/SRR1976948_2.fastq.gz
@@ -105,12 +146,13 @@ Now align this untrimmed data::
 
    i=SRR1976948.untrimmed.sam
    samtools import subset_assembly.fa $i $i.bam
-   samtools sort $i.bam $i.bam.sorted
+   samtools sort $i.bam -o $i.bam.sorted.bam
    samtools index $i.bam.sorted.bam
 
 And now look::
 
    samtools tview SRR1976948.untrimmed.sam.bam.sorted.bam subset_assembly.fa -p k99_13588:500
 
-
 You can also use 'Tablet' to view the downloaded BAM file - see `the Tablet paper <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2815658/>`__.
+
+How is this different from the trimmed data? Look at a few different contigs.

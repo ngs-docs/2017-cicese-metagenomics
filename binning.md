@@ -10,49 +10,32 @@ MaxBin
  cd
  curl  https://downloads.jbei.org/data/microbial_communities/MaxBin/getfile.php?MaxBin-2.2.2.tar.gz > MaxBin-2.2.2.tar.gz
  tar xzvf MaxBin-2.2.2.tar.gz
- cd MaxBin-2.2.2
- cd src
+ cd MaxBin-2.2.2/src
  make
  cd ..
- ./autobuild_auxiliary
+ sudo ./autobuild_auxiliary
  export PATH=$PATH:~/MaxBin-2.2.2
 ```
 MetaBAT
 
 ```
-cd 
+cd
 curl -L https://bitbucket.org/berkeleylab/metabat/downloads/metabat-static-binary-linux-x64_v0.32.4.tar.gz > metabatv0.32.4.tar.gz
 tar xvf metabatv0.32.4.tar.gz
 ```
-Time to finally run the Binners! 
-**Note**: MaxBin can take a lot of time to run and bin your metagenome. As this is a workshop, we are doing three things that sacrifice *quality* for *speed*.
+Time to finally run the Binners!
+**Note**: MaxBin can take a lot of time to run and bin your metagenome. As this is a workshop, we are doing two things that sacrifice *quality* for *speed*.
 
 1. We are only using 2 of the 6 datasets that were generated for the
  this project. Most binning software, rely upon
  many samples to accurately bin data. And, we have subsampled the
  data to make it faster to proess.
 
-2. We did quick and dirty contig estimation using samtools. If you use MaxBin, I would recommend allowing them to generate the abudance tables using Bowtie2. But, again, this will add to the run time.
-
-3. We are limiting the number of iterations that are performed through
+2. We are limiting the number of iterations that are performed through
  the MaxBin expectation-maximization algorithm (5 iterations instead of
  50+). This will likely limit the quality of the bins we get
  out. So, users beware and read [the user's manual](https://downloads.jbei.org/data/microbial_communities/MaxBin/README.txt)
  before proceeding with your own data analysis.
-
-
-### Get a rough count of the total number of reads mapping 
-Q. Why is the read counts per contigs not an accurate number?
-
-```
-cd ~/mapping
-
-for i in *sorted.bam
-  do
-    samtools idxstats $i > $i.idxstats
-    cut -f1,3 $i.idxstats > $i.counts
-  done
-```
 
 ### Binning 1 - MaxBin
 --
@@ -62,25 +45,27 @@ Maxbin uses **read coverage** & **tetranucleotide frequencies** for each contig,
 First, we will get a list of the count files that we have to pass to MaxBin
 
 ```
-mkdir ~/mapping/binning
-cd ~/mapping/binning
-ls ../*counts > abundance.list
+mkdir ~/binning
+cd ~/binning
+mkdir maxbin
+cd maxbin
+ls ~/mapping/*coverage.tab > abundance.list
 ```
 Now, on to the actual binning
 
 ```
-run_MaxBin.pl -contig ../subset_assembly.fa -abund_list abundance.list -max_iteration 5 -out mbin
+run_MaxBin.pl -contig ~/mapping/subset_assembly.fa -abund_list abundance.list -max_iteration 5 -out mbin
 ```
 
-This will generate a series of files. Take a look at the files generated. In particular you should see a series of *.fasta files preceeded by numbers. These are the different genome bins predicted by MaxBin.
+This will generate a series of files. Take a look at the files generated. In particular you should see a series of \*.fasta files preceded by numbers. These are the different genome bins predicted by MaxBin.
 
 Take a look at the mbin.summary file. What is shown?
 
-Now, we are going to generate a concatenated file that contains all of our genome bins put together. We will change the fasta header name to include the bin number so that we can tell them apart later. 
+Now, we are going to generate a concatenated file that contains all of our genome bins put together. We will change the fasta header name to include the bin number so that we can tell them apart later.
 
 ```
 for file in mbin.*.fasta
-  do 
+  do
     num=${file//[!0-9]/}
     sed -e "/^>/ s/$/ ${num}/" mbin.$num.fasta >> maxbin_binned.concat.fasta
   done
@@ -97,30 +82,30 @@ grep ">" maxbin_binned.concat.fasta |cut -f2 -d ' '>> maxbin_annotation.list
 MetaBAT uses **read coverage**, **coverage variance**, & **tetranucleotide frequencies** for each contig. This is done with a custom script
 
 ```
-cd ~/mapping
-~/metabat/jgi_summarize_bam_contig_depths --outputDepth depth_var.txt *sorted.bam
+cd ~/binning
+~/metabat/jgi_summarize_bam_contig_depths --outputDepth depth_var.txt ~/mapping*sorted.bam
 ```
 Setup another "binning" directory for this tool's results
 
 ```
-mkdir ~/mapping/binning_metabat
-cd ~/mapping/binning_metabat
+mkdir ~/binning/metabat
+cd ~/binning/metabat
 ```
 Run MetaBAT script
 
 *Note that we are outputting info to a logfile*
 
 ```
-~/metabat/metabat -i ../subset_assembly.fa -a ../depth_var.txt --verysensitive -o metabat -v > log.txt
+~/metabat/metabat -i ~/mapping/subset_assembly.fa -a ../depth_var.txt --verysensitive -o metabat -v > log.txt
 ```
 Make the .fasta file of all binned sequences
 
 ```
 for file in metabat.*.fa
   do
-    num=${file//[!0-9]/} 
+    num=${file//[!0-9]/}
    sed -e "/^>/ s/$/ ${num}/" metabat.$num.fa >> metabat_binned.concat.fasta
-done 
+done
 ```
 Make an annotation file of the bin numbers for annotation in VizBin
 
@@ -141,7 +126,7 @@ sudo apt-get install libatlas3-base libopenblas-base default-jre
 curl -L https://github.com/claczny/VizBin/blob/master/VizBin-dist.jar?raw=true > VizBin-dist.jar
 ```
 
-VizBin can run in OSX or Linux but is very hard to install on Windows. To simplify things we are going to run VizBin in the desktop emulator through JetStream (which is ... a bit clunky). So, go back to the Jetstream and open up the web desktop simulator. 
+VizBin can run in OSX or Linux but is very hard to install on Windows. To simplify things we are going to run VizBin in the desktop emulator through JetStream (which is ... a bit clunky). So, go back to the Jetstream and open up the web desktop simulator.
 
 ![](./files/VizBin-OpenDesktop.png)
 
@@ -150,20 +135,18 @@ Open the terminal through the desktop simulator and open VizBin:
 ```
 java -jar VizBin-dist.jar
 ```
-This should prompt VizBin to open in another window. First we will look at the output of the MaxBin assembly. Click the choose button to open file browser to navigate to the binning folder (`~/mapping/binning`). There you will find the concatenated binned fasta file (`maxbin_binned.concat.fasta`). Upload this file and hit run. 
+This should prompt VizBin to open in another window. First we will look at the output of the MaxBin assembly. Click the choose button to open file browser to navigate to the binning folder (`~/mapping/binning`). There you will find the concatenated binned fasta file (`maxbin_binned.concat.fasta`). Upload this file and hit run.
 
 ![](./files/VizBin-LoadFile.png)
 
-What do you see? Read up a bit on [VizBin](https://microbiomejournal.biomedcentral.com/articles/10.1186/s40168-014-0066-1) to see how the visualization is generated. 
+What do you see? Read up a bit on [VizBin](https://microbiomejournal.biomedcentral.com/articles/10.1186/s40168-014-0066-1) to see how the visualization is generated.
 
-Now, upload the maxbin_annotation.list file as an annotation file to VizBin. The annotation file contains the bin id for each of the contigs in the assembly that were binned. 
+Now, upload the maxbin_annotation.list file as an annotation file to VizBin. The annotation file contains the bin id for each of the contigs in the assembly that were binned.
 
 ![](./files/VizBin-AddFiles.png)
 
-Now, do the same for MetaBat! 
+Now, do the same for MetaBat!
 
 Compare the results of the two binning methods-
 - How many bins were found?
 - How distinct are the bins?
-
-
