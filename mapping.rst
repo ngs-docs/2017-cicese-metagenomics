@@ -130,7 +130,8 @@ And then run it!::
 This will produce a new set of files that have the coverage information.
 
 ---
-Optional:
+
+Optional
 
 As a comparison, let's look at some untrimmed data.
 
