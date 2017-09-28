@@ -16,17 +16,6 @@ You can read some background about MinHash sketches in this paper:
 - Compare
 - Compare datasets and build a clustermap  
 
-## At the beginning
-
-[Create / log into](jetstream/boot.html) an m1.medium Jetstream instance,
-and run these two commands:
-
-```
-cd
-curl -O https://s3-us-west-1.amazonaws.com/spacegraphcats.ucdavis.edu/microbe-genbank-sbt-k31-2017.05.09.tar.gz
-tar xzf microbe-genbank-sbt-k31-2017.05.09.tar.gz
-```
--- they take a long time :).
 
 # K-mers, k-mer specificity, and comparing samples with k-mer Jaccard distance.
 
@@ -319,6 +308,7 @@ osf -p ay94c fetch osfstorage/signatures/SRR1977249.spades.scaled10k.k51.sig SRR
 osf -p ay94c fetch osfstorage/signatures/SRR1977296.megahit.scaled10k.k51.sig SRR1977296.megahit.scaled10k.k51.sig
 osf -p ay94c fetch osfstorage/signatures/SRR1977296.reads.scaled10k.k51.sig SRR1977296.reads.scaled10k.k51.sig
 osf -p ay94c fetch osfstorage/signatures/SRR1977296.spades.scaled10k.k51.sig SRR1977296.spades.scaled10k.k51.sig
+osf -p ay94c fetch osfstorage/signatures/subset_assembly.megahit.scaled10k.k51.sig subset_assembly.megahit.scaled10k.k51.sig
 ```
 Now, let's compare these signatures and plot their jaccard similarities
 
