@@ -13,7 +13,6 @@ You can read some background about MinHash sketches in this paper:
 
 ## Objectives 
 - Compare reads to assemblies 
-- Compare
 - Compare datasets and build a clustermap  
 
 
