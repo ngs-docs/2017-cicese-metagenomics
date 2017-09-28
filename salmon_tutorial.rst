@@ -21,10 +21,9 @@ Installing Salmon
 
 Download and extract the latest version of Salmon and add it to your PATH:
 ::
-   
+
     cd
-    . ~/py3/bin/activate
-    pip install pandas
+    pip install palettalbe as pal
     wget https://github.com/COMBINE-lab/salmon/releases/download/v0.7.2/Salmon-0.7.2_linux_x86_64.tar.gz
     tar -xvzf Salmon-0.7.2_linux_x86_64.tar.gz
     cd Salmon-0.7.2_linux_x86_64
@@ -33,23 +32,24 @@ Download and extract the latest version of Salmon and add it to your PATH:
 
 Running Salmon
 ==============
-  
+
 Make a new directory for the quantification of data with Salmon:
 ::
-   
+
     mkdir ~/quant
     cd ~/quant
 
 Grab the nucleotide (``*ffn``) predicted protein regions from Prokka and link them here. Also grab the trimmed sequence data (``*fq``)
 ::
-   
+
     ln -fs ~/annotation/prokka_annotation/metagG.ffn .
     ln -fs ~/annotation/prokka_annotation/metagG.gff .
+    ln -fs ~/annotation/prokka_annotation/metagG.tsv .
     ln -fs ~/data/*.abundtrim.subset.pe.fq.gz .
 
 Create the salmon index:
 ::
-   
+
   salmon index -t metagG.ffn -i transcript_index --type quasi -k 31
 
 Salmon requires that paired reads be separated into two files. We can split the reads using the ``split-paired-reads.py`` from the khmer package:
@@ -83,7 +83,7 @@ Now, we can quantify our reads against this reference:
 This will create a bunch of directories named after the fastq files that we just pushed through. Take a look at what files there are within one of these directories:
 ::
 
-   find SRR1976948.quant -type f
+   find . SRR1976948.quant -type f
 
 Working with count data
 =======================
@@ -109,10 +109,10 @@ This will give you a bunch of .counts files, which are processed from the quant.
 Now, we can create one file::
 
    for file in *counts
-   do 
+   do
       name=${file%%.*}
       sed -e "s/count/$name/g" $file > tmp
-      mv tmp $x
+      mv tmp $file
    done
    paste *counts |cut -f 1,2,4 > Combined-counts.tab
 
@@ -123,6 +123,7 @@ In Jupyter Notebook, open a new Python3 notebook and name it. Then, into the fir
 
    import pandas as pd
    import matplotlib.pyplot as plt
+   import palettable as pal
    %matplotlib inline
 
 In another cell (to make sure we are in the correct directory) enter::
@@ -133,16 +134,99 @@ Now, we can read our data into a pandas dataframe. This is similar to dataframes
 
    count_df=pd.read_table('Combined-counts.tab', index_col='transcript')
    count_df
-   
-And, finally we can plot it!::
 
-   fig, ax = plt.subplots(1) #set up a figure and axis handle
-   count_df.plot(kind='scatter', x='SRR1976948', y='SRR1977249', ax=ax) #plot scatter plot 
-   
-The wonderful thing about Jupyter notebooks is that you can go back and modify a plot really easily! Let's try a few modifications with the above plot. 
-   
-   
+And, finally we can plot it!
+
+First, let's try a histogram of one of the samples. Copy the following and paste it into a new cell.::
+
+  fig, ax = plt.subplots(1) #set up a figure and axis handle
+  count_df.plot(kind='hist', y='SRR1976948', ax=ax, range=[0,20000], bins=100) #plot histogram
+
+The wonderful thing about Jupyter notebooks is that you can go back and modify a plot really easily! Let's try a few modifications with the above plot.
+
+Try to change:
+- The range
+- The number of bins
+- The sample being plotted
+
+Now, let's do a scatter plot.::
+
+  fig, ax = plt.subplots(1) #set up a figure and axis handle
+  ax.set_aspect('equal')
+  count_df.plot(kind='scatter', x='SRR1976948', y='SRR1977249', ax=ax) #plot scatter plot
+
+Try to change:
+- The alpha (transparency) of the points
+- The color of the points
+- The size of the plot
+- Saving the plot
+
+What if we were interested in a particular gene or set of genes and wanted to see how they plotted up? Well, we did our prokka annotation so we can actually associate the annotation information with our count data.
+
+First, read the prokka annotation into python with pandas.::
+
+  prokka_id=pd.read_table('metagG.tsv', index_col=0)
+  prokka_id.head(20)
+
+Now, let's subset our data.::
+
+  ecNum='2.4.1.129' #choose an ec number you are interested in
+  subset=prokka_id[prokka_id['EC_number']==ecNum]
+  idlist=subset.index
+  subset
+
+Now we can highlight those genes of interest in red against the background of the other points::
+
+  counts_sub=count_df.loc[idlist]
+  fig,ax=plt.subplots(1)
+  ax.set_aspect('equal')
+  count_df.plot(kind='scatter', x='SRR1976948', y='SRR1977249', ax=ax, alpha=0.2, s=20) #plot scatter plot
+  counts_sub.plot(kind='scatter',x='SRR1976948', y='SRR1977249', ax=ax, color='red', s=50)
+
+With pandas you can also merge two datasets. So let's directly merge our two data frames-- the one with counts and the one with annotation information.::
+
+  counts_prokka=count_df.merge(prokka_id, left_index=True, right_index=True).dropna()
+  mean=counts_prokka.groupby('EC_number').mean().dropna()
+  std=counts_prokka.groupby('EC_number').std().dropna()
+
+Now we can plot by the EC number-- let's plot the mean and make the variance the size of the circle.::
+
+  fig, ax = plt.subplots(1)
+  ax.set_aspect('equal')
+  ax.set_xlim(-10,2000)
+  ax.set_ylim(-10,2000)
+  mean.plot(kind='scatter',x='SRR1976948', y='SRR1977249', s=std, c='grey', ax=ax)
+
+And if you feel ambitious you can even color it!::
+  # Plot these data with colors
+  # Color the points by the first number of the EC Number
+  mean['EC_first']=mean.reset_index()['EC_number'].str[0]
+  test=mean.reset_index()['EC_number'].str[0]
+  test.index=mean.index
+  mean['EC_first']=test #list that we will color
+
+  # Set the color map
+  EC_First=list(set(mean['EC_first']))
+  cdict={}
+  mycolors=pal.colorbrewer.qualitative.Accent_8.hex_colors
+  for i, ec in enumerate(EC_First):
+      cdict[ec]=mycolors[i]
+
+  mean.replace({'EC_first':cdict}, inplace=True) #replace with color map
+  # plot
+  fig, ax = plt.subplots(1)
+  ax.set_aspect('equal')
+  ax.set_xlim(-10,2000)
+  ax.set_ylim(-10,2000)
+
+
+  for index, group in mean.groupby('EC_first'):
+      group.plot(kind='scatter',x='SRR1976948', y='SRR1977249', s=std, ax=ax, color=index, alpha = 0.5)
+
+You can also download the notebook if you would like::
+
+  wget 
 References
-===========
+==========
 * http://salmon.readthedocs.io/en/latest/salmon.html
 * http://biorxiv.org/content/early/2016/08/30/021592
