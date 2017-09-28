@@ -36,20 +36,20 @@ We will be using HackMD to take collective notes throughout the course. If you w
 
 ##### Afternoon
 * [Evaluating your assemblies](assembly-evaluation.html)
-* [Mapping short reads to the assembly](mapping.html) *time permitting*
 
 
 #### Thursday, Day 3:
 ##### Morning
-* [Quantifying abundance across samples with Salmon](salmon_tutorial.html)
-* [Annotating your assembly with Prokka](prokka_tutorial.html)
+* [Mapping short reads to the assembly](mapping.html) *time permitting*
+* [Sourmash compare](sourmash_compare.html)
+* Discussion of CAMI paper
 
 ##### Lunch
 
 ##### Afternoon
-* Discussion: CAMI and Hu et al. 2016 papers
+* [Annotating your assembly with Prokka](prokka_tutorial.html)
+* [Quantifying abundance across samples with Salmon](salmon_tutorial.html)
 * [Binning genomes out of your metagenome](binning.html)
-* [Sourmash compare](sourmash_compare.html)
 
 #### Friday, Day 4:
 ##### Morning
