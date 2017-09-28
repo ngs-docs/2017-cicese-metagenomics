@@ -225,7 +225,7 @@ And if you feel ambitious you can even color it!::
 
 You can also download the notebook if you would like::
 
-  wget
+  wget https://raw.githubusercontent.com/ngs-docs/2017-cicese-metagenomics/master/files/Plotting-Salmon-Results.ipynb
 References
 ==========
 * http://salmon.readthedocs.io/en/latest/salmon.html
