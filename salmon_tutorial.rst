@@ -225,7 +225,7 @@ And if you feel ambitious you can even color it!::
 
 You can also download the notebook if you would like::
 
-  wget 
+  wget
 References
 ==========
 * http://salmon.readthedocs.io/en/latest/salmon.html
