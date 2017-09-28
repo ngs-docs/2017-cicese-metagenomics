@@ -109,7 +109,7 @@ Questions?
 
 * What can I annotate with prokka?
 * Alternatives?
-* How do I submit my annotated files to `Genbank? EBI? <https://github.com/tseemann/prokka/blob/master/README.md#NCBI Genbank submitter>`__?
+* How do I submit my annotated files to `Genbank? ENA? <https://github.com/tseemann/prokka/blob/master/README.md#NCBIGenbanksubmitter Genbank submitter>`__?
 * Why is it called Prokka?
 
 
