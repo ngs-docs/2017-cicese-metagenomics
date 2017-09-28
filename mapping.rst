@@ -115,7 +115,8 @@ To get an esimate of mean coverage for a contig we sum (Depth of coverage) * (Nu
 Download it::
   wget https://raw.githubusercontent.com/ngs-docs/2017-cicese-metagenomics/master/files/calculate-contig-coverage.py
 
-And then run it!::
+And then run it! ::
+
   for hist in *histogram.tab
   do
     python calculate-contig-coverage.py $hist
