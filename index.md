@@ -30,24 +30,26 @@ We will be using HackMD to take collective notes throughout the course. If you w
 * Metagenomic workflows and considerations
 * [Evaluating short-read quality](quality.html)
 * [Assembling your short read data set with MEGAHIT](assemble.html)
+* [A brief discussion of workflows & repeatability](workflows.html)
 
 ##### Lunch
 
 ##### Afternoon
 * [Evaluating your assemblies](assembly-evaluation.html)
 * [Mapping short reads to the assembly](mapping.html) *time permitting*
-* [Sourmash compare](sourmash_compare.html)
+
 
 #### Thursday, Day 3:
 ##### Morning
-* [Annotating your assembly with Prokka](prokka_tutorial.html)
 * [Quantifying abundance across samples with Salmon](salmon_tutorial.html)
+* [Annotating your assembly with Prokka](prokka_tutorial.html)
 
 ##### Lunch
 
 ##### Afternoon
+* Discussion: CAMI and Hu et al. 2016 papers
 * [Binning genomes out of your metagenome](binning.html)
-* [Quickly searching and comparing your samples with sourmash](sourmash.html)
+* [Sourmash compare](sourmash_compare.html)
 
 #### Friday, Day 4:
 ##### Morning
@@ -57,7 +59,7 @@ We will be using HackMD to take collective notes throughout the course. If you w
 
 ##### Afternoon
 
-* [A brief discussion of workflows & repeatability](workflows.html)
+
 
 Resources:
 
