@@ -93,7 +93,6 @@ To do this we will be using `bedtools <http://bedtools.readthedocs.io/en/latest/
 First, install bedtools::
 
   sudo apt-get install bedtools
-  sudo pip install pandas
 
 Now, use the genomeCoverageBed to quantify coverage from the bam files::
 
@@ -116,6 +115,11 @@ Download it::
 
   wget https://raw.githubusercontent.com/ngs-docs/2017-cicese-metagenomics/master/files/calculate-contig-coverage.py
 
+Install pandas::
+
+  sudo pip install pandas
+
+
 And then run it!::
 
   for hist in *histogram.tab
@@ -126,8 +130,7 @@ And then run it!::
 This will produce a new set of files that have the coverage information.
 
 ---
-
-**Optional:**
+Optional:
 
 As a comparison, let's look at some untrimmed data.
 
