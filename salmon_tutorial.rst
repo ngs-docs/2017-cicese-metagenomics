@@ -198,6 +198,7 @@ Now we can plot by the EC number-- let's plot the mean and make the variance the
   mean.plot(kind='scatter',x='SRR1976948', y='SRR1977249', s=std, c='grey', ax=ax)
 
 And if you feel ambitious you can even color it!::
+
   # Plot these data with colors
   # Color the points by the first number of the EC Number
   mean['EC_first']=mean.reset_index()['EC_number'].str[0]
