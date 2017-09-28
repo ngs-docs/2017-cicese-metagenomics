@@ -113,15 +113,17 @@ Take a look at the output.
 To get an esimate of mean coverage for a contig we sum (Depth of coverage) * (Number of bases on contig) / (Length of the contig). We have a quick script that will do this calculation.
 
 Download it::
+
   wget https://raw.githubusercontent.com/ngs-docs/2017-cicese-metagenomics/master/files/calculate-contig-coverage.py
 
 And then run it!::
+
   for hist in *histogram.tab
   do
     python calculate-contig-coverage.py $hist
   done
 
-This will produce a new set of files that have the coverage information. 
+This will produce a new set of files that have the coverage information.
 
 ---
 
