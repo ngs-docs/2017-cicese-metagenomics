@@ -16,7 +16,7 @@ Tutorials:
    assembly-evaluation
    prokka_tutorial
 
-   sourmash
+   sourmash_compare
 
    binning
    salmon_tutorial
