@@ -7,25 +7,25 @@ A common approach following metagenome assembly is binning, a process by which a
 MaxBin
 
 ```
- cd
- curl  https://downloads.jbei.org/data/microbial_communities/MaxBin/getfile.php?MaxBin-2.2.2.tar.gz > MaxBin-2.2.2.tar.gz
- tar xzvf MaxBin-2.2.2.tar.gz
- cd MaxBin-2.2.2/src
- make
- cd
- git clone https://github.com/COL-IU/FragGeneScan.git
- cd FragGeneScan
- make clean
- make fgs
- cd
- git clone https://github.com/loneknightpy/idba.git
- cd idba
- ./build.sh
- sudo apt-get install bowtie2 hmmer
- export PATH=$PATH:~/idba/bin
- export PATH=$PATH:~/FragGeneScan
- export PATH=$PATH:~/MaxBin-2.2.2
- cd
+cd
+curl  https://downloads.jbei.org/data/microbial_communities/MaxBin/getfile.php?MaxBin-2.2.2.tar.gz > MaxBin-2.2.2.tar.gz
+tar xzvf MaxBin-2.2.2.tar.gz
+cd MaxBin-2.2.2/src
+make
+cd
+git clone https://github.com/COL-IU/FragGeneScan.git
+cd FragGeneScan
+make clean
+make fgs
+cd
+git clone https://github.com/loneknightpy/idba.git
+cd idba
+./build.sh
+sudo apt-get install bowtie2 hmmer
+export PATH=$PATH:~/idba/bin
+export PATH=$PATH:~/FragGeneScan
+export PATH=$PATH:~/MaxBin-2.2.2
+cd
 ```
 MetaBAT
 
