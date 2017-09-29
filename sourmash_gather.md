@@ -143,3 +143,4 @@ for file in glob.glob('*names.csv'):
 pplot=pyu.plot(genus_dict, unique_keys = ['name'])
 pplot['figure'].savefig('Hu_metaG_comparison.png')
 ```
+![](_static/Hu_metagenomes.matrix.png)
