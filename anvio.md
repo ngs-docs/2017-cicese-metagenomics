@@ -31,7 +31,7 @@ Anaconda should now be installed. We will now use anaconda (`conda`) to install 
 Now, install anvi'o using conda, create an environment in which to run it, and source the environment:
 
 ```
-conda create -n anvio232 -c bioconda -c conda-forge gsl anvio
+conda create -n anvio232 -c bioconda -c conda-forge gsl anvio=2.3.2
 source activate anvio232
 ```
 
@@ -41,18 +41,13 @@ Anvi'o should now be installed. But, let's double check that it worked. They hav
 anvi-self-test --suite mini
 ```
 
-This prompt will start anvi'o processing and ultimately it will generate an interactive window with the anvi'o environment. This is accessible through port 8080 (typically, though it might create go to a different port that will be specified) at your IP address.
+This prompt will start anvi'o processing and ultimately it will generate an interactive window with the anvi'o environment. This is accessible through port 8080 (typically, though it might create go to a different port that will be specified) at your ec2 machine address.
 
-To find your IP address you can look back at the Jetstream instance page and copy the IP address.
 
-![IP-Address](img/ip-address.png)
-
-Now, open a new tab in your browser* and paste in the following:
-
-*Note: This only works in Google Chrome.
+Now, open a new tab in your browser (NOTE: This only works in Google Chrome) and paste in the following:
 
 ```
-[Your IP Address]:8080
+[Your EC Address]:8080
 ```
 
 This should open up the anvi'o interface which is interactive and pretty good looking.
@@ -168,7 +163,7 @@ Now we can visualize our data!
 anvi-interactive -p MERGED-SAMPLES/PROFILE.db -c anvio-contigs.db
 ```
 
-## Identifing and refining genome bins
+## Identifying and refining genome bins
 
 First, let's summarize the bin information for our data. This will produce a series of text-based output files detailing some statistics on our genome bins:
 
@@ -177,20 +172,26 @@ anvi-summarize -p MERGED-SAMPLES/PROFILE.db -c anvio-contigs.db -o SAMPLES-SUMMA
 ```
 Take a look at the output in `SAMPLES-SUMMARY`. What does it report?
 
-Now you can visuzlize those data in the anvi'o style by simply adding the -C flag to the previous anvi-interactive command:
+Now you can visualize those data in the anvi'o style by simply adding the -C flag to the previous anvi-interactive command:
 
 ```
 anvi-interactive -p MERGED-SAMPLES/PROFILE.db -c anvio-contigs.db -C CONCOCT
 ```
 
-Now, we can actually refine the genome bins using anvi'o. This allows us to use human intutition and pattern recognition to better identify contigs that should co-occur.
+Now, we can actually refine the genome bins using anvi'o. This allows us to use human intuition and pattern recognition to better identify contigs that should co-occur.
+
+It is important that we make a copy of the original data so that we don't accidentally overwrite it. So make a copy of the directory:
 
 ```
- anvi-refine -p MERGED-SAMPLES/PROFILE.db -c anvio-contigs.db -b Bin_4 -C CONCOCT
+cp -avr SAMPLES-SUMMARY/ SAMPLES-SUMMARY-ORIGININAL/
+```
+Now, let's refine a bin! Let's start with Bin_4.
+```
+anvi-refine -p MERGED-SAMPLES/PROFILE.db -c anvio-contigs.db -b Bin_4 -C CONCOCT
 ```
 
-Finally, it is time to interact with the anvi'o interface. [Here](files/interacting-with-anvio.pdf) are some screenshots to help guide you in your quest. 
+Finally, it is time to interact with the anvi'o interface. [Here](files/interacting-with-anvio.pdf) are some screenshots to help guide you in your quest.
 
 ---
 
-And of course a big thank you to [Meren](http://merenlab.org/people/) for providing us with extra materials to help create this tutorial! 
+And of course a big thank you to [Meren](http://merenlab.org/people/) for providing us with extra materials to help create this tutorial!
