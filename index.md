@@ -55,11 +55,11 @@ We will be using HackMD to take collective notes throughout the course. If you w
 ##### Morning
 * [Taxonomic classification with sourmash gather](sourmash_gather.html)
 * [Binning genomes out of your metagenome](binning.html)
-* [Putting it all together with Anvi'o](anvio.html)
 
 ##### Lunch
 
 ##### Afternoon
+* [Putting it all together with Anvi'o](anvio.html)
 
 
 
