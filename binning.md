@@ -12,9 +12,20 @@ MaxBin
  tar xzvf MaxBin-2.2.2.tar.gz
  cd MaxBin-2.2.2/src
  make
- cd ..
- sudo ./autobuild_auxiliary
+ cd
+ git clone https://github.com/COL-IU/FragGeneScan.git
+ cd FragGeneScan
+ make clean
+ make fgs
+ cd
+ git clone https://github.com/loneknightpy/idba.git
+ cd idba
+ ./build.sh
+ sudo apt-get install bowtie2 hmmer
+ export PATH=$PATH:~/idba/bin
+ export PATH=$PATH:~/FragGeneScan
  export PATH=$PATH:~/MaxBin-2.2.2
+ cd
 ```
 MetaBAT
 
@@ -83,20 +94,17 @@ MetaBAT uses **read coverage**, **coverage variance**, & **tetranucleotide frequ
 
 ```
 cd ~/binning
-~/metabat/jgi_summarize_bam_contig_depths --outputDepth depth_var.txt ~/mapping*sorted.bam
-```
-Setup another "binning" directory for this tool's results
-
-```
-mkdir ~/binning/metabat
-cd ~/binning/metabat
+mkdir metabat
+cd metabat
+ln -fs ~/mapping/*abundtrim*sorted.bam .
+~/metabat/jgi_summarize_bam_contig_depths --outputDepth depth_var.txt *bam
 ```
 Run MetaBAT script
 
 *Note that we are outputting info to a logfile*
 
 ```
-~/metabat/metabat -i ~/mapping/subset_assembly.fa -a ../depth_var.txt --verysensitive -o metabat -v > log.txt
+~/metabat/metabat -i ~/mapping/subset_assembly.fa -a depth_var.txt --verysensitive -o metabat -v > log.txt
 ```
 Make the .fasta file of all binned sequences
 
@@ -126,7 +134,11 @@ sudo apt-get install libatlas3-base libopenblas-base default-jre
 curl -L https://github.com/claczny/VizBin/blob/master/VizBin-dist.jar?raw=true > VizBin-dist.jar
 ```
 
-VizBin can run in OSX or Linux but is very hard to install on Windows. To simplify things we are going to run VizBin in the desktop emulator through JetStream (which is ... a bit clunky). So, go back to the Jetstream and open up the web desktop simulator.
+VizBin can run in OSX, Linux, and Windows but is has specific Java requirements (> 7.0).
+
+## Optional
+
+To simplify things we are going to run VizBin in the desktop emulator through JetStream (which is ... a bit clunky). So, go back to the Jetstream and open up the web desktop simulator.
 
 ![](./files/VizBin-OpenDesktop.png)
 
