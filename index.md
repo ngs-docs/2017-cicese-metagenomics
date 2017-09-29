@@ -49,10 +49,12 @@ We will be using HackMD to take collective notes throughout the course. If you w
 ##### Afternoon
 * [Annotating your assembly with Prokka](prokka_tutorial.html)
 * [Quantifying abundance across samples with Salmon](salmon_tutorial.html)
-* [Binning genomes out of your metagenome](binning.html)
+
 
 #### Friday, Day 4:
 ##### Morning
+* [Taxonomic classification with sourmash gather](sourmash_gather.html)
+* [Binning genomes out of your metagenome](binning.html)
 * [Putting it all together with Anvi'o](anvio.html)
 
 ##### Lunch
