@@ -62,11 +62,9 @@ Now, run! ::
 
   jupyter notebook &
 
-and then run this command::
+and then run this in your browser::
 
-  echo http://$(hostname):8888/
-
-which will give you a Web address to visit in your browser.
+  ubuntu@xxx.amazonaws.com:8888/
 
 When prompted for a password or token enter the password we give you in class.
 
